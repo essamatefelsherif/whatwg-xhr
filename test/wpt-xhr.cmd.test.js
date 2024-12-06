@@ -1,0 +1,635 @@
+/**
+ * @module  wpt-xhr-cmd-test
+ * @desc    The wpt-xhr.cmd command line interface test module.
+ * @version 1.0.0
+ * @author  Essam A. El-Sherif
+ */
+
+/** Import nodeJS core modules */
+import assert             from 'node:assert/strict';
+import { exec }           from 'node:child_process';
+import { fileURLToPath }  from 'node:url';
+import { dirname, join }  from 'node:path';
+
+/** Emulate commonJS __filename and __dirname constants */
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+/** Prepare test environment */
+const srcFile = join(__dirname, 'wpt-xhr.cmd.js');
+const CMD = `node ${srcFile}`;
+const CMD_BIN = 'wpt-xhr';
+
+const cmdOptions = {
+	verbose: true,
+	runner: process.env.WPT_XHR_TEST || 'default',
+};
+
+let testCount   = 1;
+let passCount   = 0;
+let failCount   = 0;
+let cancelCount = 0;
+let skipCount   = 0;
+let todoCount   = 0;
+let startTime = Date.now();
+
+const suites = new Map();
+
+/**
+ *     function main()
+ * function loadTestData()
+ * function nodeRunner()
+ * function defRunner()
+ * async function makeTest()
+ * function getCmdOutput()
+ *
+ * @func Main
+ * @desc The application entry point function
+ */
+(() => {
+	loadTestData();
+
+	if(cmdOptions.runner === 'node'){
+		import('node:test')
+			.then(runner => {
+				cmdOptions.verbose = false;
+				nodeRunner(runner);
+			})
+			/* node:coverage disable */
+			.catch(() => {
+				defRunner();
+			});
+	}
+	else
+	if(cmdOptions.runner === 'default'){
+		defRunner();
+	}
+	/* node:coverage enable */
+
+})('Main Function');
+
+/**
+ * @func loadTestData
+ * @desc Load test data
+ */
+function loadTestData(){
+
+	let cmdData = null;
+	let suiteDesc = '';
+
+	// TEST SUITE #1 - Test common coreutils options
+	suiteDesc = 'Test common coreutils options';
+	suites.set(suiteDesc, []);
+
+	// TEST ### - wpt-xhr --help
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} --help`;
+
+	cmdData.cmd_out = `\
+Usage: wpt-xhr [OPTIONS]... [URL]
+
+Test the developed *XMLHttpRequest* module for compliance with
+WHATWG XMLHttpRequest specs using the web-platform-tests live
+or locally installed server as the testing server.
+
+With no URL, testing server is determined by the options given.
+
+  -t, --host[=<host>]  wpt host (default wpt.live)
+  -p, --port[=<port>]  wpt port (default 80)
+      --path[=<path>]  wpt path (default /xhr/resources/)
+  -n  --node           use nodejs test runner API if supported
+  -d  --def            use default test runner
+  -v  --verbose        make the testing operation more talkative
+  -h  --help           display this help and exit
+      --version        output version information and exit
+
+Note that invalid host, port or path will not be accepted.
+
+Examples:
+  wpt-xhr -t wpt.local -p 8000  Means <http://wpt.local:8000/xhr/resources/>
+  wpt-xhr                       Means <http://wpt.live/xhr/resources/>
+
+web-platforms-tests online help: <https://web-platform-tests.org/>
+Full documentation <https://essamatefelsherif.github.io/whatwg-xhr/>\n`;
+	cmdData.cmd_err = '';
+
+	cmdData.cmd_ext = 0;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr --version
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} --version`;
+
+	cmdData.cmd_out = `v1.0.0\n`;
+	cmdData.cmd_err = '';
+
+	cmdData.cmd_ext = 0;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST SUITE #2 - Validate command line options
+	suiteDesc = 'Validate command line options';
+	suites.set(suiteDesc, []);
+
+	// TEST ### - wpt-xhr --xxx
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} --xxx`;
+
+	cmdData.cmd_out = '';
+	cmdData.cmd_err = `\
+${CMD_BIN}: invalid option -- 'xxx'
+Try '${CMD_BIN} --help' for more information.\n`;
+
+	cmdData.cmd_ext = 1;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr -x
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} -x`;
+
+	cmdData.cmd_out = '';
+	cmdData.cmd_err = `\
+${CMD_BIN}: unrecognized option '-x'
+Try '${CMD_BIN} --help' for more information.\n`;
+
+	cmdData.cmd_ext = 1;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST SUITE #3 - Validate aruments passed to command line options
+	suiteDesc = 'Validate aruments passed to command line options';
+	suites.set(suiteDesc, []);
+
+	// TEST ### - wpt-xhr --host
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} --host`;
+
+	cmdData.cmd_out = '';
+	cmdData.cmd_err = `\
+${CMD_BIN}: ambiguous argument ‘’ for ‘--host’
+Try '${CMD_BIN} --help' for more information.\n`;
+
+	cmdData.cmd_ext = 1;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr --port
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} --port`;
+
+	cmdData.cmd_out = '';
+	cmdData.cmd_err = `\
+${CMD_BIN}: ambiguous argument ‘’ for ‘--port’
+Try '${CMD_BIN} --help' for more information.\n`;
+
+	cmdData.cmd_ext = 1;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr --path
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} --path`;
+
+	cmdData.cmd_out = '';
+	cmdData.cmd_err = `\
+${CMD_BIN}: ambiguous argument ‘’ for ‘--path’
+Try '${CMD_BIN} --help' for more information.\n`;
+
+	cmdData.cmd_ext = 1;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr --host=
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} --host=`;
+
+	cmdData.cmd_out = '';
+	cmdData.cmd_err = `\
+${CMD_BIN}: ambiguous argument ‘’ for ‘--host’
+Try '${CMD_BIN} --help' for more information.\n`;
+
+	cmdData.cmd_ext = 1;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr --port=
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} --port=`;
+
+	cmdData.cmd_out = '';
+	cmdData.cmd_err = `\
+${CMD_BIN}: ambiguous argument ‘’ for ‘--port’
+Try '${CMD_BIN} --help' for more information.\n`;
+
+	cmdData.cmd_ext = 1;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr --path=
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} --path=`;
+
+	cmdData.cmd_out = '';
+	cmdData.cmd_err = `\
+${CMD_BIN}: ambiguous argument ‘’ for ‘--path’
+Try '${CMD_BIN} --help' for more information.\n`;
+
+	cmdData.cmd_ext = 1;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr -t
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} -t`;
+
+	cmdData.cmd_out = '';
+	cmdData.cmd_err = `\
+${CMD_BIN}: ambiguous argument ‘’ for ‘-t’
+Try '${CMD_BIN} --help' for more information.
+`;
+
+	cmdData.cmd_ext = 1;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr -p
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} -p`;
+
+	cmdData.cmd_out = '';
+	cmdData.cmd_err = `\
+${CMD_BIN}: ambiguous argument ‘’ for ‘-p’
+Try '${CMD_BIN} --help' for more information.\n`;
+
+	cmdData.cmd_ext = 1;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr --host -t
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} --host -t`;
+
+	cmdData.cmd_out = '';
+	cmdData.cmd_err = `\
+${CMD_BIN}: invalid argument ‘-t’ for ‘--host’
+Try '${CMD_BIN} --help' for more information.\n`;
+
+	cmdData.cmd_ext = 1;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr --port -p
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} --port -p`;
+
+	cmdData.cmd_out = '';
+	cmdData.cmd_err = `\
+${CMD_BIN}: invalid argument ‘-p’ for ‘--port’
+Try '${CMD_BIN} --help' for more information.\n`;
+
+	cmdData.cmd_ext = 1;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr --path -p
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} --path -p`;
+
+	cmdData.cmd_out = '';
+	cmdData.cmd_err = `\
+${CMD_BIN}: invalid argument ‘-p’ for ‘--path’
+Try '${CMD_BIN} --help' for more information.\n`;
+
+	cmdData.cmd_ext = 1;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr --path xhr
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} --path xhr`;
+
+	cmdData.cmd_out = '';
+	cmdData.cmd_err = `\
+${CMD_BIN}: invalid argument ‘xhr’ for ‘--path’
+Try '${CMD_BIN} --help' for more information.\n`;
+
+	cmdData.cmd_ext = 1;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST SUITE #4 - Test normal operation
+	suiteDesc = 'Test normal operation';
+	suites.set(suiteDesc, []);
+
+	// TEST ### - wpt-xhr
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD}`;
+
+	cmdData.cmd_out = '{"host":"wpt.local","port":"8000","path":"/xhr/resources/","url":"http://wpt.local:8000/xhr/resources/","node":true,"verbose":false}';
+	cmdData.cmd_err = '';
+
+	cmdData.cmd_ext = 0;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr --host example.com --port 8040
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} --host example.com --port 8040`;
+
+	cmdData.cmd_out = '{"host":"example.com","port":"8040","path":"/xhr/resources/","url":"http://example.com:8040/xhr/resources/","node":true,"verbose":false}';
+	cmdData.cmd_err = '';
+
+	cmdData.cmd_ext = 0;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr --host=example.com --port=8040
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} --host=example.com --port=8040`;
+
+	cmdData.cmd_out = '{"host":"example.com","port":"8040","path":"/xhr/resources/","url":"http://example.com:8040/xhr/resources/","node":true,"verbose":false}';
+	cmdData.cmd_err = '';
+
+	cmdData.cmd_ext = 0;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr -t example.com -p 8040
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} -t example.com -p 8040`;
+
+	cmdData.cmd_out = '{"host":"example.com","port":"8040","path":"/xhr/resources/","url":"http://example.com:8040/xhr/resources/","node":true,"verbose":false}';
+	cmdData.cmd_err = '';
+
+	cmdData.cmd_ext = 0;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr http://www1.example.com:8080 -t www2.example.com -p 8040
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} http://www1.example.com:8080 -t www2.example.com -p 8040`;
+
+	cmdData.cmd_out = '{"host":"www2.example.com","port":"8040","path":"/","url":"http://www2.example.com:8040/","node":true,"verbose":false}';
+	cmdData.cmd_err = '';
+
+	cmdData.cmd_ext = 0;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr -t www2.example.com -p 8040 http://www1.example.com:8080/xhr
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} -t www2.example.com -p 8040 http://www1.example.com:8080/xhr`;
+
+	cmdData.cmd_out = '{"host":"www1.example.com","port":"8080","path":"/xhr","url":"http://www1.example.com:8080/xhr","node":true,"verbose":false}';
+	cmdData.cmd_err = '';
+
+	cmdData.cmd_ext = 0;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr --verbose --def
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} --verbose --def`;
+
+	cmdData.cmd_out = '{"host":"wpt.local","port":"8000","path":"/xhr/resources/","url":"http://wpt.local:8000/xhr/resources/","node":false,"verbose":true}';
+	cmdData.cmd_err = '';
+
+	cmdData.cmd_ext = 0;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr -v -d
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} -v -d`;
+
+	cmdData.cmd_out = '{"host":"wpt.local","port":"8000","path":"/xhr/resources/","url":"http://wpt.local:8000/xhr/resources/","node":false,"verbose":true}';
+	cmdData.cmd_err = '';
+
+	cmdData.cmd_ext = 0;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr -d -n
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} -d -n`;
+
+	cmdData.cmd_out = '{"host":"wpt.local","port":"8000","path":"/xhr/resources/","url":"http://wpt.local:8000/xhr/resources/","node":true,"verbose":false}';
+	cmdData.cmd_err = '';
+
+	cmdData.cmd_ext = 0;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+
+	// TEST ### - wpt-xhr --def --node
+	cmdData = {};
+
+	cmdData.cmd_act = `${CMD} --def --node`;
+
+	cmdData.cmd_out = '{"host":"wpt.local","port":"8000","path":"/xhr/resources/","url":"http://wpt.local:8000/xhr/resources/","node":true,"verbose":false}';
+	cmdData.cmd_err = '';
+
+	cmdData.cmd_ext = 0;
+	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
+
+	cmdData.cmd_skip = false;
+	suites.get(suiteDesc).push(cmdData);
+}
+
+/**
+ * @func  nodeRunner
+ * @param {object} runner - The node core module 'node:test' object
+ * @desc  Carry out the loaded tests using node test runner
+ */
+function nodeRunner(runner){
+
+	for(let [suiteDesc, suiteTests] of suites){
+		runner.suite(suiteDesc, () => {
+			for(let cmdObj of suiteTests){
+				runner.test(cmdObj.cmd_desc, {skip: cmdObj.cmd_skip}, async () => {
+					await makeTest(cmdObj);
+				});
+			}
+		});
+	}
+}
+
+/* node:coverage disable */
+
+/**
+ * @func  defRunner
+ * @desc  Carry out the loaded tests using this developed test runner
+ */
+function defRunner(){
+
+	cmdOptions.verbose && process.on('exit', () => {
+		console.log();
+		console.log('▶ tests',       --testCount);
+		console.log('▶ suites',      suites.size);
+		console.log('▶ pass',        passCount);
+		console.log('▶ fail',        failCount);
+		console.log('▶ cancelled',   cancelCount);
+		console.log('▶ skipped',     skipCount);
+		console.log('▶ todo',        todoCount);
+		console.log('▶ duration_ms', Math.round(Date.now() - startTime));
+	});
+
+	cmdOptions.verbose && console.error();
+
+	for(let [suiteDesc, suiteTests] of suites)
+		for(let cmdObj of suiteTests)
+			if(!cmdObj.cmd_skip)
+				makeTest(cmdObj);
+
+	cmdOptions.verbose && console.log();
+}
+
+/* node:coverage enable */
+
+/**
+ * @func  makeTest
+ * @async
+ * @param {object} cmdObj - The test data object
+ * @desc  Carry out a single tset
+ */
+async function makeTest(cmdObj){
+
+	const testID = testCount++;
+	const testMsg = `Test#${(testID).toString().padStart(3, '0')} ... `;
+
+	/* node:coverage disable */
+
+	if(cmdOptions.verbose){
+		let preMsg = testMsg + `Initiate ... ${cmdObj.cmd_desc}`;
+		console.error(preMsg);
+	}
+	/* node:coverage enable */
+
+	let [out_act, prc_act] = await getCmdOutput(cmdObj);
+
+	let out_exp = {stdout: cmdObj.cmd_out, stderr: cmdObj.cmd_err};
+	let prc_exp = {exitCode: cmdObj.cmd_ext};
+
+	/* node:coverage disable */
+
+	if(cmdOptions.verbose){
+		try{
+			assert.strictEqual(out_act.stdout, out_exp.stdout);
+			assert.strictEqual(out_act.stderr, out_exp.stderr);
+			assert.strictEqual(prc_act.exitCode, prc_exp.exitCode);
+
+			passCount++;
+
+			let postMsg = testMsg + `Success ... ${cmdObj.cmd_desc}`;
+			cmdOptions.verbose && console.error(postMsg);
+		}
+		catch(e){
+			failCount++;
+
+			let postMsg = testMsg + `Failure ... ${cmdObj.cmd_desc}`;
+			console.error(postMsg);
+		}
+	}
+	/* node:coverage enable */
+	else{
+		assert.strictEqual(out_act.stdout, out_exp.stdout);
+		assert.strictEqual(out_act.stderr, out_exp.stderr);
+		assert.strictEqual(prc_act.exitCode, prc_exp.exitCode);
+	}
+}
+
+/**
+ * @func   getCmdOutput
+ * @param  {object} cmdObj - The command object
+ * @return {array} Output of the tested command
+ * @desc   Run the tested and reference command
+ */
+function getCmdOutput(cmdObj){
+
+	let proc_act, proc_exp;
+
+	let prom_act = new Promise((resolve, reject) => {
+		proc_act = exec(cmdObj.cmd_act, {encoding: 'UTF-8'}, (err, stdout, stderr) => {
+			resolve({stdout, stderr});
+		});
+		proc_act.stdin.end();
+	});
+
+	return Promise.all([prom_act, proc_act]);
+}

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>XMLHttpRequest: Source: test/wpt-xhr.cmd.js</title>
+
+	<script src="scripts/prettify/prettify.js"> </script>
+	<script src="scripts/prettify/lang-css.js"> </script>
+	<!--[if lt IE 9]>
+	  <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="image/png" rel="icon" href="logo-xhr.png">
+	<link type="text/css"  rel="stylesheet" href="styles/prettify-tomorrow.css">
+	<link type="text/css"  rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+	<div id="main">
+		<h1 class="page-title">Source: test/wpt-xhr.cmd.js</h1>
+			
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module  wpt-xhr-cmd
+ * @desc    The wpt-xhr command line interface module.
+ * @version 1.0.0
+ * @author  Essam A. El-Sherif
+ */
+
+/** Import nodeJS core modules */
+import process from 'node:process';
+
+/** @const {object} cmdOptions - Command line options */
+const cmdOptions = {
+	host    : 'wpt.local',       // -h --host &lt;host>
+	port    : '8000',            // -p --port &lt;port>
+	path    : '/xhr/resources/', //    --path &lt;path>
+	url     : 'http://wpt.local:8000/xhr/resources/',
+
+	node   : true,               // -n --node {boolean} / -d --def {boolean}
+	verbose: false,              // -v --verbose {boolean}
+};
+
+export default cmdOptions;
+
+const CMD = 'wpt-xhr';
+const CMD_VER = 'v1.0.0';
+
+/**
+ *     function main
+ * function parseCmdLine()
+ * function getHelp()
+ * function getError(n)
+ *
+ * @func Main
+ * @desc The application entry point function
+ */
+(() => {
+    parseCmdLine();
+    if(
+		process.env.WPT_XHR_TEST &amp;&amp;
+		(
+			process.env.WPT_XHR_TEST.toLowerCase() === 'node' ||
+			process.env.WPT_XHR_TEST.toLowerCase() === 'default'
+		)
+	){
+		process.stdout.write(JSON.stringify(cmdOptions));
+    }
+})('Main Function');
+
+/**
+ * function main()
+ *     function parseCmdLine()
+ * function getHelp()
+ * function getError(n)
+ *
+ * @func parseCmdLine
+ * @desc Command line parser function
+ */
+function parseCmdLine(){
+
+	const args = process.argv;
+
+	for(let i = 2; i &lt; args.length; i++){
+		if(args[i] === '--help' || args[i] === '-h'){
+			process.stdout.write(`${getHelp()}\n`);
+			process.exit(0);
+		}
+		else
+		if(args[i] === '--version'){
+			process.stdout.write(`${CMD_VER}\n`);
+			process.exit(0);
+		}
+		else
+		if(args[i].startsWith('--host=')){
+			let str = args[i].replace('--host=', '');
+
+			if(!str){
+				process.stderr.write(`${getError(0).replace('_', '--host')}\n`);
+				process.exit(1);
+			}
+			else
+			if(str.startsWith('-')){
+				process.stderr.write(`${getError(1).replace('_', str).replace('_', '--host')}\n`);
+				process.exit(1);
+			}
+			else{
+				let url = new URL(cmdOptions.url);
+				url.hostname = str;
+				cmdOptions.url = url.href;
+				cmdOptions.host = url.hostname;
+			}
+		}
+		else
+		if(args[i].startsWith('--port=')){
+			let str = args[i].replace('--port=', '');
+
+			if(!str){
+				process.stderr.write(`${getError(0).replace('_', '--port')}\n`);
+				process.exit(1);
+			}
+			else
+			if(str.startsWith('-')){
+				process.stderr.write(`${getError(1).replace('_', str).replace('_', '--port')}\n`);
+				process.exit(1);
+			}
+			else{
+				let url = new URL(cmdOptions.url);
+				url.port = str;
+				cmdOptions.url = url.href;
+				cmdOptions.port = url.port;
+			}
+		}
+		else
+		if(args[i].startsWith('--path=')){
+			let str = args[i].replace('--path=', '');
+
+			if(!str){
+				process.stderr.write(`${getError(0).replace('_', '--path')}\n`);
+				process.exit(1);
+			}
+			else
+			if(str.startsWith('/')){
+				let url = new URL(cmdOptions.url);
+				url.pathname = str;
+				cmdOptions.url = url.href;
+				cmdOptions.path = url.pathname;
+			}
+			else{
+				process.stderr.write(`${getError(1).replace('_', str).replace('_', '--path')}\n`);
+				process.exit(1);
+			}
+		}
+		else
+		if(args[i] === '--host' || args[i] === '-t'){
+			if(i === args.length - 1){
+				process.stderr.write(`${getError(0).replace('_', args[i])}\n`);
+				process.exit(1);
+			}
+			else
+			if(args[i + 1].startsWith('-')){
+				process.stderr.write(`${getError(1).replace('_', args[i+1]).replace('_', args[i])}\n`);
+				process.exit(1);
+			}
+			else{
+				let url = new URL(cmdOptions.url);
+				url.hostname = args[++i];
+				cmdOptions.url = url.href;
+				cmdOptions.host = url.hostname;
+			}
+		}
+		else
+		if(args[i] === '--port' || args[i] === '-p'){
+			if(i === args.length - 1){
+				process.stderr.write(`${getError(0).replace('_', args[i])}\n`);
+				process.exit(1);
+			}
+			else
+			if(args[i + 1].startsWith('-')){
+				process.stderr.write(`${getError(1).replace('_', args[i+1]).replace('_', args[i])}\n`);
+				process.exit(1);
+			}
+			else{
+				let url = new URL(cmdOptions.url);
+				url.port = args[++i];
+				cmdOptions.url = url.href;
+				cmdOptions.port = url.port;
+			}
+		}
+		else
+		if(args[i] === '--path'){
+			if(i === args.length - 1){
+				process.stderr.write(`${getError(0).replace('_', args[i])}\n`);
+				process.exit(1);
+			}
+			else
+			if(args[i+1].startsWith('/')){
+				let url = new URL(cmdOptions.url);
+				url.pathname = args[++i];
+				cmdOptions.url = url.href;
+				cmdOptions.path = url.pathname;
+			}
+			else{
+				process.stderr.write(`${getError(1).replace('_', args[i+1]).replace('_', args[i])}\n`);
+				process.exit(1);
+			}
+		}
+		else
+		if(args[i] === '-v' || args[i] === '--verbose'){
+			cmdOptions.verbose = true;
+		}
+		else
+		if(args[i] === '-n' || args[i] === '--node'){
+			cmdOptions.node = true;
+		}
+		else
+		if(args[i] === '-d' || args[i] === '--def'){
+			cmdOptions.node = false;
+		}
+		else
+		if(args[i].startsWith('--')){
+			process.stderr.write(`${getError(3).replace('_', args[i].substr(2))}\n`);
+			process.exit(1);
+		}
+		else
+		if(args[i].startsWith('-')){
+			process.stderr.write(`${getError(2).replace('_', args[i])}\n`);
+			process.exit(1);
+		}
+		else{
+			try{
+				let url = new URL(args[i]);
+				cmdOptions.url = url.href;
+				cmdOptions.host = url.hostname;
+				cmdOptions.port = url.port;
+				cmdOptions.path = url.pathname;
+			}
+			catch(e){
+				process.stderr.write(`${getError(4).replace('_', args[i])}\n`);
+				process.exit(1);
+			}
+		}
+	}
+}
+
+/**
+ * function main
+ * function parseCmdLine()
+ *     function getHelp()
+ * function getError(n)
+ *
+ * @func   getHelp
+ * @return {string} Help information
+ * @desc   Function to return help info
+ */
+function getHelp(){
+	return `\
+Usage: wpt-xhr [OPTIONS]... [URL]
+
+Test the developed *XMLHttpRequest* module for compliance with
+WHATWG XMLHttpRequest specs using the web-platform-tests live
+or locally installed server as the testing server.
+
+With no URL, testing server is determined by the options given.
+
+  -t, --host[=&lt;host>]  wpt host (default wpt.live)
+  -p, --port[=&lt;port>]  wpt port (default 80)
+      --path[=&lt;path>]  wpt path (default /xhr/resources/)
+  -n  --node           use nodejs test runner API if supported
+  -d  --def            use default test runner
+  -v  --verbose        make the testing operation more talkative
+  -h  --help           display this help and exit
+      --version        output version information and exit
+
+Note that invalid host, port or path will not be accepted.
+
+Examples:
+  wpt-xhr -t wpt.local -p 8000  Means &lt;http://wpt.local:8000/xhr/resources/>
+  wpt-xhr                       Means &lt;http://wpt.live/xhr/resources/>
+
+web-platforms-tests online help: &lt;https://web-platform-tests.org/>
+Full documentation &lt;https://essamatefelsherif.github.io/whatwg-xhr/>`;
+}
+
+/**
+ * function main
+ * function parseCmdLine()
+ * function getHelp()
+ *     function getError(n)
+ *
+ * @func   getError
+ * @param  {number} Error number
+ * @return {string} Error message
+ * @desc   Function to return error message
+ */
+function getError(n){
+
+const error = [
+
+// error[0]
+`\
+${CMD}: ambiguous argument ‘’ for ‘_’
+Try '${CMD} --help' for more information.`,
+
+// error[1]
+`\
+${CMD}: invalid argument ‘_’ for ‘_’
+Try '${CMD} --help' for more information.`,
+
+// error[2]
+`\
+${CMD}: unrecognized option '_'
+Try '${CMD} --help' for more information.`,
+
+// error[3]
+`\
+${CMD}: invalid option -- '_'
+Try '${CMD} --help' for more information.`,
+
+// error[4]
+`\
+${CMD}: invalid url '_'
+Try '${CMD} --help' for more information.`,
+];
+	return error[n];
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+			<p>A Node.js implementation of the <a href="https://xhr.spec.whatwg.org/" target="_blank">WHATWG XMLHttpRequest Living Standard</a> for non-browser environments.</p>
+	</div>
+	<nav>
+		<h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-helper-content-type.html">helper-content-type</a></li><li><a href="module-helper-xml-encoding-sniffer.html">helper-xml-encoding-sniffer</a></li><li><a href="module-whatwg-fetch.html">whatwg-fetch</a></li><li><a href="module-whatwg-misc.html">whatwg-misc</a></li><li><a href="module-whatwg-xhr.html">whatwg-xhr</a></li><li><a href="module-wpt-xhr.html">wpt-xhr</a></li><li><a href="module-wpt-xhr-cmd.html">wpt-xhr-cmd</a></li><li><a href="module-wpt-xhr-cmd-test.html">wpt-xhr-cmd-test</a></li></ul><h3>Externals</h3><ul><li><a href="external-DOMException.html">DOMException</a></li></ul><h3>Classes</h3><ul><li><a href="module-whatwg-xhr.FormData.html">FormData</a></li><li><a href="module-whatwg-xhr.ProgressEvent.html">ProgressEvent</a></li><li><a href="module-whatwg-xhr.XMLHttpRequest.html">XMLHttpRequest</a></li><li><a href="module-whatwg-xhr-ClientRequestData.html">ClientRequestData</a></li><li><a href="module-whatwg-xhr-XMLHttpRequestEventTarget.html">XMLHttpRequestEventTarget</a></li><li><a href="module-whatwg-xhr-XMLHttpRequestUpload.html">XMLHttpRequestUpload</a></li></ul><h3>Interfaces</h3><ul><li><a href="module-whatwg-xhr-Event.html">Event</a></li><li><a href="module-whatwg-xhr-EventTarget.html">EventTarget</a></li></ul>
+	</nav>
+	<br class="clear">
+	<footer>
+		Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a>
+	</footer>
+	<script> prettyPrint(); </script>
+	<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
