@@ -1,24 +1,24 @@
 {
-	"name"   : "@essamonline/whatwg-xhr",
+	"name": "@essamonline/whatwg-xhr",
 	"version": "1.0.0",
 	"description": "A Node.js implementation of the WHATWG XMLHttpRequest Living Standard for non-browser environmnts.",
-	"type"   : "module",
-	"main"   : "./lib/whatwg-xhr.js",
+	"type": "module",
+	"main": "./lib/whatwg-xhr.js",
 	"exports": {
 		"require": "./lib/whatwg-xhr.cjs",
-		"import" : "./lib/whatwg-xhr.js"
+		"import": "./lib/whatwg-xhr.js"
 	},
 	"scripts": {
-		"test"       : "npm run testVerb",
-		"testVerb"   : "node                              test/wpt-xhr.test.js -n -v",
+		"test": "npm run testVerb",
+		"testVerb": "node                              test/wpt-xhr.test.js -n -v",
 		"testVerbCov": "node --experimental-test-coverage test/wpt-xhr.test.js -n -v",
-		"testSilent" : "node --experimental-test-coverage test/wpt-xhr.test.js -d",
-		"testCli"    : "WPT_XHR_TEST=node    node --experimental-test-coverage test/wpt-xhr.cmd.test.js",
+		"testSilent": "node --experimental-test-coverage test/wpt-xhr.test.js -d",
+		"testCli": "WPT_XHR_TEST=node    node --experimental-test-coverage test/wpt-xhr.cmd.test.js",
 		"testCliVerb": "WPT_XHR_TEST=default node                              test/wpt-xhr.cmd.test.js",
-		"devCovRep"  : "WPT_XHR_TEST=node    node --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=docs/coverage/node/lcov.info --test",
-		"devCovHtml" : "genhtml -o docs/coverage/node/html --config-file .lcovrc --prefix $PWD docs/coverage/node/lcov.info",
-		"devDoc"     : "jsdoc lib/whatwg-xhr.js lib/helper/*.js test/wpt-xhr*.js -d docs/jsdoc/ -c .jsdoc.conf.json --verbose",
-		"devDocAll"  : "rm -vfr docs/jsdoc/* && npm run devDoc"
+		"devCovRep": "WPT_XHR_TEST=node    node --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=docs/coverage/node/lcov.info --test",
+		"devCovHtml": "genhtml -o docs/coverage/node/html --config-file .lcovrc --prefix $PWD docs/coverage/node/lcov.info",
+		"devDoc": "jsdoc lib/whatwg-xhr.js lib/helper/*.js test/wpt-xhr*.js -d docs/jsdoc/ -c .jsdoc.conf.json --verbose",
+		"devDocAll": "rm -vfr docs/jsdoc/* && npm run devDoc"
 	},
 	"bin": {
 		"wpt-xhr": "bin/wpt-xhr"
@@ -30,7 +30,12 @@
 			"win32"
 		]
 	},
-	"keywords": ["xmlhHttprequest", "xhr", "ajax", "whatwg"],
+	"keywords": [
+		"xmlhHttprequest",
+		"xhr",
+		"ajax",
+		"whatwg"
+	],
 	"author": {
 		"name": "Essam A. El-Sherif",
 		"email": "esm.elsh@gmail.com",
