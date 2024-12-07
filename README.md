@@ -2,6 +2,8 @@
 
 A Node.js implementation of the [WHATWG XMLHttpRequest Living Standard](https://xhr.spec.whatwg.org/) for non-browser environments. The XMLHttpRequest Standard defines an API that provides scripted client functionality for transferring data between a client and a server.
 
+[![Coverage Status](https://coveralls.io/repos/github/essamatefelsherif/whatwg-xhr/badge.svg?branch=main)](https://coveralls.io/github/essamatefelsherif/whatwg-xhr?branch=main)
+
 ## References
 
 * [WHATWG XMLHttpRequest Living Standard](https://xhr.spec.whatwg.org/).
