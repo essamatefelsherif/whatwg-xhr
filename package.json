@@ -6,19 +6,19 @@
 	"main": "./lib/whatwg-xhr.js",
 	"exports": {
 		"require": "./lib/whatwg-xhr.cjs",
-		"import": "./lib/whatwg-xhr.js"
+		"import":  "./lib/whatwg-xhr.js"
 	},
 	"scripts": {
-		"test": "npm run testVerb",
-		"testVerb": "node                              test/wpt-xhr.test.js -n -v",
-		"testVerbCov": "node --experimental-test-coverage test/wpt-xhr.test.js -n -v",
-		"testSilent": "node --experimental-test-coverage test/wpt-xhr.test.js -d",
-		"testCli": "WPT_XHR_TEST=node    node --experimental-test-coverage test/wpt-xhr.cmd.test.js",
-		"testCliVerb": "WPT_XHR_TEST=default node                              test/wpt-xhr.cmd.test.js",
-		"devCovRep": "WPT_XHR_TEST=node    node --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=docs/coverage/node/lcov.info --test",
-		"devCovHtml": "genhtml -o docs/coverage/node/html --config-file .lcovrc --prefix $PWD docs/coverage/node/lcov.info",
-		"devDoc": "jsdoc lib/whatwg-xhr.js lib/helper/*.js test/wpt-xhr*.js -d docs/jsdoc/ -c .jsdoc.conf.json --verbose",
-		"devDocAll": "rm -vfr docs/jsdoc/* && npm run devDoc"
+		"test"        : "npm run testVerb",
+		"testVerb"    : "node test/wpt-xhr.test.js -n -v",
+		"testVerbCov" : "node --experimental-test-coverage test/wpt-xhr.test.js -n -v",
+		"testSilent"  : "node --experimental-test-coverage test/wpt-xhr.test.js -d",
+		"testCli"     : "node --experimental-test-coverage test/wpt-xhr.cmd.test.js",
+		"devCovRep"   : "node --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=docs/coverage/node/lcov.info --test",
+		"devCovHtml"  : "genhtml -o docs/coverage/node/html --config-file .lcovrc --prefix $PWD docs/coverage/node/lcov.info",
+		"devDoc"      : "jsdoc lib/whatwg-xhr.js lib/helper/*.js test/wpt-xhr*.js -d docs/jsdoc/ -c .jsdoc.conf.json --verbose",
+		"devDocAll"   : "rm -vfr docs/jsdoc/* && npm run devDoc",
+		"devCoveralls": "coveralls < docs/coverage/node/lcov.info"
 	},
 	"bin": {
 		"wpt-xhr": "bin/wpt-xhr"

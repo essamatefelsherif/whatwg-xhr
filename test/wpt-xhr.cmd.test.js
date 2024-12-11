@@ -22,7 +22,7 @@ const CMD_BIN = 'wpt-xhr';
 
 const cmdOptions = {
 	verbose: true,
-	runner: process.env.WPT_XHR_TEST || 'default',
+	runner: process.env.WPT_XHR_TEST === 'default' ? 'default' : 'node',
 };
 
 let testCount   = 1;
@@ -114,6 +114,7 @@ web-platforms-tests online help: <https://web-platform-tests.org/>
 Full documentation <https://essamatefelsherif.github.io/whatwg-xhr/>\n`;
 	cmdData.cmd_err = '';
 
+	cmdData.cmd_opt = {encoding: 'UTF-8'};
 	cmdData.cmd_ext = 0;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -128,6 +129,7 @@ Full documentation <https://essamatefelsherif.github.io/whatwg-xhr/>\n`;
 	cmdData.cmd_out = `v1.0.0\n`;
 	cmdData.cmd_err = '';
 
+	cmdData.cmd_opt = {encoding: 'UTF-8'};
 	cmdData.cmd_ext = 0;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -148,6 +150,7 @@ Full documentation <https://essamatefelsherif.github.io/whatwg-xhr/>\n`;
 ${CMD_BIN}: invalid option -- 'xxx'
 Try '${CMD_BIN} --help' for more information.\n`;
 
+	cmdData.cmd_opt = {encoding: 'UTF-8'};
 	cmdData.cmd_ext = 1;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -164,6 +167,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 ${CMD_BIN}: unrecognized option '-x'
 Try '${CMD_BIN} --help' for more information.\n`;
 
+	cmdData.cmd_opt = {encoding: 'UTF-8'};
 	cmdData.cmd_ext = 1;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -184,6 +188,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 ${CMD_BIN}: ambiguous argument ‘’ for ‘--host’
 Try '${CMD_BIN} --help' for more information.\n`;
 
+	cmdData.cmd_opt = {encoding: 'UTF-8'};
 	cmdData.cmd_ext = 1;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -200,6 +205,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 ${CMD_BIN}: ambiguous argument ‘’ for ‘--port’
 Try '${CMD_BIN} --help' for more information.\n`;
 
+	cmdData.cmd_opt = {encoding: 'UTF-8'};
 	cmdData.cmd_ext = 1;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -216,6 +222,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 ${CMD_BIN}: ambiguous argument ‘’ for ‘--path’
 Try '${CMD_BIN} --help' for more information.\n`;
 
+	cmdData.cmd_opt = {encoding: 'UTF-8'};
 	cmdData.cmd_ext = 1;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -232,6 +239,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 ${CMD_BIN}: ambiguous argument ‘’ for ‘--host’
 Try '${CMD_BIN} --help' for more information.\n`;
 
+	cmdData.cmd_opt = {encoding: 'UTF-8'};
 	cmdData.cmd_ext = 1;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -248,6 +256,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 ${CMD_BIN}: ambiguous argument ‘’ for ‘--port’
 Try '${CMD_BIN} --help' for more information.\n`;
 
+	cmdData.cmd_opt = {encoding: 'UTF-8'};
 	cmdData.cmd_ext = 1;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -264,6 +273,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 ${CMD_BIN}: ambiguous argument ‘’ for ‘--path’
 Try '${CMD_BIN} --help' for more information.\n`;
 
+	cmdData.cmd_opt = {encoding: 'UTF-8'};
 	cmdData.cmd_ext = 1;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -281,6 +291,7 @@ ${CMD_BIN}: ambiguous argument ‘’ for ‘-t’
 Try '${CMD_BIN} --help' for more information.
 `;
 
+	cmdData.cmd_opt = {encoding: 'UTF-8'};
 	cmdData.cmd_ext = 1;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -297,6 +308,7 @@ Try '${CMD_BIN} --help' for more information.
 ${CMD_BIN}: ambiguous argument ‘’ for ‘-p’
 Try '${CMD_BIN} --help' for more information.\n`;
 
+	cmdData.cmd_opt = {encoding: 'UTF-8'};
 	cmdData.cmd_ext = 1;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -313,6 +325,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 ${CMD_BIN}: invalid argument ‘-t’ for ‘--host’
 Try '${CMD_BIN} --help' for more information.\n`;
 
+	cmdData.cmd_opt = {encoding: 'UTF-8'};
 	cmdData.cmd_ext = 1;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -329,6 +342,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 ${CMD_BIN}: invalid argument ‘-p’ for ‘--port’
 Try '${CMD_BIN} --help' for more information.\n`;
 
+	cmdData.cmd_opt = {encoding: 'UTF-8'};
 	cmdData.cmd_ext = 1;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -345,6 +359,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 ${CMD_BIN}: invalid argument ‘-p’ for ‘--path’
 Try '${CMD_BIN} --help' for more information.\n`;
 
+	cmdData.cmd_opt = {encoding: 'UTF-8'};
 	cmdData.cmd_ext = 1;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -361,6 +376,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 ${CMD_BIN}: invalid argument ‘xhr’ for ‘--path’
 Try '${CMD_BIN} --help' for more information.\n`;
 
+	cmdData.cmd_opt = {encoding: 'UTF-8'};
 	cmdData.cmd_ext = 1;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -379,6 +395,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 	cmdData.cmd_out = '{"host":"wpt.local","port":"8000","path":"/xhr/resources/","url":"http://wpt.local:8000/xhr/resources/","node":true,"verbose":false}';
 	cmdData.cmd_err = '';
 
+	cmdData.cmd_opt = {encoding: 'UTF-8', env: {WPT_XHR_TEST: "node"}};
 	cmdData.cmd_ext = 0;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -393,6 +410,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 	cmdData.cmd_out = '{"host":"example.com","port":"8040","path":"/xhr/resources/","url":"http://example.com:8040/xhr/resources/","node":true,"verbose":false}';
 	cmdData.cmd_err = '';
 
+	cmdData.cmd_opt = {encoding: 'UTF-8', env: {WPT_XHR_TEST: "node"}};
 	cmdData.cmd_ext = 0;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -407,6 +425,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 	cmdData.cmd_out = '{"host":"example.com","port":"8040","path":"/xhr/resources/","url":"http://example.com:8040/xhr/resources/","node":true,"verbose":false}';
 	cmdData.cmd_err = '';
 
+	cmdData.cmd_opt = {encoding: 'UTF-8', env: {WPT_XHR_TEST: "node"}};
 	cmdData.cmd_ext = 0;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -421,6 +440,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 	cmdData.cmd_out = '{"host":"example.com","port":"8040","path":"/xhr/resources/","url":"http://example.com:8040/xhr/resources/","node":true,"verbose":false}';
 	cmdData.cmd_err = '';
 
+	cmdData.cmd_opt = {encoding: 'UTF-8', env: {WPT_XHR_TEST: "node"}};
 	cmdData.cmd_ext = 0;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -435,6 +455,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 	cmdData.cmd_out = '{"host":"www2.example.com","port":"8040","path":"/","url":"http://www2.example.com:8040/","node":true,"verbose":false}';
 	cmdData.cmd_err = '';
 
+	cmdData.cmd_opt = {encoding: 'UTF-8', env: {WPT_XHR_TEST: "node"}};
 	cmdData.cmd_ext = 0;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -449,6 +470,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 	cmdData.cmd_out = '{"host":"www1.example.com","port":"8080","path":"/xhr","url":"http://www1.example.com:8080/xhr","node":true,"verbose":false}';
 	cmdData.cmd_err = '';
 
+	cmdData.cmd_opt = {encoding: 'UTF-8', env: {WPT_XHR_TEST: "node"}};
 	cmdData.cmd_ext = 0;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -463,6 +485,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 	cmdData.cmd_out = '{"host":"wpt.local","port":"8000","path":"/xhr/resources/","url":"http://wpt.local:8000/xhr/resources/","node":false,"verbose":true}';
 	cmdData.cmd_err = '';
 
+	cmdData.cmd_opt = {encoding: 'UTF-8', env: {WPT_XHR_TEST: "node"}};
 	cmdData.cmd_ext = 0;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -477,6 +500,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 	cmdData.cmd_out = '{"host":"wpt.local","port":"8000","path":"/xhr/resources/","url":"http://wpt.local:8000/xhr/resources/","node":false,"verbose":true}';
 	cmdData.cmd_err = '';
 
+	cmdData.cmd_opt = {encoding: 'UTF-8', env: {WPT_XHR_TEST: "node"}};
 	cmdData.cmd_ext = 0;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -491,6 +515,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 	cmdData.cmd_out = '{"host":"wpt.local","port":"8000","path":"/xhr/resources/","url":"http://wpt.local:8000/xhr/resources/","node":true,"verbose":false}';
 	cmdData.cmd_err = '';
 
+	cmdData.cmd_opt = {encoding: 'UTF-8', env: {WPT_XHR_TEST: "node"}};
 	cmdData.cmd_ext = 0;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -505,6 +530,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 	cmdData.cmd_out = '{"host":"wpt.local","port":"8000","path":"/xhr/resources/","url":"http://wpt.local:8000/xhr/resources/","node":true,"verbose":false}';
 	cmdData.cmd_err = '';
 
+	cmdData.cmd_opt = {encoding: 'UTF-8', env: {WPT_XHR_TEST: "node"}};
 	cmdData.cmd_ext = 0;
 	cmdData.cmd_desc = cmdData.cmd_act.replace(CMD, CMD_BIN);
 
@@ -625,7 +651,7 @@ function getCmdOutput(cmdObj){
 	let proc_act, proc_exp;
 
 	let prom_act = new Promise((resolve, reject) => {
-		proc_act = exec(cmdObj.cmd_act, {encoding: 'UTF-8'}, (err, stdout, stderr) => {
+		proc_act = exec(cmdObj.cmd_act, cmdObj.cmd_opt, (err, stdout, stderr) => {
 			resolve({stdout, stderr});
 		});
 		proc_act.stdin.end();
