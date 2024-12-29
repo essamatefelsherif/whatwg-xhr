@@ -31,20 +31,20 @@
 		]
 	},
 	"keywords": [
-		"xmlhHttprequest",
+		"xmlhttprequest",
 		"xhr",
 		"ajax",
 		"whatwg"
 	],
 	"author": {
-		"name": "Essam A. El-Sherif",
+		"name" : "Essam A. El-Sherif",
 		"email": "esm.elsh@gmail.com",
-		"url": "https://essamonline.net/resume-it.html"
+		"url"  : "https://essamatefelsherif.github.io/whoami/"
 	},
 	"homepage": "https://github.com/essamatefelsherif/whatwg-xhr#readme",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/essamatefelsherif/what-xhr.git"
+		"url" : "git+https://github.com/essamatefelsherif/what-xhr.git"
 	},
 	"license": "MIT",
 	"dependencies": {

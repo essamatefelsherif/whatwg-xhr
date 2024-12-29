@@ -36,6 +36,8 @@ import { XMLHttpRequest } from '@essamonline/whatwg-xhr';
 
 ## Documentation
 
+Source code documentation, along with a test coverage report and more relevant documents are all included under [Documentation](https://essamatefelsherif.github.io/whatwg-xhr/ "Documentation").
+
 
 ## Node version support
 
