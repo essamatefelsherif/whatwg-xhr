@@ -40,6 +40,8 @@ export default (activeURL) => {
 		"text/javascript;charset=UTF-8",
 		"String request keeps setRequestHeader() Content-Type, with charset adjusted to UTF-8"
 	);
+
+
 /*
 	request(
 		function _XMLDocument() { return new DOMParser().parseFromString("<xml/>", "application/xml"); },
@@ -78,6 +80,7 @@ export default (activeURL) => {
 		"HTML Document request keeps setRequestHeader() Content-Type, with charset adjusted to UTF-8"
 	);
 */
+
 	request(
 		function _Blob() { return new Blob(["test"]); },
 		{"Content-Type": ""},
@@ -150,13 +153,14 @@ export default (activeURL) => {
 		"application/xml;charset=ASCII",
 		"ArrayBufferView request keeps setRequestHeader() Content-Type and charset"
 	);
-/*
+
 	request(
 		function _FormData() { return new FormData(); },
 		{"Content-Type": ""},
 		"",
 		'FormData request respects setRequestHeader("")'
 	);
+/*
 	request(
 		function _FormData() { return new FormData(); },
 		{},
@@ -170,6 +174,7 @@ export default (activeURL) => {
 		"FormData request keeps setRequestHeader() Content-Type and charset"
 	);
 */
+
 	request(
 		function _URLSearchParams() { return new URLSearchParams("q=testQ&topic=testTopic") },
 		{"Content-Type": ""},

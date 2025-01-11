@@ -21,7 +21,19 @@ import event_readystate_sync_open_any                                   from './
 import event_timeout_any                                                from './wpt/xhr/event-timeout.any.js';
 import event_timeout_order_any                                          from './wpt/xhr/event-timeout-order.any.js';
 import event_upload_progress_any                                        from './wpt/xhr/event-upload-progress.any.js';
-	// import formdata.js                                                     from './wpt/xhr/formdata.js';
+
+import formdata                                                         from './wpt/xhr/formdata.js';
+
+import formdata_append_any                                              from './wpt/xhr/formdata/append.any.js';
+import formdata_constructor_any                                         from './wpt/xhr/formdata/constructor.any.js';
+import formdata_delete_any                                              from './wpt/xhr/formdata/delete.any.js';
+import formdata_foreach_any                                             from './wpt/xhr/formdata/foreach.any.js';
+import formdata_get_any                                                 from './wpt/xhr/formdata/get.any.js';
+import formdata_has_any                                                 from './wpt/xhr/formdata/has.any.js';
+import formdata_iteration_any                                           from './wpt/xhr/formdata/iteration.any.js';
+import formdata_set_any                                                 from './wpt/xhr/formdata/set.any.js';
+import formdata_set_blob_any                                            from './wpt/xhr/formdata/set-blob.any.js';
+
 import firing_events_http_content_length                                from './wpt/xhr/firing-events-http-content-length.js';
 import firing_events_http_no_content_length                             from './wpt/xhr/firing-events-http-no-content-length.js';
 import getallresponseheaders_cookies                                    from './wpt/xhr/getallresponseheaders-cookies.js';
@@ -190,7 +202,7 @@ function loadTestData(){
 		testData.desc = 'XMLHttpRequest - prototype and members';
 		testData.method = xmlhttprequest_basic;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - XMLHttpRequest - implements EventTarget
@@ -198,7 +210,7 @@ function loadTestData(){
 		testData.desc = 'XMLHttpRequest - implements EventTarget';
 		testData.method = xmlhttprequest_eventtarget;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - XMLHttpRequest - members during network errors (async)
@@ -206,7 +218,7 @@ function loadTestData(){
 		testData.desc = 'XMLHttpRequest - members during network errors (async)';
 		testData.method = xmlhttprequest_network_error;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - XMLHttpRequest - members during network errors (sync)
@@ -214,7 +226,7 @@ function loadTestData(){
 		testData.desc = 'XMLHttpRequest - members during network errors (sync)';
 		testData.method = xmlhttprequest_network_error_sync;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - XMLHttpRequest - members during UNSENT
@@ -222,7 +234,7 @@ function loadTestData(){
 		testData.desc = 'XMLHttpRequest - members during UNSENT';
 		testData.method = xmlhttprequest_unsent;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #2 - Events
@@ -234,7 +246,7 @@ function loadTestData(){
 		testData.desc = 'event - abort event';
 		testData.method = event_abort_any;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - event - error (order of events)
@@ -242,7 +254,7 @@ function loadTestData(){
 		testData.desc = 'event - error (order of events)';
 		testData.method = event_error_order_sub;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - event - error event
@@ -250,7 +262,7 @@ function loadTestData(){
 		testData.desc = 'event - error event';
 		testData.method = event_error_sub_any;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - event - load event
@@ -258,7 +270,7 @@ function loadTestData(){
 		testData.desc = 'event - load event';
 		testData.method = event_load_any;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - event - loadend event
@@ -266,7 +278,7 @@ function loadTestData(){
 		testData.desc = 'event - loadend event';
 		testData.method = event_loadend_any;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - event - loadstart event
@@ -274,7 +286,7 @@ function loadTestData(){
 		testData.desc = 'event - loadstart event';
 		testData.method = event_loadstart_any;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - event - loadstart on upload object
@@ -282,7 +294,7 @@ function loadTestData(){
 		testData.desc = 'event - loadstart on upload object';
 		testData.method = event_loadstart_upload_any;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - event - the LOADING state change may be emitted multiple times
@@ -290,7 +302,7 @@ function loadTestData(){
 		testData.desc = 'event - the LOADING state change may be emitted multiple times';
 		testData.method = event_readystatechange_loaded_any;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - event - open() - call fires sync readystate event
@@ -298,7 +310,7 @@ function loadTestData(){
 		testData.desc = 'event - open() - call fires sync readystate event';
 		testData.method = event_readystate_sync_open_any;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - event - timeout event
@@ -306,7 +318,7 @@ function loadTestData(){
 		testData.desc = 'event - timeout event';
 		testData.method = event_timeout_any;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - event - timeout (order of events)
@@ -314,7 +326,7 @@ function loadTestData(){
 		testData.desc = 'event - timeout (order of events)';
 		testData.method = event_timeout_order_any;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - event - progress event
@@ -322,7 +334,7 @@ function loadTestData(){
 		testData.desc = 'event - progress event';
 		testData.method = event_progress_any;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - event - upload progress event
@@ -330,7 +342,7 @@ function loadTestData(){
 		testData.desc = 'event - upload progress event';
 		testData.method = event_upload_progress_any;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #3 - Progress Events
@@ -342,7 +354,7 @@ function loadTestData(){
 		testData.desc = 'ProgressEvent - constructor';
 		testData.method = progressevent_constructor;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - ProgressEvent - interface
@@ -350,7 +362,7 @@ function loadTestData(){
 		testData.desc = 'ProgressEvent - interface';
 		testData.method = progressevent_interface;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - ProgressEvent - firing events for HTTP with Content-Length
@@ -358,7 +370,7 @@ function loadTestData(){
 		testData.desc = 'ProgressEvent - firing events for HTTP with Content-Length';
 		testData.method = firing_events_http_content_length;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - ProgressEvent - firing events for HTTP with NO Content-Length
@@ -366,7 +378,7 @@ function loadTestData(){
 		testData.desc = 'ProgressEvent - firing events for HTTP with NO Content-Length';
 		testData.method = firing_events_http_no_content_length;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - ProgressEvent - and GZIP encoding
@@ -374,7 +386,7 @@ function loadTestData(){
 		testData.desc = 'ProgressEvent - and GZIP encoding';
 		testData.method = progress_events_response_data_gzip;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #4 - Headers
@@ -386,7 +398,7 @@ function loadTestData(){
 		testData.desc = 'Headers - Whitespace and null in header values';
 		testData.method = headers_normalize_response;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - Headers - Test that async requests are sent with the User-Agent header
@@ -394,7 +406,7 @@ function loadTestData(){
 		testData.desc = 'Headers - Test that async requests are sent with the User-Agent header';
 		testData.method = header_user_agent_async;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - Headers - Test that sync requests are sent with the User-Agent header
@@ -402,7 +414,7 @@ function loadTestData(){
 		testData.desc = 'Headers - Test that sync requests are sent with the User-Agent header';
 		testData.method = header_user_agent_sync;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - Headers - User-Agent header is preserved on redirect
@@ -410,7 +422,7 @@ function loadTestData(){
 		testData.desc = 'Headers - User-Agent header is preserved on redirect';
 		testData.method = preserve_ua_header_on_redirect;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #5 - Methods - open
@@ -422,7 +434,7 @@ function loadTestData(){
 		testData.desc = 'open() - after abort()';
 		testData.method = open_after_abort;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - open() - after setRequestHeader()
@@ -430,7 +442,7 @@ function loadTestData(){
 		testData.desc = 'open() - after setRequestHeader()';
 		testData.method = open_after_setrequestheader;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - open() - during abort()
@@ -438,7 +450,7 @@ function loadTestData(){
 		testData.desc = 'open() - during abort()';
 		testData.method = open_during_abort;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - open() - bogus methods
@@ -446,7 +458,7 @@ function loadTestData(){
 		testData.desc = 'open() - bogus methods';
 		testData.method = open_method_bogus;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - open() - case-insensitive methods test
@@ -454,7 +466,7 @@ function loadTestData(){
 		testData.desc = 'open() - case-insensitive methods test';
 		testData.method = open_method_case_insensitive;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - open() - "insecure" methods
@@ -462,7 +474,7 @@ function loadTestData(){
 		testData.desc = 'open() - "insecure" methods';
 		testData.method = open_method_insecure;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - open() - sync request not allowed if responseType is set
@@ -470,7 +482,7 @@ function loadTestData(){
 		testData.desc = 'open() - sync request not allowed if responseType is set';
 		testData.method = open_method_responsetype_set_sync;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - open() - attempts to toString its string parameters
@@ -478,7 +490,7 @@ function loadTestData(){
 		testData.desc = 'open() - attempts to toString its string parameters';
 		testData.method = open_parameters_toString;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - open() - open() - send()
@@ -486,7 +498,7 @@ function loadTestData(){
 		testData.desc = 'open() - open() - send()';
 		testData.method = open_open_send;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - open() - open() (sync) - send()
@@ -494,7 +506,7 @@ function loadTestData(){
 		testData.desc = 'open() - open() (sync) - send()';
 		testData.method = open_open_sync_send;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - open() - send() - open()
@@ -502,7 +514,7 @@ function loadTestData(){
 		testData.desc = 'open() - send() - open()';
 		testData.method = open_send_open;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - open() - during abort()
@@ -510,7 +522,7 @@ function loadTestData(){
 		testData.desc = 'open() - during abort()';
 		testData.method = open_send_during_abort;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - open() - (sync) - send() - open()
@@ -518,7 +530,7 @@ function loadTestData(){
 		testData.desc = 'open() - (sync) - send() - open()';
 		testData.method = open_sync_open_send;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - open() - resolving URLs
@@ -526,7 +538,7 @@ function loadTestData(){
 		testData.desc = 'open() - resolving URLs';
 		testData.method = open_url_base;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - open() - resolving URLs - fragment identifier
@@ -534,7 +546,7 @@ function loadTestData(){
 		testData.desc = 'open() - resolving URLs - fragment identifier';
 		testData.method = open_url_fragment;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #6 - Methods - setRequestHeader
@@ -546,7 +558,7 @@ function loadTestData(){
 		testData.desc = 'setRequestHeader() - after send()';
 		testData.method = setrequestheader_after_send;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - setRequestHeader() - empty header
@@ -554,7 +566,7 @@ function loadTestData(){
 		testData.desc = 'setRequestHeader() - empty header';
 		testData.method = setrequestheader_allow_empty_value;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - setRequestHeader() - header value with whitespace
@@ -562,7 +574,7 @@ function loadTestData(){
 		testData.desc = 'setRequestHeader() - header value with whitespace';
 		testData.method = setrequestheader_allow_whitespace_in_value;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - setRequestHeader() - before open()
@@ -570,7 +582,7 @@ function loadTestData(){
 		testData.desc = 'setRequestHeader() - before open()';
 		testData.method = setrequestheader_before_open;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - setRequestHeader() - name argument checks
@@ -578,7 +590,7 @@ function loadTestData(){
 		testData.desc = 'setRequestHeader() - name argument checks';
 		testData.method = setrequestheader_bogus_name;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - setRequestHeader() - value argument checks
@@ -586,7 +598,7 @@ function loadTestData(){
 		testData.desc = 'setRequestHeader() - value argument checks';
 		testData.method = setrequestheader_bogus_value;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - setRequestHeader() - headers that differ in case
@@ -594,7 +606,7 @@ function loadTestData(){
 		testData.desc = 'setRequestHeader() - headers that differ in case';
 		testData.method = setrequestheader_case_insensitive;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - setRequestHeader() - Content-Type header
@@ -602,7 +614,7 @@ function loadTestData(){
 		testData.desc = 'setRequestHeader() - Content-Type header';
 		testData.method = setrequestheader_content_type;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - setRequestHeader() - headers that are allowed
@@ -610,7 +622,7 @@ function loadTestData(){
 		testData.desc = 'setRequestHeader() - headers that are allowed';
 		testData.method = setrequestheader_header_allowed;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - setRequestHeader() - headers that are forbidden
@@ -618,7 +630,7 @@ function loadTestData(){
 		testData.desc = 'setRequestHeader() - headers that are forbidden';
 		testData.method = setrequestheader_header_forbidden;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - setRequestHeader() - and open()
@@ -626,7 +638,7 @@ function loadTestData(){
 		testData.desc = 'setRequestHeader() - and open()';
 		testData.method = setrequestheader_open_setrequestheader;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #7 - Methods - overrideMimeType
@@ -638,7 +650,7 @@ function loadTestData(){
 		testData.desc = 'overrideMimeType() - in HEADERS RECEIVED state, enforcing Shift-JIS encoding';
 		testData.method = overridemimetype_headers_received_state_force_shiftjis;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - overrideMimeType() - and invalid MIME types
@@ -646,7 +658,7 @@ function loadTestData(){
 		testData.desc = 'overrideMimeType() - and invalid MIME types';
 		testData.method = overridemimetype_invalid_mime_type;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - overrideMimeType() - in LOADING state
@@ -654,7 +666,7 @@ function loadTestData(){
 		testData.desc = 'overrideMimeType() - in LOADING state';
 		testData.method = overridemimetype_loading_state;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - overrideMimeType() - in open state, enforcing UTF-8 encoding
@@ -662,7 +674,7 @@ function loadTestData(){
 		testData.desc = 'overrideMimeType() - in open state, enforcing UTF-8 encoding';
 		testData.method = overridemimetype_open_state_force_utf_8;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #8 - Methods - send
@@ -674,7 +686,7 @@ function loadTestData(){
 		testData.desc = 'send() - Accept';
 		testData.method = send_accept;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - Accept-Language
@@ -682,7 +694,7 @@ function loadTestData(){
 		testData.desc = 'send() - Accept-Language';
 		testData.method = send_accept_language;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - Blob data with no mime type
@@ -690,7 +702,7 @@ function loadTestData(){
 		testData.desc = 'send() - Blob data with no mime type';
 		testData.method = send_blob_with_no_mime_type;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - Content-Type
@@ -698,7 +710,7 @@ function loadTestData(){
 		testData.desc = 'send() - Content-Type';
 		testData.method = send_content_type_string;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - charset parameter of Content-Type
@@ -706,7 +718,7 @@ function loadTestData(){
 		testData.desc = 'send() - charset parameter of Content-Type';
 		testData.method = send_content_type_charset;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - method: Blob data
@@ -714,7 +726,7 @@ function loadTestData(){
 		testData.desc = 'send() - method: Blob data';
 		testData.method = send_data_blob;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - data argument
@@ -722,7 +734,7 @@ function loadTestData(){
 		testData.desc = 'send() - data argument';
 		testData.method = send_entity_body_basic;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - "" empty entity body
@@ -730,7 +742,7 @@ function loadTestData(){
 		testData.desc = 'send() - "" empty entity body';
 		testData.method = send_entity_body_empty;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - non-empty data argument and GET/HEAD - async, no upload events should fire
@@ -738,7 +750,7 @@ function loadTestData(){
 		testData.desc = 'send() - non-empty data argument and GET/HEAD - async, no upload events should fire';
 		testData.method = send_entity_body_get_head_async;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - non-empty data argument and GET/HEAD, no upload events should fire
@@ -746,7 +758,7 @@ function loadTestData(){
 		testData.desc = 'send() - non-empty data argument and GET/HEAD, no upload events should fire';
 		testData.method = send_entity_body_get_head;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - null entity body
@@ -754,7 +766,7 @@ function loadTestData(){
 		testData.desc = 'send() - null entity body';
 		testData.method = send_entity_body_none;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - Fire a progress event named error when Network error happens (synchronous flag is unset
@@ -762,7 +774,7 @@ function loadTestData(){
 		testData.desc = 'send() - Fire a progress event named error when Network error happens (synchronous flag is unset)';
 		testData.method = send_network_error_async_events_sub;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - Throw a "throw an "NetworkError" exception when Network error happens (synchronous flag is set)
@@ -770,7 +782,7 @@ function loadTestData(){
 		testData.desc = 'send() - Throw a "throw an "NetworkError" exception when Network error happens (synchronous flag is set)';
 		testData.method = send_network_error_sync_events_sub;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - Fire a progress event named loadend (no response entity body)
@@ -778,7 +790,7 @@ function loadTestData(){
 		testData.desc = 'send() - Fire a progress event named loadend (no response entity body)';
 		testData.method = send_no_response_event_loadend;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - Fire a progress event named loadstart (no response entity body and the state is LOADING)
@@ -786,7 +798,7 @@ function loadTestData(){
 		testData.desc = 'send() - Fire a progress event named loadstart (no response entity body and the state is LOADING)';
 		testData.method = send_no_response_event_loadstart;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - event order when there is no response entity body
@@ -794,7 +806,7 @@ function loadTestData(){
 		testData.desc = 'send() - event order when there is no response entity body';
 		testData.method = send_no_response_event_order;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - receive data which is UTF-16 encoded
@@ -802,7 +814,7 @@ function loadTestData(){
 		testData.desc = 'send() - receive data which is UTF-16 encoded';
 		testData.method = send_receive_utf16;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - Redirects (basics)
@@ -810,7 +822,7 @@ function loadTestData(){
 		testData.desc = 'send() - Redirects (basics)';
 		testData.method = send_redirect;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - Redirects (bogus Location header)
@@ -818,7 +830,7 @@ function loadTestData(){
 		testData.desc = 'send() - Redirects (bogus Location header)';
 		testData.method = send_redirect_bogus;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - Redirects (bogus Location header; sync)
@@ -826,7 +838,7 @@ function loadTestData(){
 		testData.desc = 'send() - Redirects (bogus Location header; sync)';
 		testData.method = send_redirect_bogus_sync;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - Redirects (infinite loop)
@@ -834,7 +846,7 @@ function loadTestData(){
 		testData.desc = 'send() - Redirects (infinite loop)';
 		testData.method = send_redirect_infinite;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - Redirects (infinite loop; sync)
@@ -842,7 +854,7 @@ function loadTestData(){
 		testData.desc = 'send() - Redirects (infinite loop; sync)';
 		testData.method = send_redirect_infinite_sync;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - POSTing to URL that redirects
@@ -850,7 +862,7 @@ function loadTestData(){
 		testData.desc = 'send() - POSTing to URL that redirects';
 		testData.method = send_redirect_post_upload;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - event order when synchronous flag is unset
@@ -858,7 +870,7 @@ function loadTestData(){
 		testData.desc = 'send() - event order when synchronous flag is unset';
 		testData.method = send_response_event_order;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - Fire a progress event named loadstart on the XMLHttpRequestUpload (synchronous flag is unset)
@@ -866,7 +878,7 @@ function loadTestData(){
 		testData.desc = 'send() - Fire a progress event named loadstart on the XMLHttpRequestUpload (synchronous flag is unset)';
 		testData.method = send_response_upload_event_loadstart;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - Fire a progress event named loadend on the XMLHttpRequestUpload (synchronous flag is unset)
@@ -874,7 +886,7 @@ function loadTestData(){
 		testData.desc = 'send() - Fire a progress event named loadend on the XMLHttpRequestUpload (synchronous flag is unset)';
 		testData.method = send_response_upload_event_loadend;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - Fire a progress event named progress on the XMLHttpRequestUpload (synchronous flag is unset)
@@ -882,7 +894,7 @@ function loadTestData(){
 		testData.desc = 'send() - Fire a progress event named progress on the XMLHttpRequestUpload (synchronous flag is unset)';
 		testData.method = send_response_upload_event_progress;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - sync requests should block events on pending async requests
@@ -890,7 +902,7 @@ function loadTestData(){
 		testData.desc = 'send() - sync requests should block events on pending async requests';
 		testData.method = send_sync_blocks_async;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - event order when synchronous flag is set and there is no response entity body
@@ -898,7 +910,7 @@ function loadTestData(){
 		testData.desc = 'send() - event order when synchronous flag is set and there is no response entity body';
 		testData.method = send_sync_no_response_event_order;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - Fire an event named loadend (no response entity body and the synchronous flag is set)
@@ -906,7 +918,7 @@ function loadTestData(){
 		testData.desc = 'send() - Fire an event named loadend (no response entity body and the synchronous flag is set)';
 		testData.method = send_sync_no_response_event_load;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - Fire an event named loadend (no response entity body and the synchronous flag is set)
@@ -914,7 +926,7 @@ function loadTestData(){
 		testData.desc = 'send() - Fire an event named loadend (no response entity body and the synchronous flag is set)';
 		testData.method = send_sync_no_response_event_loadend;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - event order when synchronous flag is set
@@ -922,7 +934,7 @@ function loadTestData(){
 		testData.desc = 'send() - event order when synchronous flag is set';
 		testData.method = send_sync_response_event_order;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - timeout during sync send() should not run
@@ -930,7 +942,7 @@ function loadTestData(){
 		testData.desc = 'send() - timeout during sync send() should not run';
 		testData.method = send_sync_timeout;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - send() - timeout is not 0
@@ -938,7 +950,7 @@ function loadTestData(){
 		testData.desc = 'send() - timeout is not 0';
 		testData.method = send_timeout_events;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #9 - Methods - abort
@@ -950,7 +962,7 @@ function loadTestData(){
 		testData.desc = 'abort() - abort and loadend events';
 		testData.method = abort_event_order;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #10 - Methods - getAllResponseHeaders
@@ -962,7 +974,7 @@ function loadTestData(){
 		testData.desc = 'getAllResponseHeaders() - excludes cookies';
 		testData.method = getallresponseheaders_cookies;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 
@@ -971,7 +983,7 @@ function loadTestData(){
 		testData.desc = 'getAllResponseHeaders() - excludes status line (HTTP/1.1 ...)';
 		testData.method = getallresponseheaders_status;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #11 - Methods - getResponseHeader
@@ -983,7 +995,7 @@ function loadTestData(){
 		testData.desc = 'getResponseHeader() - case-insensitive matching';
 		testData.method = getresponseheader_case_insensitive;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - getResponseHeader() - and HTTP trailer
@@ -991,7 +1003,7 @@ function loadTestData(){
 		testData.desc = 'getResponseHeader() - and HTTP trailer';
 		testData.method = getresponseheader_chunked_trailer;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - getResponseHeader() - custom/non-existent headers and cookies
@@ -999,7 +1011,7 @@ function loadTestData(){
 		testData.desc = 'getResponseHeader() - custom/non-existent headers and cookies';
 		testData.method = getresponseheader_cookies_and_more;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - getResponseHeader() - in error state
@@ -1007,7 +1019,7 @@ function loadTestData(){
 		testData.desc = 'getResponseHeader() - in error state';
 		testData.method = getresponseheader_error_state;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - getResponseHeader() - server and date
@@ -1015,7 +1027,7 @@ function loadTestData(){
 		testData.desc = 'getResponseHeader() - server and date';
 		testData.method = getresponseheader_server_date;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - getResponseHeader() - funny characters
@@ -1023,7 +1035,7 @@ function loadTestData(){
 		testData.desc = 'getResponseHeader() - funny characters';
 		testData.method = getresponseheader_special_characters;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - getResponseHeader() - in unsent, opened states
@@ -1031,7 +1043,7 @@ function loadTestData(){
 		testData.desc = 'getResponseHeader() - in unsent, opened states';
 		testData.method = getresponseheader_unsent_opened_state;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #12 - Response
@@ -1043,7 +1055,7 @@ function loadTestData(){
 		testData.desc = 'transmitting two chunks TEST_CHUNK and then garbage, which should result in an error';
 		testData.method = response_body_errors;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - response - ArrayBuffer data
@@ -1051,7 +1063,7 @@ function loadTestData(){
 		testData.desc = 'response - ArrayBuffer data';
 		testData.method = response_data_arraybuffer;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - response - Blob data
@@ -1059,7 +1071,7 @@ function loadTestData(){
 		testData.desc = 'response - Blob data';
 		testData.method = response_data_blob;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - progress events grow response body size
@@ -1067,7 +1079,7 @@ function loadTestData(){
 		testData.desc = 'progress events grow response body size';
 		testData.method = response_data_progress;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - responseType - is plain text if responseType is set to an invalid string
@@ -1075,7 +1087,7 @@ function loadTestData(){
 		testData.desc = 'responseType - is plain text if responseType is set to an invalid string';
 		testData.method = response_invalid_responsetype;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - responseType - json
@@ -1083,7 +1095,7 @@ function loadTestData(){
 		testData.desc = 'responseType - json';
 		testData.method = response_json;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - responseText - status
@@ -1091,7 +1103,7 @@ function loadTestData(){
 		testData.desc = 'responseText - status';
 		testData.method = responsetext_status;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - responseText - decoding
@@ -1099,7 +1111,7 @@ function loadTestData(){
 		testData.desc = 'responseText - decoding';
 		testData.method = responsetext_decoding;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #13 - Status
@@ -1111,7 +1123,7 @@ function loadTestData(){
 		testData.desc = 'status/statusText - various responses';
 		testData.method = status_async;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - status/statusText - basic
@@ -1119,7 +1131,7 @@ function loadTestData(){
 		testData.desc = 'status/statusText - basic';
 		testData.method = status_basic;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - status - error handling
@@ -1127,10 +1139,94 @@ function loadTestData(){
 		testData.desc = 'status - error handling';
 		testData.method = status_error;
 
+		testData.skip = true;
+		suites.get(suiteDesc).push(testData);
+
+	// TEST SUITE #14 - FormData
+	suiteDesc = 'FormData';
+	suites.set(suiteDesc, []);
+
+		// TEST ### - XMLHttpRequest: Construct and upload FormData
+		testData = {};
+		testData.desc = 'XMLHttpRequest: Construct and upload FormData';
+		testData.method = formdata;
+
 		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-	// TEST SUITE #14 - Miscellaneous
+		// TEST ### - FormData Constructor
+		testData = {};
+		testData.desc = 'FormData Constructor';
+		testData.method = formdata_constructor_any;
+
+		testData.skip = false;
+		suites.get(suiteDesc).push(testData);
+
+		// TEST ### - FormData set
+		testData = {};
+		testData.desc = 'FormData set';
+		testData.method = formdata_set_any;
+
+		testData.skip = false;
+		suites.get(suiteDesc).push(testData);
+
+		// TEST ### - FormData set-blob
+		testData = {};
+		testData.desc = 'FormData set-blob';
+		testData.method = formdata_set_blob_any;
+
+		testData.skip = false;
+		suites.get(suiteDesc).push(testData);
+
+		// TEST ### - FormData get
+		testData = {};
+		testData.desc = 'FormData get';
+		testData.method = formdata_get_any;
+
+		testData.skip = false;
+		suites.get(suiteDesc).push(testData);
+
+		// TEST ### - FormData append
+		testData = {};
+		testData.desc = 'FormData append';
+		testData.method = formdata_append_any;
+
+		testData.skip = false;
+		suites.get(suiteDesc).push(testData);
+
+		// TEST ### - FormData delete
+		testData = {};
+		testData.desc = 'FormData delete';
+		testData.method = formdata_delete_any;
+
+		testData.skip = false;
+		suites.get(suiteDesc).push(testData);
+
+		// TEST ### - FormData has
+		testData = {};
+		testData.desc = 'FormData has';
+		testData.method = formdata_has_any;
+
+		testData.skip = false;
+		suites.get(suiteDesc).push(testData);
+
+		// TEST ### - FormData iteration
+		testData = {};
+		testData.desc = 'FormData iteration';
+		testData.method = formdata_iteration_any;
+
+		testData.skip = false;
+		suites.get(suiteDesc).push(testData);
+
+		// TEST ### - FormData forEach
+		testData = {};
+		testData.desc = 'FormData forEach';
+		testData.method = formdata_foreach_any;
+
+		testData.skip = false;
+		suites.get(suiteDesc).push(testData);
+
+	// TEST SUITE #15 - Miscellaneous
 	suiteDesc = 'Miscellaneous';
 	suites.set(suiteDesc, []);
 
@@ -1139,7 +1235,7 @@ function loadTestData(){
 		testData.desc = 'data URLs';
 		testData.method = data_uri;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - historical features
@@ -1147,7 +1243,7 @@ function loadTestData(){
 		testData.desc = 'historical features';
 		testData.method = historical;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 
 		// TEST ### - loadstart event corner cases
@@ -1155,7 +1251,7 @@ function loadTestData(){
 		testData.desc = 'loadstart event corner cases';
 		testData.method = loadstart_and_state;
 
-		testData.skip = false;
+		testData.skip = true;
 		suites.get(suiteDesc).push(testData);
 }
 
