@@ -21,9 +21,7 @@ import event_readystate_sync_open_any                                   from './
 import event_timeout_any                                                from './wpt/xhr/event-timeout.any.js';
 import event_timeout_order_any                                          from './wpt/xhr/event-timeout-order.any.js';
 import event_upload_progress_any                                        from './wpt/xhr/event-upload-progress.any.js';
-
 import formdata                                                         from './wpt/xhr/formdata.js';
-
 import formdata_append_any                                              from './wpt/xhr/formdata/append.any.js';
 import formdata_constructor_any                                         from './wpt/xhr/formdata/constructor.any.js';
 import formdata_delete_any                                              from './wpt/xhr/formdata/delete.any.js';
@@ -33,7 +31,6 @@ import formdata_has_any                                                 from './
 import formdata_iteration_any                                           from './wpt/xhr/formdata/iteration.any.js';
 import formdata_set_any                                                 from './wpt/xhr/formdata/set.any.js';
 import formdata_set_blob_any                                            from './wpt/xhr/formdata/set-blob.any.js';
-
 import firing_events_http_content_length                                from './wpt/xhr/firing-events-http-content-length.js';
 import firing_events_http_no_content_length                             from './wpt/xhr/firing-events-http-no-content-length.js';
 import getallresponseheaders_cookies                                    from './wpt/xhr/getallresponseheaders-cookies.js';
@@ -197,956 +194,955 @@ function loadTestData(){
 	suiteDesc = 'XMLHttpRequest';
 	suites.set(suiteDesc, []);
 
-		// TEST ### - XMLHttpRequest - prototype and members
+		// TEST 001 - XMLHttpRequest - prototype and members
 		testData = {};
 		testData.desc = 'XMLHttpRequest - prototype and members';
 		testData.method = xmlhttprequest_basic;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - XMLHttpRequest - implements EventTarget
+		// TEST 002 - XMLHttpRequest - implements EventTarget
 		testData = {};
 		testData.desc = 'XMLHttpRequest - implements EventTarget';
 		testData.method = xmlhttprequest_eventtarget;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - XMLHttpRequest - members during network errors (async)
+		// TEST 003 - XMLHttpRequest - members during network errors (async)
 		testData = {};
 		testData.desc = 'XMLHttpRequest - members during network errors (async)';
 		testData.method = xmlhttprequest_network_error;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - XMLHttpRequest - members during network errors (sync)
+		// TEST 004 - XMLHttpRequest - members during network errors (sync)
 		testData = {};
 		testData.desc = 'XMLHttpRequest - members during network errors (sync)';
 		testData.method = xmlhttprequest_network_error_sync;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - XMLHttpRequest - members during UNSENT
+		// TEST 005 - XMLHttpRequest - members during UNSENT
 		testData = {};
 		testData.desc = 'XMLHttpRequest - members during UNSENT';
 		testData.method = xmlhttprequest_unsent;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #2 - Events
 	suiteDesc = 'Events';
 	suites.set(suiteDesc, []);
 
-		// TEST ### - event - abort event
+		// TEST 006 - event - abort event
 		testData = {};
 		testData.desc = 'event - abort event';
 		testData.method = event_abort_any;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - event - error (order of events)
+		// TEST 007 - event - error (order of events)
 		testData = {};
 		testData.desc = 'event - error (order of events)';
 		testData.method = event_error_order_sub;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - event - error event
+		// TEST 008 - event - error event
 		testData = {};
 		testData.desc = 'event - error event';
 		testData.method = event_error_sub_any;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - event - load event
+		// TEST 009 - event - load event
 		testData = {};
 		testData.desc = 'event - load event';
 		testData.method = event_load_any;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - event - loadend event
+		// TEST 010 - event - loadend event
 		testData = {};
 		testData.desc = 'event - loadend event';
 		testData.method = event_loadend_any;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - event - loadstart event
+		// TEST 011 - event - loadstart event
 		testData = {};
 		testData.desc = 'event - loadstart event';
 		testData.method = event_loadstart_any;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - event - loadstart on upload object
+		// TEST 012 - event - loadstart on upload object
 		testData = {};
 		testData.desc = 'event - loadstart on upload object';
 		testData.method = event_loadstart_upload_any;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - event - the LOADING state change may be emitted multiple times
+		// TEST 013 - event - the LOADING state change may be emitted multiple times
 		testData = {};
 		testData.desc = 'event - the LOADING state change may be emitted multiple times';
 		testData.method = event_readystatechange_loaded_any;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - event - open() - call fires sync readystate event
+		// TEST 014 - event - open() - call fires sync readystate event
 		testData = {};
 		testData.desc = 'event - open() - call fires sync readystate event';
 		testData.method = event_readystate_sync_open_any;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - event - timeout event
+		// TEST 015 - event - timeout event
 		testData = {};
 		testData.desc = 'event - timeout event';
 		testData.method = event_timeout_any;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - event - timeout (order of events)
+		// TEST 016 - event - timeout (order of events)
 		testData = {};
 		testData.desc = 'event - timeout (order of events)';
 		testData.method = event_timeout_order_any;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - event - progress event
+		// TEST 017 - event - progress event
 		testData = {};
 		testData.desc = 'event - progress event';
 		testData.method = event_progress_any;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - event - upload progress event
+		// TEST 018 - event - upload progress event
 		testData = {};
 		testData.desc = 'event - upload progress event';
 		testData.method = event_upload_progress_any;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #3 - Progress Events
 	suiteDesc = 'Progress Events';
 	suites.set(suiteDesc, []);
 
-		// TEST ### - ProgressEvent - constructor
+		// TEST 019 - ProgressEvent - constructor
 		testData = {};
 		testData.desc = 'ProgressEvent - constructor';
 		testData.method = progressevent_constructor;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - ProgressEvent - interface
+		// TEST 020 - ProgressEvent - interface
 		testData = {};
 		testData.desc = 'ProgressEvent - interface';
 		testData.method = progressevent_interface;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - ProgressEvent - firing events for HTTP with Content-Length
+		// TEST 021 - ProgressEvent - firing events for HTTP with Content-Length
 		testData = {};
 		testData.desc = 'ProgressEvent - firing events for HTTP with Content-Length';
 		testData.method = firing_events_http_content_length;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - ProgressEvent - firing events for HTTP with NO Content-Length
+		// TEST 022 - ProgressEvent - firing events for HTTP with NO Content-Length
 		testData = {};
 		testData.desc = 'ProgressEvent - firing events for HTTP with NO Content-Length';
 		testData.method = firing_events_http_no_content_length;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - ProgressEvent - and GZIP encoding
+		// TEST 023 - ProgressEvent - and GZIP encoding
 		testData = {};
 		testData.desc = 'ProgressEvent - and GZIP encoding';
 		testData.method = progress_events_response_data_gzip;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #4 - Headers
 	suiteDesc = 'Headers';
 	suites.set(suiteDesc, []);
 
-		// TEST ### - Headers - Whitespace and null in header values
+		// TEST 024 - Headers - Whitespace and null in header values
 		testData = {};
 		testData.desc = 'Headers - Whitespace and null in header values';
 		testData.method = headers_normalize_response;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - Headers - Test that async requests are sent with the User-Agent header
+		// TEST 025 - Headers - Test that async requests are sent with the User-Agent header
 		testData = {};
 		testData.desc = 'Headers - Test that async requests are sent with the User-Agent header';
 		testData.method = header_user_agent_async;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - Headers - Test that sync requests are sent with the User-Agent header
+		// TEST 026 - Headers - Test that sync requests are sent with the User-Agent header
 		testData = {};
 		testData.desc = 'Headers - Test that sync requests are sent with the User-Agent header';
 		testData.method = header_user_agent_sync;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - Headers - User-Agent header is preserved on redirect
+		// TEST 027 - Headers - User-Agent header is preserved on redirect
 		testData = {};
 		testData.desc = 'Headers - User-Agent header is preserved on redirect';
 		testData.method = preserve_ua_header_on_redirect;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #5 - Methods - open
 	suiteDesc = 'Methods - open';
 	suites.set(suiteDesc, []);
 
-		// TEST ### - open() - after abort()
+		// TEST 028 - open() - after abort()
 		testData = {};
 		testData.desc = 'open() - after abort()';
 		testData.method = open_after_abort;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - open() - after setRequestHeader()
+		// TEST 029 - open() - after setRequestHeader()
 		testData = {};
 		testData.desc = 'open() - after setRequestHeader()';
 		testData.method = open_after_setrequestheader;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - open() - during abort()
+		// TEST 030 - open() - during abort()
 		testData = {};
 		testData.desc = 'open() - during abort()';
 		testData.method = open_during_abort;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - open() - bogus methods
+		// TEST 031 - open() - bogus methods
 		testData = {};
 		testData.desc = 'open() - bogus methods';
 		testData.method = open_method_bogus;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - open() - case-insensitive methods test
+		// TEST 032 - open() - case-insensitive methods test
 		testData = {};
 		testData.desc = 'open() - case-insensitive methods test';
 		testData.method = open_method_case_insensitive;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - open() - "insecure" methods
+		// TEST 033 - open() - "insecure" methods
 		testData = {};
 		testData.desc = 'open() - "insecure" methods';
 		testData.method = open_method_insecure;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - open() - sync request not allowed if responseType is set
+		// TEST 034 - open() - sync request not allowed if responseType is set
 		testData = {};
 		testData.desc = 'open() - sync request not allowed if responseType is set';
 		testData.method = open_method_responsetype_set_sync;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - open() - attempts to toString its string parameters
+		// TEST 035 - open() - attempts to toString its string parameters
 		testData = {};
 		testData.desc = 'open() - attempts to toString its string parameters';
 		testData.method = open_parameters_toString;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - open() - open() - send()
+		// TEST 036 - open() - open() - send()
 		testData = {};
 		testData.desc = 'open() - open() - send()';
 		testData.method = open_open_send;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - open() - open() (sync) - send()
+		// TEST 037 - open() - open() (sync) - send()
 		testData = {};
 		testData.desc = 'open() - open() (sync) - send()';
 		testData.method = open_open_sync_send;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - open() - send() - open()
+		// TEST 038 - open() - send() - open()
 		testData = {};
 		testData.desc = 'open() - send() - open()';
 		testData.method = open_send_open;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - open() - during abort()
+		// TEST 039 - open() - during abort()
 		testData = {};
 		testData.desc = 'open() - during abort()';
 		testData.method = open_send_during_abort;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - open() - (sync) - send() - open()
+		// TEST 040 - open() - (sync) - send() - open()
 		testData = {};
 		testData.desc = 'open() - (sync) - send() - open()';
 		testData.method = open_sync_open_send;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - open() - resolving URLs
+		// TEST 041 - open() - resolving URLs
 		testData = {};
 		testData.desc = 'open() - resolving URLs';
 		testData.method = open_url_base;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - open() - resolving URLs - fragment identifier
+		// TEST 042 - open() - resolving URLs - fragment identifier
 		testData = {};
 		testData.desc = 'open() - resolving URLs - fragment identifier';
 		testData.method = open_url_fragment;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #6 - Methods - setRequestHeader
 	suiteDesc = 'Methods - setRequestHeader';
 	suites.set(suiteDesc, []);
 
-		// TEST ### - setRequestHeader() - after send()
+		// TEST 043 - setRequestHeader() - after send()
 		testData = {};
 		testData.desc = 'setRequestHeader() - after send()';
 		testData.method = setrequestheader_after_send;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - setRequestHeader() - empty header
+		// TEST 044 - setRequestHeader() - empty header
 		testData = {};
 		testData.desc = 'setRequestHeader() - empty header';
 		testData.method = setrequestheader_allow_empty_value;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - setRequestHeader() - header value with whitespace
+		// TEST 045 - setRequestHeader() - header value with whitespace
 		testData = {};
 		testData.desc = 'setRequestHeader() - header value with whitespace';
 		testData.method = setrequestheader_allow_whitespace_in_value;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - setRequestHeader() - before open()
+		// TEST 046 - setRequestHeader() - before open()
 		testData = {};
 		testData.desc = 'setRequestHeader() - before open()';
 		testData.method = setrequestheader_before_open;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - setRequestHeader() - name argument checks
+		// TEST 047 - setRequestHeader() - name argument checks
 		testData = {};
 		testData.desc = 'setRequestHeader() - name argument checks';
 		testData.method = setrequestheader_bogus_name;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - setRequestHeader() - value argument checks
+		// TEST 048 - setRequestHeader() - value argument checks
 		testData = {};
 		testData.desc = 'setRequestHeader() - value argument checks';
 		testData.method = setrequestheader_bogus_value;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - setRequestHeader() - headers that differ in case
+		// TEST 049 - setRequestHeader() - headers that differ in case
 		testData = {};
 		testData.desc = 'setRequestHeader() - headers that differ in case';
 		testData.method = setrequestheader_case_insensitive;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - setRequestHeader() - Content-Type header
+		// TEST 050 - setRequestHeader() - Content-Type header
 		testData = {};
 		testData.desc = 'setRequestHeader() - Content-Type header';
 		testData.method = setrequestheader_content_type;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - setRequestHeader() - headers that are allowed
+		// TEST 051 - setRequestHeader() - headers that are allowed
 		testData = {};
 		testData.desc = 'setRequestHeader() - headers that are allowed';
 		testData.method = setrequestheader_header_allowed;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - setRequestHeader() - headers that are forbidden
+		// TEST 052 - setRequestHeader() - headers that are forbidden
 		testData = {};
 		testData.desc = 'setRequestHeader() - headers that are forbidden';
 		testData.method = setrequestheader_header_forbidden;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - setRequestHeader() - and open()
+		// TEST 053 - setRequestHeader() - and open()
 		testData = {};
 		testData.desc = 'setRequestHeader() - and open()';
 		testData.method = setrequestheader_open_setrequestheader;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #7 - Methods - overrideMimeType
 	suiteDesc = 'Methods - overrideMimeType';
 	suites.set(suiteDesc, []);
 
-		// TEST ### - overrideMimeType() - in HEADERS RECEIVED state, enforcing Shift-JIS encoding
+		// TEST 054 - overrideMimeType() - in HEADERS RECEIVED state, enforcing Shift-JIS encoding
 		testData = {};
 		testData.desc = 'overrideMimeType() - in HEADERS RECEIVED state, enforcing Shift-JIS encoding';
 		testData.method = overridemimetype_headers_received_state_force_shiftjis;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - overrideMimeType() - and invalid MIME types
+		// TEST 055 - overrideMimeType() - and invalid MIME types
 		testData = {};
 		testData.desc = 'overrideMimeType() - and invalid MIME types';
 		testData.method = overridemimetype_invalid_mime_type;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - overrideMimeType() - in LOADING state
+		// TEST 056 - overrideMimeType() - in LOADING state
 		testData = {};
 		testData.desc = 'overrideMimeType() - in LOADING state';
 		testData.method = overridemimetype_loading_state;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - overrideMimeType() - in open state, enforcing UTF-8 encoding
+		// TEST 057 - overrideMimeType() - in open state, enforcing UTF-8 encoding
 		testData = {};
 		testData.desc = 'overrideMimeType() - in open state, enforcing UTF-8 encoding';
 		testData.method = overridemimetype_open_state_force_utf_8;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #8 - Methods - send
 	suiteDesc = 'Methods - send';
 	suites.set(suiteDesc, []);
 
-		// TEST ### - send() - Accept
+		// TEST 058 - send() - Accept
 		testData = {};
 		testData.desc = 'send() - Accept';
 		testData.method = send_accept;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - Accept-Language
+		// TEST 059 - send() - Accept-Language
 		testData = {};
 		testData.desc = 'send() - Accept-Language';
 		testData.method = send_accept_language;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - Blob data with no mime type
+		// TEST 060 - send() - Blob data with no mime type
 		testData = {};
 		testData.desc = 'send() - Blob data with no mime type';
 		testData.method = send_blob_with_no_mime_type;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - Content-Type
+		// TEST 061 - send() - Content-Type
 		testData = {};
 		testData.desc = 'send() - Content-Type';
 		testData.method = send_content_type_string;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - charset parameter of Content-Type
+		// TEST 062 - send() - charset parameter of Content-Type
 		testData = {};
 		testData.desc = 'send() - charset parameter of Content-Type';
 		testData.method = send_content_type_charset;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - method: Blob data
+		// TEST 063 - send() - method: Blob data
 		testData = {};
 		testData.desc = 'send() - method: Blob data';
 		testData.method = send_data_blob;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - data argument
+		// TEST 064 - send() - data argument
 		testData = {};
 		testData.desc = 'send() - data argument';
 		testData.method = send_entity_body_basic;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - "" empty entity body
+		// TEST 065 - send() - "" empty entity body
 		testData = {};
 		testData.desc = 'send() - "" empty entity body';
 		testData.method = send_entity_body_empty;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - non-empty data argument and GET/HEAD - async, no upload events should fire
+		// TEST 066 - send() - non-empty data argument and GET/HEAD - async, no upload events should fire
 		testData = {};
 		testData.desc = 'send() - non-empty data argument and GET/HEAD - async, no upload events should fire';
 		testData.method = send_entity_body_get_head_async;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - non-empty data argument and GET/HEAD, no upload events should fire
+		// TEST 067 - send() - non-empty data argument and GET/HEAD, no upload events should fire
 		testData = {};
 		testData.desc = 'send() - non-empty data argument and GET/HEAD, no upload events should fire';
 		testData.method = send_entity_body_get_head;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - null entity body
+		// TEST 068 - send() - null entity body
 		testData = {};
 		testData.desc = 'send() - null entity body';
 		testData.method = send_entity_body_none;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - Fire a progress event named error when Network error happens (synchronous flag is unset
+		// TEST 069 - send() - Fire a progress event named error when Network error happens (synchronous flag is unset
 		testData = {};
 		testData.desc = 'send() - Fire a progress event named error when Network error happens (synchronous flag is unset)';
 		testData.method = send_network_error_async_events_sub;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - Throw a "throw an "NetworkError" exception when Network error happens (synchronous flag is set)
+		// TEST 070 - send() - Throw a "throw an "NetworkError" exception when Network error happens (synchronous flag is set)
 		testData = {};
 		testData.desc = 'send() - Throw a "throw an "NetworkError" exception when Network error happens (synchronous flag is set)';
 		testData.method = send_network_error_sync_events_sub;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - Fire a progress event named loadend (no response entity body)
+		// TEST 071 - send() - Fire a progress event named loadend (no response entity body)
 		testData = {};
 		testData.desc = 'send() - Fire a progress event named loadend (no response entity body)';
 		testData.method = send_no_response_event_loadend;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - Fire a progress event named loadstart (no response entity body and the state is LOADING)
+		// TEST 072 - send() - Fire a progress event named loadstart (no response entity body and the state is LOADING)
 		testData = {};
 		testData.desc = 'send() - Fire a progress event named loadstart (no response entity body and the state is LOADING)';
 		testData.method = send_no_response_event_loadstart;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - event order when there is no response entity body
+		// TEST 073 - send() - event order when there is no response entity body
 		testData = {};
 		testData.desc = 'send() - event order when there is no response entity body';
 		testData.method = send_no_response_event_order;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - receive data which is UTF-16 encoded
+		// TEST 074 - send() - receive data which is UTF-16 encoded
 		testData = {};
 		testData.desc = 'send() - receive data which is UTF-16 encoded';
 		testData.method = send_receive_utf16;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - Redirects (basics)
+		// TEST 075 - send() - Redirects (basics)
 		testData = {};
 		testData.desc = 'send() - Redirects (basics)';
 		testData.method = send_redirect;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - Redirects (bogus Location header)
+		// TEST 076 - send() - Redirects (bogus Location header)
 		testData = {};
 		testData.desc = 'send() - Redirects (bogus Location header)';
 		testData.method = send_redirect_bogus;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - Redirects (bogus Location header; sync)
+		// TEST 077 - send() - Redirects (bogus Location header; sync)
 		testData = {};
 		testData.desc = 'send() - Redirects (bogus Location header; sync)';
 		testData.method = send_redirect_bogus_sync;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - Redirects (infinite loop)
+		// TEST 078 - send() - Redirects (infinite loop)
 		testData = {};
 		testData.desc = 'send() - Redirects (infinite loop)';
 		testData.method = send_redirect_infinite;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - Redirects (infinite loop; sync)
+		// TEST 079 - send() - Redirects (infinite loop; sync)
 		testData = {};
 		testData.desc = 'send() - Redirects (infinite loop; sync)';
 		testData.method = send_redirect_infinite_sync;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - POSTing to URL that redirects
+		// TEST 080 - send() - POSTing to URL that redirects
 		testData = {};
 		testData.desc = 'send() - POSTing to URL that redirects';
 		testData.method = send_redirect_post_upload;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - event order when synchronous flag is unset
+		// TEST 081 - send() - event order when synchronous flag is unset
 		testData = {};
 		testData.desc = 'send() - event order when synchronous flag is unset';
 		testData.method = send_response_event_order;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - Fire a progress event named loadstart on the XMLHttpRequestUpload (synchronous flag is unset)
+		// TEST 082 - send() - Fire a progress event named loadstart on the XMLHttpRequestUpload (synchronous flag is unset)
 		testData = {};
 		testData.desc = 'send() - Fire a progress event named loadstart on the XMLHttpRequestUpload (synchronous flag is unset)';
 		testData.method = send_response_upload_event_loadstart;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - Fire a progress event named loadend on the XMLHttpRequestUpload (synchronous flag is unset)
+		// TEST 083 - send() - Fire a progress event named loadend on the XMLHttpRequestUpload (synchronous flag is unset)
 		testData = {};
 		testData.desc = 'send() - Fire a progress event named loadend on the XMLHttpRequestUpload (synchronous flag is unset)';
 		testData.method = send_response_upload_event_loadend;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - Fire a progress event named progress on the XMLHttpRequestUpload (synchronous flag is unset)
+		// TEST 084 - send() - Fire a progress event named progress on the XMLHttpRequestUpload (synchronous flag is unset)
 		testData = {};
 		testData.desc = 'send() - Fire a progress event named progress on the XMLHttpRequestUpload (synchronous flag is unset)';
 		testData.method = send_response_upload_event_progress;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - sync requests should block events on pending async requests
+		// TEST 085 - send() - sync requests should block events on pending async requests
 		testData = {};
 		testData.desc = 'send() - sync requests should block events on pending async requests';
 		testData.method = send_sync_blocks_async;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - event order when synchronous flag is set and there is no response entity body
+		// TEST 086 - send() - event order when synchronous flag is set and there is no response entity body
 		testData = {};
 		testData.desc = 'send() - event order when synchronous flag is set and there is no response entity body';
 		testData.method = send_sync_no_response_event_order;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - Fire an event named loadend (no response entity body and the synchronous flag is set)
+		// TEST 087 - send() - Fire an event named loadend (no response entity body and the synchronous flag is set)
 		testData = {};
 		testData.desc = 'send() - Fire an event named loadend (no response entity body and the synchronous flag is set)';
 		testData.method = send_sync_no_response_event_load;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - Fire an event named loadend (no response entity body and the synchronous flag is set)
+		// TEST 088 - send() - Fire an event named loadend (no response entity body and the synchronous flag is set)
 		testData = {};
 		testData.desc = 'send() - Fire an event named loadend (no response entity body and the synchronous flag is set)';
 		testData.method = send_sync_no_response_event_loadend;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - event order when synchronous flag is set
+		// TEST 089 - send() - event order when synchronous flag is set
 		testData = {};
 		testData.desc = 'send() - event order when synchronous flag is set';
 		testData.method = send_sync_response_event_order;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - timeout during sync send() should not run
+		// TEST 090 - send() - timeout during sync send() should not run
 		testData = {};
 		testData.desc = 'send() - timeout during sync send() should not run';
 		testData.method = send_sync_timeout;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - send() - timeout is not 0
+		// TEST 091 - send() - timeout is not 0
 		testData = {};
 		testData.desc = 'send() - timeout is not 0';
 		testData.method = send_timeout_events;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #9 - Methods - abort
 	suiteDesc = 'Methods - abort';
 	suites.set(suiteDesc, []);
 
-		// TEST ### - abort() - abort and loadend events
+		// TEST 092 - abort() - abort and loadend events
 		testData = {};
 		testData.desc = 'abort() - abort and loadend events';
 		testData.method = abort_event_order;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #10 - Methods - getAllResponseHeaders
 	suiteDesc = 'Methods - getAllResponseHeaders';
 	suites.set(suiteDesc, []);
 
-		// TEST ### - getAllResponseHeaders() - excludes cookies
+		// TEST 093 - getAllResponseHeaders() - excludes cookies
 		testData = {};
 		testData.desc = 'getAllResponseHeaders() - excludes cookies';
 		testData.method = getallresponseheaders_cookies;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-
-		// TEST ### - getAllResponseHeaders() - excludes status line (HTTP/1.1 ...)
+		// TEST 094 - getAllResponseHeaders() - excludes status line (HTTP/1.1 ...)
 		testData = {};
 		testData.desc = 'getAllResponseHeaders() - excludes status line (HTTP/1.1 ...)';
 		testData.method = getallresponseheaders_status;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #11 - Methods - getResponseHeader
 	suiteDesc = 'Methods - getResponseHeader';
 	suites.set(suiteDesc, []);
 
-		// TEST ### - getResponseHeader() - case-insensitive matching
+		// TEST 095 - getResponseHeader() - case-insensitive matching
 		testData = {};
 		testData.desc = 'getResponseHeader() - case-insensitive matching';
 		testData.method = getresponseheader_case_insensitive;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - getResponseHeader() - and HTTP trailer
+		// TEST 096 - getResponseHeader() - and HTTP trailer
 		testData = {};
 		testData.desc = 'getResponseHeader() - and HTTP trailer';
 		testData.method = getresponseheader_chunked_trailer;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - getResponseHeader() - custom/non-existent headers and cookies
+		// TEST 097 - getResponseHeader() - custom/non-existent headers and cookies
 		testData = {};
 		testData.desc = 'getResponseHeader() - custom/non-existent headers and cookies';
 		testData.method = getresponseheader_cookies_and_more;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - getResponseHeader() - in error state
+		// TEST 098 - getResponseHeader() - in error state
 		testData = {};
 		testData.desc = 'getResponseHeader() - in error state';
 		testData.method = getresponseheader_error_state;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - getResponseHeader() - server and date
+		// TEST 099 - getResponseHeader() - server and date
 		testData = {};
 		testData.desc = 'getResponseHeader() - server and date';
 		testData.method = getresponseheader_server_date;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - getResponseHeader() - funny characters
+		// TEST 100 - getResponseHeader() - funny characters
 		testData = {};
 		testData.desc = 'getResponseHeader() - funny characters';
 		testData.method = getresponseheader_special_characters;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - getResponseHeader() - in unsent, opened states
+		// TEST 101 - getResponseHeader() - in unsent, opened states
 		testData = {};
 		testData.desc = 'getResponseHeader() - in unsent, opened states';
 		testData.method = getresponseheader_unsent_opened_state;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #12 - Response
 	suiteDesc = 'Response';
 	suites.set(suiteDesc, []);
 
-		// TEST ### - transmitting two chunks TEST_CHUNK and then garbage, which should result in an error
+		// TEST 102 - transmitting two chunks TEST_CHUNK and then garbage, which should result in an error
 		testData = {};
 		testData.desc = 'transmitting two chunks TEST_CHUNK and then garbage, which should result in an error';
 		testData.method = response_body_errors;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - response - ArrayBuffer data
+		// TEST 103 - response - ArrayBuffer data
 		testData = {};
 		testData.desc = 'response - ArrayBuffer data';
 		testData.method = response_data_arraybuffer;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - response - Blob data
+		// TEST 104 - response - Blob data
 		testData = {};
 		testData.desc = 'response - Blob data';
 		testData.method = response_data_blob;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - progress events grow response body size
+		// TEST 105 - progress events grow response body size
 		testData = {};
 		testData.desc = 'progress events grow response body size';
 		testData.method = response_data_progress;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - responseType - is plain text if responseType is set to an invalid string
+		// TEST 106 - responseType - is plain text if responseType is set to an invalid string
 		testData = {};
 		testData.desc = 'responseType - is plain text if responseType is set to an invalid string';
 		testData.method = response_invalid_responsetype;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - responseType - json
+		// TEST 107 - responseType - json
 		testData = {};
 		testData.desc = 'responseType - json';
 		testData.method = response_json;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - responseText - status
+		// TEST 108 - responseText - status
 		testData = {};
 		testData.desc = 'responseText - status';
 		testData.method = responsetext_status;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - responseText - decoding
+		// TEST 109 - responseText - decoding
 		testData = {};
 		testData.desc = 'responseText - decoding';
 		testData.method = responsetext_decoding;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #13 - Status
 	suiteDesc = 'Status';
 	suites.set(suiteDesc, []);
 
-		// TEST ### - status/statusText - various responses
+		// TEST 110 - status/statusText - various responses
 		testData = {};
 		testData.desc = 'status/statusText - various responses';
 		testData.method = status_async;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - status/statusText - basic
+		// TEST 111 - status/statusText - basic
 		testData = {};
 		testData.desc = 'status/statusText - basic';
 		testData.method = status_basic;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - status - error handling
+		// TEST 112 - status - error handling
 		testData = {};
 		testData.desc = 'status - error handling';
 		testData.method = status_error;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
 	// TEST SUITE #14 - FormData
 	suiteDesc = 'FormData';
 	suites.set(suiteDesc, []);
 
-		// TEST ### - XMLHttpRequest: Construct and upload FormData
+		// TEST 113 - XMLHttpRequest: Construct and upload FormData
 		testData = {};
 		testData.desc = 'XMLHttpRequest: Construct and upload FormData';
 		testData.method = formdata;
@@ -1154,7 +1150,7 @@ function loadTestData(){
 		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - FormData Constructor
+		// TEST 114 - FormData Constructor
 		testData = {};
 		testData.desc = 'FormData Constructor';
 		testData.method = formdata_constructor_any;
@@ -1162,7 +1158,7 @@ function loadTestData(){
 		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - FormData set
+		// TEST 115 - FormData set
 		testData = {};
 		testData.desc = 'FormData set';
 		testData.method = formdata_set_any;
@@ -1170,7 +1166,7 @@ function loadTestData(){
 		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - FormData set-blob
+		// TEST 116 - FormData set-blob
 		testData = {};
 		testData.desc = 'FormData set-blob';
 		testData.method = formdata_set_blob_any;
@@ -1178,7 +1174,7 @@ function loadTestData(){
 		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - FormData get
+		// TEST 117 - FormData get
 		testData = {};
 		testData.desc = 'FormData get';
 		testData.method = formdata_get_any;
@@ -1186,7 +1182,7 @@ function loadTestData(){
 		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - FormData append
+		// TEST 118 - FormData append
 		testData = {};
 		testData.desc = 'FormData append';
 		testData.method = formdata_append_any;
@@ -1194,7 +1190,7 @@ function loadTestData(){
 		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - FormData delete
+		// TEST 119 - FormData delete
 		testData = {};
 		testData.desc = 'FormData delete';
 		testData.method = formdata_delete_any;
@@ -1202,7 +1198,7 @@ function loadTestData(){
 		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - FormData has
+		// TEST 120 - FormData has
 		testData = {};
 		testData.desc = 'FormData has';
 		testData.method = formdata_has_any;
@@ -1210,7 +1206,7 @@ function loadTestData(){
 		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - FormData iteration
+		// TEST 121 - FormData iteration
 		testData = {};
 		testData.desc = 'FormData iteration';
 		testData.method = formdata_iteration_any;
@@ -1218,7 +1214,7 @@ function loadTestData(){
 		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - FormData forEach
+		// TEST 122 - FormData forEach
 		testData = {};
 		testData.desc = 'FormData forEach';
 		testData.method = formdata_foreach_any;
@@ -1230,28 +1226,28 @@ function loadTestData(){
 	suiteDesc = 'Miscellaneous';
 	suites.set(suiteDesc, []);
 
-		// TEST ### - data URLs
+		// TEST 123 - data URLs
 		testData = {};
 		testData.desc = 'data URLs';
 		testData.method = data_uri;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - historical features
+		// TEST 124 - historical features
 		testData = {};
 		testData.desc = 'historical features';
 		testData.method = historical;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST ### - loadstart event corner cases
+		// TEST 125 - loadstart event corner cases
 		testData = {};
 		testData.desc = 'loadstart event corner cases';
 		testData.method = loadstart_and_state;
 
-		testData.skip = true;
+		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 }
 

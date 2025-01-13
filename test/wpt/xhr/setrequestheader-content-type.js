@@ -41,8 +41,7 @@ export default (activeURL) => {
 		"String request keeps setRequestHeader() Content-Type, with charset adjusted to UTF-8"
 	);
 
-
-/*
+	/*
 	request(
 		function _XMLDocument() { return new DOMParser().parseFromString("<xml/>", "application/xml"); },
 		{"Content-Type": ""},
@@ -79,7 +78,7 @@ export default (activeURL) => {
 		"text/html+junk;charset=UTF-8",
 		"HTML Document request keeps setRequestHeader() Content-Type, with charset adjusted to UTF-8"
 	);
-*/
+	*/
 
 	request(
 		function _Blob() { return new Blob(["test"]); },
@@ -153,14 +152,12 @@ export default (activeURL) => {
 		"application/xml;charset=ASCII",
 		"ArrayBufferView request keeps setRequestHeader() Content-Type and charset"
 	);
-
 	request(
 		function _FormData() { return new FormData(); },
 		{"Content-Type": ""},
 		"",
 		'FormData request respects setRequestHeader("")'
 	);
-/*
 	request(
 		function _FormData() { return new FormData(); },
 		{},
@@ -173,8 +170,6 @@ export default (activeURL) => {
 		"application/xml;charset=ASCII",
 		"FormData request keeps setRequestHeader() Content-Type and charset"
 	);
-*/
-
 	request(
 		function _URLSearchParams() { return new URLSearchParams("q=testQ&topic=testTopic") },
 		{"Content-Type": ""},
@@ -221,7 +216,7 @@ export default (activeURL) => {
 		}
 		else
 		if(expectedType instanceof RegExp){
-			assert(expectedType.test(equal));
+			assert(expectedType.test(actual));
 		}
 		else{
 			assert.strictEqual(actual, `Content-Type: ${expectedType}\n`);

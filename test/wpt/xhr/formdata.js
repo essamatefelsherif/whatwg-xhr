@@ -3,12 +3,12 @@ import { XMLHttpRequest, FormData } from '../../../lib/whatwg-xhr.js';
 
 export default (activeURL) => {
 
-	// do_test('empty formdata', new FormData(), '\n');
-	// do_test('formdata with string', create_formdata(['key', 'value']), 'key=value,\n');
-	// do_test('formdata with named string', create_formdata(['key', new Blob(['value'], {type: 'text/plain'}), 'kv.txt']), '\nkey=kv.txt:text/plain:5,');
+	do_test('empty formdata', new FormData(), '\n');
+	do_test('formdata with string', create_formdata(['key', 'value']), 'key=value,\n');
+	do_test('formdata with named string', create_formdata(['key', new Blob(['value'], {type: 'text/plain'}), 'kv.txt']), '\nkey=kv.txt:text/plain:5,');
 	// do_test('formdata from form', new FormData(document.getElementById('form')), 'key=value,\n');
-	// do_test('formdata with blob', create_formdata(['key', new Blob(['value'], {type: 'text/x-value'})]), '\nkey=blob:text/x-value:5,');
-	// do_test('formdata with named blob', create_formdata(['key', new Blob(['value'], {type: 'text/x-value'}), 'blob.txt']), '\nkey=blob.txt:text/x-value:5,');
+	do_test('formdata with blob', create_formdata(['key', new Blob(['value'], {type: 'text/x-value'})]), '\nkey=blob:text/x-value:5,');
+	do_test('formdata with named blob', create_formdata(['key', new Blob(['value'], {type: 'text/x-value'}), 'blob.txt']), '\nkey=blob.txt:text/x-value:5,');
 
 	function create_formdata(){
 		const fd = new FormData();
