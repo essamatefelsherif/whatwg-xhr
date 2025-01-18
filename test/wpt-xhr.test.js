@@ -138,6 +138,8 @@ import xmlhttprequest_eventtarget                                       from './
 import xmlhttprequest_network_error                                     from './wpt/xhr/xmlhttprequest-network-error.js';
 import xmlhttprequest_network_error_sync                                from './wpt/xhr/xmlhttprequest-network-error-sync.js';
 import xmlhttprequest_unsent                                            from './wpt/xhr/xmlhttprequest-unsent.js';
+import File_constructor_any                                             from './wpt/FileAPI/file/File-constructor.any.js';
+import File_constructor_endings                                         from './wpt/FileAPI/file/File-constructor-endings.js';
 
 /** @const {object} cmdOptions - Command line options */
 import cmdOptions from './wpt-xhr.cmd.js';
@@ -1222,11 +1224,31 @@ function loadTestData(){
 		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-	// TEST SUITE #15 - Miscellaneous
+	// TEST SUITE #15 - File
+	suiteDesc = 'File';
+	suites.set(suiteDesc, []);
+
+		// TEST 123 - File: Constructor
+		testData = {};
+		testData.desc = 'File: Constructor';
+		testData.method = File_constructor_any;
+
+		testData.skip = false;
+		suites.get(suiteDesc).push(testData);
+
+		// TEST 124 - File: Constructor endings
+		testData = {};
+		testData.desc = 'File: Constructor endings';
+		testData.method = File_constructor_endings;
+
+		testData.skip = false;
+		suites.get(suiteDesc).push(testData);
+
+	// TEST SUITE #16 - Miscellaneous
 	suiteDesc = 'Miscellaneous';
 	suites.set(suiteDesc, []);
 
-		// TEST 123 - data URLs
+		// TEST 125 - data URLs
 		testData = {};
 		testData.desc = 'data URLs';
 		testData.method = data_uri;
@@ -1234,7 +1256,7 @@ function loadTestData(){
 		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST 124 - historical features
+		// TEST 126 - historical features
 		testData = {};
 		testData.desc = 'historical features';
 		testData.method = historical;
@@ -1242,7 +1264,7 @@ function loadTestData(){
 		testData.skip = false;
 		suites.get(suiteDesc).push(testData);
 
-		// TEST 125 - loadstart event corner cases
+		// TEST 127 - loadstart event corner cases
 		testData = {};
 		testData.desc = 'loadstart event corner cases';
 		testData.method = loadstart_and_state;

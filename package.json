@@ -1,23 +1,23 @@
 {
-	"name": "@essamonline/whatwg-xhr",
+	"name"   : "@essamonline/whatwg-xhr",
 	"version": "1.0.0",
 	"description": "A Node.js implementation of the WHATWG XMLHttpRequest Living Standard for non-browser environmnts.",
-	"type": "module",
-	"main": "./lib/whatwg-xhr.js",
+	"type"   : "module",
+	"main"   : "./lib/whatwg-xhr.js",
 	"exports": {
 		"require": "./lib/whatwg-xhr.cjs",
-		"import": "./lib/whatwg-xhr.js"
+		"import" : "./lib/whatwg-xhr.js"
 	},
 	"scripts": {
-		"test": "npm run testVerb",
-		"testVerb": "node test/wpt-xhr.test.js -n -v",
-		"testVerbCov": "node --experimental-test-coverage test/wpt-xhr.test.js -n -v",
-		"testSilent": "node --experimental-test-coverage test/wpt-xhr.test.js -d",
-		"testCli": "node --experimental-test-coverage test/wpt-xhr.cmd.test.js",
-		"devCovRep": "node --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=docs/coverage/node/lcov.info --test",
-		"devCovHtml": "genhtml -o docs/coverage/node/html --config-file .lcovrc --prefix $PWD docs/coverage/node/lcov.info",
-		"devDoc": "jsdoc lib/whatwg-xhr.js lib/helper/*.js test/wpt-xhr*.js -d docs/jsdoc/ -c .jsdoc.conf.json --verbose",
-		"devDocAll": "rm -vfr docs/jsdoc/* && npm run devDoc",
+		"test"        : "npm run testVerb",
+		"testVerb"    : "node test/wpt-xhr.test.js -n -v",
+		"testVerbCov" : "node --experimental-test-coverage test/wpt-xhr.test.js -n -v",
+		"testSilent"  : "node test/wpt-xhr.test.js -d",
+		"testCli"     : "node --experimental-test-coverage test/wpt-xhr.cmd.test.js",
+		"devCovRep"   : "node --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=docs/coverage/node/lcov.info --test",
+		"devCovHtml"  : "genhtml -o docs/coverage/node/html --config-file .lcovrc --prefix $PWD docs/coverage/node/lcov.info",
+		"devDoc"      : "jsdoc lib/whatwg-xhr.js lib/helper/*.js test/wpt-xhr*.js -d docs/jsdoc/ -c .jsdoc.conf.json --verbose",
+		"devDocAll"   : "rm -vfr docs/jsdoc/* && npm run devDoc",
 		"devCoveralls": "coveralls < docs/coverage/node/lcov.info"
 	},
 	"bin": {
@@ -37,14 +37,14 @@
 		"whatwg"
 	],
 	"author": {
-		"name": "Essam A. El-Sherif",
+		"name" : "Essam A. El-Sherif",
 		"email": "esm.elsh@gmail.com",
-		"url": "https://essamatefelsherif.github.io/whoami/"
+		"url"  : "https://essamatefelsherif.github.io/whoami/"
 	},
-	"homepage": "https://github.com/essamatefelsherif/whatwg-xhr#readme",
+	"homepage"  : "https://github.com/essamatefelsherif/whatwg-xhr#readme",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/essamatefelsherif/what-xhr.git"
+		"url" : "git+https://github.com/essamatefelsherif/whatwg-xhr.git"
 	},
 	"license": "MIT",
 	"dependencies": {
