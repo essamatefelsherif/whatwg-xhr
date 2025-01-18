@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-12-07 00:20:21</td>
+            <td class="headerValue">2025-01-18 23:18:38</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -69,10 +69,10 @@
       <td>
 <pre class="sourceHeading">           Branch data     Line data    Source code</pre>
 <pre class="source">
-<a name="1"><span class="lineNum">       1 </span>           [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span>]:<span class="lineCov">          2 : import assert from 'node:assert/strict';</span></a>
-<a name="2"><span class="lineNum">       2 </span>                :<span class="lineCov">          2 : import { XMLHttpRequest } from '../../../lib/whatwg-xhr.js';</span></a>
-<a name="3"><span class="lineNum">       3 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="4"><span class="lineNum">       4 </span>           [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span>]:<span class="lineCov">          2 : export default (activeURL) =&gt; {</span></a>
+<a name="1"><span class="lineNum">       1 </span>           [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span>]:<span class="lineCov">          1 : import assert from 'node:assert/strict';</span></a>
+<a name="2"><span class="lineNum">       2 </span>                :<span class="lineCov">          1 : import { XMLHttpRequest } from '../../../lib/whatwg-xhr.js';</span></a>
+<a name="3"><span class="lineNum">       3 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="4"><span class="lineNum">       4 </span>           [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span>]:<span class="lineCov">          1 : export default (activeURL) =&gt; {</span></a>
 <a name="5"><span class="lineNum">       5 </span>                :<span class="lineCov">          1 : </span></a>
 <a name="6"><span class="lineNum">       6 </span>                :<span class="lineCov">          1 :         const stringBody = 'Test Message'.repeat(1000);</span></a>
 <a name="7"><span class="lineNum">       7 </span>                :<span class="lineCov">          1 :         const blobBody = new Blob(new Array(1000).fill('Test Message'));</span></a>
@@ -207,155 +207,155 @@
 <a name="136"><span class="lineNum">     136 </span>                :<span class="lineCov">          5 :                 xhr.send(params.body);</span></a>
 <a name="137"><span class="lineNum">     137 </span>                :<span class="lineCov">          5 :         }</span></a>
 <a name="138"><span class="lineNum">     138 </span>                :<span class="lineCov">          1 : }</span></a>
-<a name="139"><span class="lineNum">     139 </span>                :<span class="lineCov">          2 : ﻿</span></a>
-<a name="140"><span class="lineNum">     140 </span>                :<span class="lineCov">          2 : /*</span></a>
-<a name="141"><span class="lineNum">     141 </span>                :<span class="lineCov">          2 :  * send-redirect-post-upload.htm</span></a>
-<a name="142"><span class="lineNum">     142 </span>                :<span class="lineCov">          2 :  *</span></a>
-<a name="143"><span class="lineNum">     143 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="144"><span class="lineNum">     144 </span>                :<span class="lineCov">          2 : &lt;!DOCTYPE html&gt;</span></a>
-<a name="145"><span class="lineNum">     145 </span>                :<span class="lineCov">          2 : &lt;html&gt;</span></a>
-<a name="146"><span class="lineNum">     146 </span>                :<span class="lineCov">          2 : &lt;head&gt;</span></a>
-<a name="147"><span class="lineNum">     147 </span>                :<span class="lineCov">          2 :     &lt;link rel=&quot;help&quot; href=&quot;https://xhr.spec.whatwg.org/#handler-xhr-onprogress&quot; data-tested-assertations=&quot;../..&quot; /&gt;</span></a>
-<a name="148"><span class="lineNum">     148 </span>                :<span class="lineCov">          2 :     &lt;link rel=&quot;help&quot; href=&quot;https://xhr.spec.whatwg.org/#event-xhr-progress&quot; data-tested-assertations=&quot;../..&quot; /&gt;</span></a>
-<a name="149"><span class="lineNum">     149 </span>                :<span class="lineCov">          2 :     &lt;link rel=&quot;help&quot; href=&quot;https://xhr.spec.whatwg.org/#the-send()-method&quot; data-tested-assertations=&quot;following::dt[@id=&quot;dom-xmlhttprequest-send-bodyinit&quot;]/following::dd[1]/p[2] following::ol[1]/li[9]//li[1] following::ol[1]/li[9]//li[2]&quot; /&gt;</span></a>
-<a name="150"><span class="lineNum">     150 </span>                :<span class="lineCov">          2 :     &lt;link rel=&quot;help&quot; href=&quot;https://fetch.spec.whatwg.org/#http-fetch&quot; data-tested-assertations=&quot;following::ol[1]/li[6]/dl/dd[1]//dd[3]&quot; /&gt;</span></a>
-<a name="151"><span class="lineNum">     151 </span>                :<span class="lineCov">          2 :     &lt;link rel=&quot;help&quot; href=&quot;https://fetch.spec.whatwg.org/#concept-http-redirect-fetch&quot; data-tested-assertations=&quot;following::li[16]&quot; /&gt;</span></a>
-<a name="152"><span class="lineNum">     152 </span>                :<span class="lineCov">          2 :     &lt;script src=&quot;/resources/testharness.js&quot;&gt;&lt;/script&gt;</span></a>
-<a name="153"><span class="lineNum">     153 </span>                :<span class="lineCov">          2 :     &lt;script src=&quot;/resources/testharnessreport.js&quot;&gt;&lt;/script&gt;</span></a>
-<a name="154"><span class="lineNum">     154 </span>                :<span class="lineCov">          2 :     &lt;title&gt;XMLHttpRequest: The send() method: POSTing to URL that redirects&lt;/title&gt;</span></a>
-<a name="155"><span class="lineNum">     155 </span>                :<span class="lineCov">          2 : &lt;/head&gt;</span></a>
-<a name="156"><span class="lineNum">     156 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="157"><span class="lineNum">     157 </span>                :<span class="lineCov">          2 : &lt;body&gt;</span></a>
-<a name="158"><span class="lineNum">     158 </span>                :<span class="lineCov">          2 :     &lt;div id=&quot;log&quot;&gt;&lt;/div&gt;</span></a>
-<a name="159"><span class="lineNum">     159 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="160"><span class="lineNum">     160 </span>                :<span class="lineCov">          2 :     &lt;script type=&quot;text/javascript&quot;&gt;</span></a>
-<a name="161"><span class="lineNum">     161 </span>                :<span class="lineCov">          2 :     function testRedirectPost(params) {</span></a>
-<a name="162"><span class="lineNum">     162 </span>                :<span class="lineCov">          2 :         var test = async_test(document.title + &quot; (&quot; + params.name + &quot;)&quot;);</span></a>
-<a name="163"><span class="lineNum">     163 </span>                :<span class="lineCov">          2 :         var actual = [];</span></a>
-<a name="164"><span class="lineNum">     164 </span>                :<span class="lineCov">          2 :         // We check upload.onprogress with a boolean because it *might* fire more than once</span></a>
-<a name="165"><span class="lineNum">     165 </span>                :<span class="lineCov">          2 :         var progressFiredReadyState1 = false;</span></a>
-<a name="166"><span class="lineNum">     166 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="167"><span class="lineNum">     167 </span>                :<span class="lineCov">          2 :         var expectedHeaders, expectedEvents;</span></a>
-<a name="168"><span class="lineNum">     168 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="169"><span class="lineNum">     169 </span>                :<span class="lineCov">          2 :         // 307 redirects should resend the POST data, and events and headers will be a little different..</span></a>
-<a name="170"><span class="lineNum">     170 </span>                :<span class="lineCov">          2 :         if(params.expectResendPost) {</span></a>
-<a name="171"><span class="lineNum">     171 </span>                :<span class="lineCov">          2 :             expectedHeaders = {</span></a>
-<a name="172"><span class="lineNum">     172 </span>                :<span class="lineCov">          2 :                 &quot;X-Request-Content-Length&quot;: &quot;12000&quot;,</span></a>
-<a name="173"><span class="lineNum">     173 </span>                :<span class="lineCov">          2 :                 &quot;X-Request-Content-Type&quot;: &quot;text/plain;charset=UTF-8&quot;,</span></a>
-<a name="174"><span class="lineNum">     174 </span>                :<span class="lineCov">          2 :                 &quot;X-Request-Method&quot;: &quot;POST&quot;,</span></a>
-<a name="175"><span class="lineNum">     175 </span>                :<span class="lineCov">          2 :                 &quot;X-Request-Query&quot;: &quot;NO&quot;,</span></a>
-<a name="176"><span class="lineNum">     176 </span>                :<span class="lineCov">          2 :                 &quot;Content-Length&quot;: &quot;12000&quot;</span></a>
-<a name="177"><span class="lineNum">     177 </span>                :<span class="lineCov">          2 :             }</span></a>
-<a name="178"><span class="lineNum">     178 </span>                :<span class="lineCov">          2 :             expectedEvents = [</span></a>
-<a name="179"><span class="lineNum">     179 </span>                :<span class="lineCov">          2 :                 &quot;xhr onreadystatechange 1&quot;,</span></a>
-<a name="180"><span class="lineNum">     180 </span>                :<span class="lineCov">          2 :                 &quot;xhr loadstart 1&quot;,</span></a>
-<a name="181"><span class="lineNum">     181 </span>                :<span class="lineCov">          2 :                 &quot;upload loadstart 1&quot;,</span></a>
-<a name="182"><span class="lineNum">     182 </span>                :<span class="lineCov">          2 :                 &quot;upload loadend 1&quot;,</span></a>
-<a name="183"><span class="lineNum">     183 </span>                :<span class="lineCov">          2 :                 &quot;xhr onreadystatechange 2&quot;,</span></a>
-<a name="184"><span class="lineNum">     184 </span>                :<span class="lineCov">          2 :                 &quot;xhr onreadystatechange 3&quot;,</span></a>
-<a name="185"><span class="lineNum">     185 </span>                :<span class="lineCov">          2 :                 &quot;xhr onreadystatechange 4&quot;,</span></a>
-<a name="186"><span class="lineNum">     186 </span>                :<span class="lineCov">          2 :                 &quot;xhr load 4&quot;,</span></a>
-<a name="187"><span class="lineNum">     187 </span>                :<span class="lineCov">          2 :                 &quot;xhr loadend 4&quot;</span></a>
-<a name="188"><span class="lineNum">     188 </span>                :<span class="lineCov">          2 :             ];</span></a>
-<a name="189"><span class="lineNum">     189 </span>                :<span class="lineCov">          2 :         } else {</span></a>
-<a name="190"><span class="lineNum">     190 </span>                :<span class="lineCov">          2 :             // setting the right expectations for POST resent as GET without request body</span></a>
-<a name="191"><span class="lineNum">     191 </span>                :<span class="lineCov">          2 :             expectedHeaders = {</span></a>
-<a name="192"><span class="lineNum">     192 </span>                :<span class="lineCov">          2 :                 &quot;X-Request-Content-Length&quot;: &quot;NO&quot;,</span></a>
-<a name="193"><span class="lineNum">     193 </span>                :<span class="lineCov">          2 :                 &quot;X-Request-Content-Type&quot;: &quot;NO&quot;,</span></a>
-<a name="194"><span class="lineNum">     194 </span>                :<span class="lineCov">          2 :                 &quot;X-Request-Method&quot;: &quot;GET&quot;,</span></a>
-<a name="195"><span class="lineNum">     195 </span>                :<span class="lineCov">          2 :                 &quot;X-Request-Query&quot;: &quot;NO&quot;</span></a>
-<a name="196"><span class="lineNum">     196 </span>                :<span class="lineCov">          2 :             }</span></a>
-<a name="197"><span class="lineNum">     197 </span>                :<span class="lineCov">          2 :             expectedEvents = [</span></a>
-<a name="198"><span class="lineNum">     198 </span>                :<span class="lineCov">          2 :                 &quot;xhr onreadystatechange 1&quot;,</span></a>
-<a name="199"><span class="lineNum">     199 </span>                :<span class="lineCov">          2 :                 &quot;xhr loadstart 1&quot;,</span></a>
-<a name="200"><span class="lineNum">     200 </span>                :<span class="lineCov">          2 :                 &quot;upload loadstart 1&quot;,</span></a>
-<a name="201"><span class="lineNum">     201 </span>                :<span class="lineCov">          2 :                 &quot;upload loadend 1&quot;,</span></a>
-<a name="202"><span class="lineNum">     202 </span>                :<span class="lineCov">          2 :                 &quot;xhr onreadystatechange 2&quot;,</span></a>
-<a name="203"><span class="lineNum">     203 </span>                :<span class="lineCov">          2 :                 // we expect no onreadystatechange readyState=3 event because there is no loading content</span></a>
-<a name="204"><span class="lineNum">     204 </span>                :<span class="lineCov">          2 :                 &quot;xhr onreadystatechange 4&quot;,</span></a>
-<a name="205"><span class="lineNum">     205 </span>                :<span class="lineCov">          2 :                 &quot;xhr load 4&quot;,</span></a>
-<a name="206"><span class="lineNum">     206 </span>                :<span class="lineCov">          2 :                 &quot;xhr loadend 4&quot;</span></a>
-<a name="207"><span class="lineNum">     207 </span>                :<span class="lineCov">          2 :             ];</span></a>
-<a name="208"><span class="lineNum">     208 </span>                :<span class="lineCov">          2 :         }</span></a>
-<a name="209"><span class="lineNum">     209 </span>                :<span class="lineCov">          2 :         // Override expectations if provided.</span></a>
-<a name="210"><span class="lineNum">     210 </span>                :<span class="lineCov">          2 :         if(params.expectedContentType)</span></a>
-<a name="211"><span class="lineNum">     211 </span>                :<span class="lineCov">          2 :           expectedHeaders[&quot;X-Request-Content-Type&quot;] = params.expectedContentType;</span></a>
-<a name="212"><span class="lineNum">     212 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="213"><span class="lineNum">     213 </span>                :<span class="lineCov">          2 :         test.step(function()</span></a>
-<a name="214"><span class="lineNum">     214 </span>                :<span class="lineCov">          2 :         {</span></a>
-<a name="215"><span class="lineNum">     215 </span>                :<span class="lineCov">          2 :             var xhr = new XMLHttpRequest();</span></a>
-<a name="216"><span class="lineNum">     216 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="217"><span class="lineNum">     217 </span>                :<span class="lineCov">          2 :             xhr.upload.onloadstart = test.step_func(function(e) {</span></a>
-<a name="218"><span class="lineNum">     218 </span>                :<span class="lineCov">          2 :                 actual.push(&quot;upload loadstart &quot; + xhr.readyState);</span></a>
-<a name="219"><span class="lineNum">     219 </span>                :<span class="lineCov">          2 :             });</span></a>
-<a name="220"><span class="lineNum">     220 </span>                :<span class="lineCov">          2 :             xhr.upload.onprogress = test.step_func(function(e) {</span></a>
-<a name="221"><span class="lineNum">     221 </span>                :<span class="lineCov">          2 :                 // events every 50ms, one final when uploading is done</span></a>
-<a name="222"><span class="lineNum">     222 </span>                :<span class="lineCov">          2 :                 if(xhr.readyState &gt;= xhr.HEADERS_RECEIVED) {</span></a>
-<a name="223"><span class="lineNum">     223 </span>                :<span class="lineCov">          2 :                     assert_equals(xhr.status, 200, &quot;JS never gets to see the 30x status code&quot;);</span></a>
-<a name="224"><span class="lineNum">     224 </span>                :<span class="lineCov">          2 :                 }</span></a>
-<a name="225"><span class="lineNum">     225 </span>                :<span class="lineCov">          2 :                 progressFiredReadyState1 = xhr.readyState === xhr.OPENED;</span></a>
-<a name="226"><span class="lineNum">     226 </span>                :<span class="lineCov">          2 :             });</span></a>
-<a name="227"><span class="lineNum">     227 </span>                :<span class="lineCov">          2 :             xhr.upload.onloadend = test.step_func(function() {</span></a>
-<a name="228"><span class="lineNum">     228 </span>                :<span class="lineCov">          2 :                 actual.push(&quot;upload loadend &quot; + xhr.readyState);</span></a>
-<a name="229"><span class="lineNum">     229 </span>                :<span class="lineCov">          2 :             });</span></a>
-<a name="230"><span class="lineNum">     230 </span>                :<span class="lineCov">          2 :             xhr.onloadstart = test.step_func(function() {</span></a>
-<a name="231"><span class="lineNum">     231 </span>                :<span class="lineCov">          2 :                 actual.push(&quot;xhr loadstart &quot; + xhr.readyState);</span></a>
-<a name="232"><span class="lineNum">     232 </span>                :<span class="lineCov">          2 :             });</span></a>
-<a name="233"><span class="lineNum">     233 </span>                :<span class="lineCov">          2 :             xhr.onreadystatechange = test.step_func(function() {</span></a>
-<a name="234"><span class="lineNum">     234 </span>                :<span class="lineCov">          2 :                 if(xhr.readyState &gt;= xhr.HEADERS_RECEIVED) {</span></a>
-<a name="235"><span class="lineNum">     235 </span>                :<span class="lineCov">          2 :                     assert_equals(xhr.status, 200, &quot;JS never gets to see the 30x status code&quot;);</span></a>
-<a name="236"><span class="lineNum">     236 </span>                :<span class="lineCov">          2 :                 }</span></a>
-<a name="237"><span class="lineNum">     237 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="238"><span class="lineNum">     238 </span>                :<span class="lineCov">          2 :                 // The UA may fire multiple &quot;readystatechange&quot; events while in</span></a>
-<a name="239"><span class="lineNum">     239 </span>                :<span class="lineCov">          2 :                 // the &quot;loading&quot; state.</span></a>
-<a name="240"><span class="lineNum">     240 </span>                :<span class="lineCov">          2 :                 // https://xhr.spec.whatwg.org/#the-send()-method</span></a>
-<a name="241"><span class="lineNum">     241 </span>                :<span class="lineCov">          2 :                 if (xhr.readyState === 3 &amp;&amp; actual[actual.length - 1] === &quot;xhr onreadystatechange 3&quot;) {</span></a>
-<a name="242"><span class="lineNum">     242 </span>                :<span class="lineCov">          2 :                     return;</span></a>
-<a name="243"><span class="lineNum">     243 </span>                :<span class="lineCov">          2 :                 }</span></a>
-<a name="244"><span class="lineNum">     244 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="245"><span class="lineNum">     245 </span>                :<span class="lineCov">          2 :                 actual.push(&quot;xhr onreadystatechange &quot; + xhr.readyState);</span></a>
-<a name="246"><span class="lineNum">     246 </span>                :<span class="lineCov">          2 :             });</span></a>
-<a name="247"><span class="lineNum">     247 </span>                :<span class="lineCov">          2 :             xhr.onload = test.step_func(function(e)</span></a>
-<a name="248"><span class="lineNum">     248 </span>                :<span class="lineCov">          2 :             {</span></a>
-<a name="249"><span class="lineNum">     249 </span>                :<span class="lineCov">          2 :                 actual.push(&quot;xhr load &quot; + xhr.readyState);</span></a>
-<a name="250"><span class="lineNum">     250 </span>                :<span class="lineCov">          2 :             });</span></a>
-<a name="251"><span class="lineNum">     251 </span>                :<span class="lineCov">          2 :             xhr.onloadend = test.step_func(function(e)</span></a>
-<a name="252"><span class="lineNum">     252 </span>                :<span class="lineCov">          2 :             {</span></a>
-<a name="253"><span class="lineNum">     253 </span>                :<span class="lineCov">          2 :                 actual.push(&quot;xhr loadend &quot; + xhr.readyState);</span></a>
-<a name="254"><span class="lineNum">     254 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="255"><span class="lineNum">     255 </span>                :<span class="lineCov">          2 :                 assert_true(progressFiredReadyState1, &quot;One progress event should fire on xhr.upload when readyState is 1&quot;);</span></a>
-<a name="256"><span class="lineNum">     256 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="257"><span class="lineNum">     257 </span>                :<span class="lineCov">          2 :                 // Headers will tell us if data was sent when expected</span></a>
-<a name="258"><span class="lineNum">     258 </span>                :<span class="lineCov">          2 :                 for(var header in expectedHeaders) {</span></a>
-<a name="259"><span class="lineNum">     259 </span>                :<span class="lineCov">          2 :                     assert_equals(xhr.getResponseHeader(header), expectedHeaders[header], header);</span></a>
-<a name="260"><span class="lineNum">     260 </span>                :<span class="lineCov">          2 :                 }</span></a>
-<a name="261"><span class="lineNum">     261 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="262"><span class="lineNum">     262 </span>                :<span class="lineCov">          2 :                 assert_array_equals(actual, expectedEvents, &quot;events firing in expected order and states&quot;);</span></a>
-<a name="263"><span class="lineNum">     263 </span>                :<span class="lineCov">          2 :                 if (params.expectedBody)</span></a>
-<a name="264"><span class="lineNum">     264 </span>                :<span class="lineCov">          2 :                   assert_equals(xhr.response, params.expectedBody, 'request body was resent');</span></a>
-<a name="265"><span class="lineNum">     265 </span>                :<span class="lineCov">          2 :                 test.done();</span></a>
-<a name="266"><span class="lineNum">     266 </span>                :<span class="lineCov">          2 :             });</span></a>
-<a name="267"><span class="lineNum">     267 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="268"><span class="lineNum">     268 </span>                :<span class="lineCov">          2 :             xhr.open(&quot;POST&quot;, &quot;./resources/redirect.py?location=content.py&amp;code=&quot; + params.code, true);</span></a>
-<a name="269"><span class="lineNum">     269 </span>                :<span class="lineCov">          2 :             xhr.send(params.body);</span></a>
-<a name="270"><span class="lineNum">     270 </span>                :<span class="lineCov">          2 :         });</span></a>
-<a name="271"><span class="lineNum">     271 </span>                :<span class="lineCov">          2 :     }</span></a>
-<a name="272"><span class="lineNum">     272 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="273"><span class="lineNum">     273 </span>                :<span class="lineCov">          2 :     const stringBody = &quot;Test Message&quot;.repeat(1000);</span></a>
-<a name="274"><span class="lineNum">     274 </span>                :<span class="lineCov">          2 :     const blobBody = new Blob(new Array(1000).fill(&quot;Test Message&quot;));</span></a>
-<a name="275"><span class="lineNum">     275 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="276"><span class="lineNum">     276 </span>                :<span class="lineCov">          2 :     testRedirectPost({name: &quot;301&quot;, code: 301, expectResendPost: false, body: stringBody});</span></a>
-<a name="277"><span class="lineNum">     277 </span>                :<span class="lineCov">          2 :     testRedirectPost({name: &quot;302&quot;, code: 302, expectResendPost: false, body: stringBody});</span></a>
-<a name="278"><span class="lineNum">     278 </span>                :<span class="lineCov">          2 :     testRedirectPost({name: &quot;303&quot;, code: 303, expectResendPost: false, body: stringBody});</span></a>
-<a name="279"><span class="lineNum">     279 </span>                :<span class="lineCov">          2 :     testRedirectPost({name: &quot;307 (string)&quot;, code: 307, expectResendPost: true,  body: stringBody, expectedBody: stringBody });</span></a>
-<a name="280"><span class="lineNum">     280 </span>                :<span class="lineCov">          2 :     testRedirectPost({name: &quot;307 (blob)&quot;, code: 307, expectResendPost: true, body: blobBody, expectedBody: stringBody, expectedContentType: &quot;NO&quot; });</span></a>
-<a name="281"><span class="lineNum">     281 </span>                :<span class="lineCov">          2 :     &lt;/script&gt;</span></a>
-<a name="282"><span class="lineNum">     282 </span>                :<span class="lineCov">          2 : &lt;/body&gt;</span></a>
-<a name="283"><span class="lineNum">     283 </span>                :<span class="lineCov">          2 : &lt;/html&gt;</span></a>
-<a name="284"><span class="lineNum">     284 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="285"><span class="lineNum">     285 </span>                :<span class="lineCov">          2 :  *</span></a>
-<a name="286"><span class="lineNum">     286 </span>                :<span class="lineCov">          2 :  * send-redirect-post-upload.htm</span></a>
-<a name="287"><span class="lineNum">     287 </span>                :<span class="lineCov">          2 :  */</span></a>
+<a name="139"><span class="lineNum">     139 </span>                :<span class="lineCov">          1 : ﻿</span></a>
+<a name="140"><span class="lineNum">     140 </span>                :<span class="lineCov">          1 : /*</span></a>
+<a name="141"><span class="lineNum">     141 </span>                :<span class="lineCov">          1 :  * send-redirect-post-upload.htm</span></a>
+<a name="142"><span class="lineNum">     142 </span>                :<span class="lineCov">          1 :  *</span></a>
+<a name="143"><span class="lineNum">     143 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="144"><span class="lineNum">     144 </span>                :<span class="lineCov">          1 : &lt;!DOCTYPE html&gt;</span></a>
+<a name="145"><span class="lineNum">     145 </span>                :<span class="lineCov">          1 : &lt;html&gt;</span></a>
+<a name="146"><span class="lineNum">     146 </span>                :<span class="lineCov">          1 : &lt;head&gt;</span></a>
+<a name="147"><span class="lineNum">     147 </span>                :<span class="lineCov">          1 :     &lt;link rel=&quot;help&quot; href=&quot;https://xhr.spec.whatwg.org/#handler-xhr-onprogress&quot; data-tested-assertations=&quot;../..&quot; /&gt;</span></a>
+<a name="148"><span class="lineNum">     148 </span>                :<span class="lineCov">          1 :     &lt;link rel=&quot;help&quot; href=&quot;https://xhr.spec.whatwg.org/#event-xhr-progress&quot; data-tested-assertations=&quot;../..&quot; /&gt;</span></a>
+<a name="149"><span class="lineNum">     149 </span>                :<span class="lineCov">          1 :     &lt;link rel=&quot;help&quot; href=&quot;https://xhr.spec.whatwg.org/#the-send()-method&quot; data-tested-assertations=&quot;following::dt[@id=&quot;dom-xmlhttprequest-send-bodyinit&quot;]/following::dd[1]/p[2] following::ol[1]/li[9]//li[1] following::ol[1]/li[9]//li[2]&quot; /&gt;</span></a>
+<a name="150"><span class="lineNum">     150 </span>                :<span class="lineCov">          1 :     &lt;link rel=&quot;help&quot; href=&quot;https://fetch.spec.whatwg.org/#http-fetch&quot; data-tested-assertations=&quot;following::ol[1]/li[6]/dl/dd[1]//dd[3]&quot; /&gt;</span></a>
+<a name="151"><span class="lineNum">     151 </span>                :<span class="lineCov">          1 :     &lt;link rel=&quot;help&quot; href=&quot;https://fetch.spec.whatwg.org/#concept-http-redirect-fetch&quot; data-tested-assertations=&quot;following::li[16]&quot; /&gt;</span></a>
+<a name="152"><span class="lineNum">     152 </span>                :<span class="lineCov">          1 :     &lt;script src=&quot;/resources/testharness.js&quot;&gt;&lt;/script&gt;</span></a>
+<a name="153"><span class="lineNum">     153 </span>                :<span class="lineCov">          1 :     &lt;script src=&quot;/resources/testharnessreport.js&quot;&gt;&lt;/script&gt;</span></a>
+<a name="154"><span class="lineNum">     154 </span>                :<span class="lineCov">          1 :     &lt;title&gt;XMLHttpRequest: The send() method: POSTing to URL that redirects&lt;/title&gt;</span></a>
+<a name="155"><span class="lineNum">     155 </span>                :<span class="lineCov">          1 : &lt;/head&gt;</span></a>
+<a name="156"><span class="lineNum">     156 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="157"><span class="lineNum">     157 </span>                :<span class="lineCov">          1 : &lt;body&gt;</span></a>
+<a name="158"><span class="lineNum">     158 </span>                :<span class="lineCov">          1 :     &lt;div id=&quot;log&quot;&gt;&lt;/div&gt;</span></a>
+<a name="159"><span class="lineNum">     159 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="160"><span class="lineNum">     160 </span>                :<span class="lineCov">          1 :     &lt;script type=&quot;text/javascript&quot;&gt;</span></a>
+<a name="161"><span class="lineNum">     161 </span>                :<span class="lineCov">          1 :     function testRedirectPost(params) {</span></a>
+<a name="162"><span class="lineNum">     162 </span>                :<span class="lineCov">          1 :         var test = async_test(document.title + &quot; (&quot; + params.name + &quot;)&quot;);</span></a>
+<a name="163"><span class="lineNum">     163 </span>                :<span class="lineCov">          1 :         var actual = [];</span></a>
+<a name="164"><span class="lineNum">     164 </span>                :<span class="lineCov">          1 :         // We check upload.onprogress with a boolean because it *might* fire more than once</span></a>
+<a name="165"><span class="lineNum">     165 </span>                :<span class="lineCov">          1 :         var progressFiredReadyState1 = false;</span></a>
+<a name="166"><span class="lineNum">     166 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="167"><span class="lineNum">     167 </span>                :<span class="lineCov">          1 :         var expectedHeaders, expectedEvents;</span></a>
+<a name="168"><span class="lineNum">     168 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="169"><span class="lineNum">     169 </span>                :<span class="lineCov">          1 :         // 307 redirects should resend the POST data, and events and headers will be a little different..</span></a>
+<a name="170"><span class="lineNum">     170 </span>                :<span class="lineCov">          1 :         if(params.expectResendPost) {</span></a>
+<a name="171"><span class="lineNum">     171 </span>                :<span class="lineCov">          1 :             expectedHeaders = {</span></a>
+<a name="172"><span class="lineNum">     172 </span>                :<span class="lineCov">          1 :                 &quot;X-Request-Content-Length&quot;: &quot;12000&quot;,</span></a>
+<a name="173"><span class="lineNum">     173 </span>                :<span class="lineCov">          1 :                 &quot;X-Request-Content-Type&quot;: &quot;text/plain;charset=UTF-8&quot;,</span></a>
+<a name="174"><span class="lineNum">     174 </span>                :<span class="lineCov">          1 :                 &quot;X-Request-Method&quot;: &quot;POST&quot;,</span></a>
+<a name="175"><span class="lineNum">     175 </span>                :<span class="lineCov">          1 :                 &quot;X-Request-Query&quot;: &quot;NO&quot;,</span></a>
+<a name="176"><span class="lineNum">     176 </span>                :<span class="lineCov">          1 :                 &quot;Content-Length&quot;: &quot;12000&quot;</span></a>
+<a name="177"><span class="lineNum">     177 </span>                :<span class="lineCov">          1 :             }</span></a>
+<a name="178"><span class="lineNum">     178 </span>                :<span class="lineCov">          1 :             expectedEvents = [</span></a>
+<a name="179"><span class="lineNum">     179 </span>                :<span class="lineCov">          1 :                 &quot;xhr onreadystatechange 1&quot;,</span></a>
+<a name="180"><span class="lineNum">     180 </span>                :<span class="lineCov">          1 :                 &quot;xhr loadstart 1&quot;,</span></a>
+<a name="181"><span class="lineNum">     181 </span>                :<span class="lineCov">          1 :                 &quot;upload loadstart 1&quot;,</span></a>
+<a name="182"><span class="lineNum">     182 </span>                :<span class="lineCov">          1 :                 &quot;upload loadend 1&quot;,</span></a>
+<a name="183"><span class="lineNum">     183 </span>                :<span class="lineCov">          1 :                 &quot;xhr onreadystatechange 2&quot;,</span></a>
+<a name="184"><span class="lineNum">     184 </span>                :<span class="lineCov">          1 :                 &quot;xhr onreadystatechange 3&quot;,</span></a>
+<a name="185"><span class="lineNum">     185 </span>                :<span class="lineCov">          1 :                 &quot;xhr onreadystatechange 4&quot;,</span></a>
+<a name="186"><span class="lineNum">     186 </span>                :<span class="lineCov">          1 :                 &quot;xhr load 4&quot;,</span></a>
+<a name="187"><span class="lineNum">     187 </span>                :<span class="lineCov">          1 :                 &quot;xhr loadend 4&quot;</span></a>
+<a name="188"><span class="lineNum">     188 </span>                :<span class="lineCov">          1 :             ];</span></a>
+<a name="189"><span class="lineNum">     189 </span>                :<span class="lineCov">          1 :         } else {</span></a>
+<a name="190"><span class="lineNum">     190 </span>                :<span class="lineCov">          1 :             // setting the right expectations for POST resent as GET without request body</span></a>
+<a name="191"><span class="lineNum">     191 </span>                :<span class="lineCov">          1 :             expectedHeaders = {</span></a>
+<a name="192"><span class="lineNum">     192 </span>                :<span class="lineCov">          1 :                 &quot;X-Request-Content-Length&quot;: &quot;NO&quot;,</span></a>
+<a name="193"><span class="lineNum">     193 </span>                :<span class="lineCov">          1 :                 &quot;X-Request-Content-Type&quot;: &quot;NO&quot;,</span></a>
+<a name="194"><span class="lineNum">     194 </span>                :<span class="lineCov">          1 :                 &quot;X-Request-Method&quot;: &quot;GET&quot;,</span></a>
+<a name="195"><span class="lineNum">     195 </span>                :<span class="lineCov">          1 :                 &quot;X-Request-Query&quot;: &quot;NO&quot;</span></a>
+<a name="196"><span class="lineNum">     196 </span>                :<span class="lineCov">          1 :             }</span></a>
+<a name="197"><span class="lineNum">     197 </span>                :<span class="lineCov">          1 :             expectedEvents = [</span></a>
+<a name="198"><span class="lineNum">     198 </span>                :<span class="lineCov">          1 :                 &quot;xhr onreadystatechange 1&quot;,</span></a>
+<a name="199"><span class="lineNum">     199 </span>                :<span class="lineCov">          1 :                 &quot;xhr loadstart 1&quot;,</span></a>
+<a name="200"><span class="lineNum">     200 </span>                :<span class="lineCov">          1 :                 &quot;upload loadstart 1&quot;,</span></a>
+<a name="201"><span class="lineNum">     201 </span>                :<span class="lineCov">          1 :                 &quot;upload loadend 1&quot;,</span></a>
+<a name="202"><span class="lineNum">     202 </span>                :<span class="lineCov">          1 :                 &quot;xhr onreadystatechange 2&quot;,</span></a>
+<a name="203"><span class="lineNum">     203 </span>                :<span class="lineCov">          1 :                 // we expect no onreadystatechange readyState=3 event because there is no loading content</span></a>
+<a name="204"><span class="lineNum">     204 </span>                :<span class="lineCov">          1 :                 &quot;xhr onreadystatechange 4&quot;,</span></a>
+<a name="205"><span class="lineNum">     205 </span>                :<span class="lineCov">          1 :                 &quot;xhr load 4&quot;,</span></a>
+<a name="206"><span class="lineNum">     206 </span>                :<span class="lineCov">          1 :                 &quot;xhr loadend 4&quot;</span></a>
+<a name="207"><span class="lineNum">     207 </span>                :<span class="lineCov">          1 :             ];</span></a>
+<a name="208"><span class="lineNum">     208 </span>                :<span class="lineCov">          1 :         }</span></a>
+<a name="209"><span class="lineNum">     209 </span>                :<span class="lineCov">          1 :         // Override expectations if provided.</span></a>
+<a name="210"><span class="lineNum">     210 </span>                :<span class="lineCov">          1 :         if(params.expectedContentType)</span></a>
+<a name="211"><span class="lineNum">     211 </span>                :<span class="lineCov">          1 :           expectedHeaders[&quot;X-Request-Content-Type&quot;] = params.expectedContentType;</span></a>
+<a name="212"><span class="lineNum">     212 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="213"><span class="lineNum">     213 </span>                :<span class="lineCov">          1 :         test.step(function()</span></a>
+<a name="214"><span class="lineNum">     214 </span>                :<span class="lineCov">          1 :         {</span></a>
+<a name="215"><span class="lineNum">     215 </span>                :<span class="lineCov">          1 :             var xhr = new XMLHttpRequest();</span></a>
+<a name="216"><span class="lineNum">     216 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="217"><span class="lineNum">     217 </span>                :<span class="lineCov">          1 :             xhr.upload.onloadstart = test.step_func(function(e) {</span></a>
+<a name="218"><span class="lineNum">     218 </span>                :<span class="lineCov">          1 :                 actual.push(&quot;upload loadstart &quot; + xhr.readyState);</span></a>
+<a name="219"><span class="lineNum">     219 </span>                :<span class="lineCov">          1 :             });</span></a>
+<a name="220"><span class="lineNum">     220 </span>                :<span class="lineCov">          1 :             xhr.upload.onprogress = test.step_func(function(e) {</span></a>
+<a name="221"><span class="lineNum">     221 </span>                :<span class="lineCov">          1 :                 // events every 50ms, one final when uploading is done</span></a>
+<a name="222"><span class="lineNum">     222 </span>                :<span class="lineCov">          1 :                 if(xhr.readyState &gt;= xhr.HEADERS_RECEIVED) {</span></a>
+<a name="223"><span class="lineNum">     223 </span>                :<span class="lineCov">          1 :                     assert_equals(xhr.status, 200, &quot;JS never gets to see the 30x status code&quot;);</span></a>
+<a name="224"><span class="lineNum">     224 </span>                :<span class="lineCov">          1 :                 }</span></a>
+<a name="225"><span class="lineNum">     225 </span>                :<span class="lineCov">          1 :                 progressFiredReadyState1 = xhr.readyState === xhr.OPENED;</span></a>
+<a name="226"><span class="lineNum">     226 </span>                :<span class="lineCov">          1 :             });</span></a>
+<a name="227"><span class="lineNum">     227 </span>                :<span class="lineCov">          1 :             xhr.upload.onloadend = test.step_func(function() {</span></a>
+<a name="228"><span class="lineNum">     228 </span>                :<span class="lineCov">          1 :                 actual.push(&quot;upload loadend &quot; + xhr.readyState);</span></a>
+<a name="229"><span class="lineNum">     229 </span>                :<span class="lineCov">          1 :             });</span></a>
+<a name="230"><span class="lineNum">     230 </span>                :<span class="lineCov">          1 :             xhr.onloadstart = test.step_func(function() {</span></a>
+<a name="231"><span class="lineNum">     231 </span>                :<span class="lineCov">          1 :                 actual.push(&quot;xhr loadstart &quot; + xhr.readyState);</span></a>
+<a name="232"><span class="lineNum">     232 </span>                :<span class="lineCov">          1 :             });</span></a>
+<a name="233"><span class="lineNum">     233 </span>                :<span class="lineCov">          1 :             xhr.onreadystatechange = test.step_func(function() {</span></a>
+<a name="234"><span class="lineNum">     234 </span>                :<span class="lineCov">          1 :                 if(xhr.readyState &gt;= xhr.HEADERS_RECEIVED) {</span></a>
+<a name="235"><span class="lineNum">     235 </span>                :<span class="lineCov">          1 :                     assert_equals(xhr.status, 200, &quot;JS never gets to see the 30x status code&quot;);</span></a>
+<a name="236"><span class="lineNum">     236 </span>                :<span class="lineCov">          1 :                 }</span></a>
+<a name="237"><span class="lineNum">     237 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="238"><span class="lineNum">     238 </span>                :<span class="lineCov">          1 :                 // The UA may fire multiple &quot;readystatechange&quot; events while in</span></a>
+<a name="239"><span class="lineNum">     239 </span>                :<span class="lineCov">          1 :                 // the &quot;loading&quot; state.</span></a>
+<a name="240"><span class="lineNum">     240 </span>                :<span class="lineCov">          1 :                 // https://xhr.spec.whatwg.org/#the-send()-method</span></a>
+<a name="241"><span class="lineNum">     241 </span>                :<span class="lineCov">          1 :                 if (xhr.readyState === 3 &amp;&amp; actual[actual.length - 1] === &quot;xhr onreadystatechange 3&quot;) {</span></a>
+<a name="242"><span class="lineNum">     242 </span>                :<span class="lineCov">          1 :                     return;</span></a>
+<a name="243"><span class="lineNum">     243 </span>                :<span class="lineCov">          1 :                 }</span></a>
+<a name="244"><span class="lineNum">     244 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="245"><span class="lineNum">     245 </span>                :<span class="lineCov">          1 :                 actual.push(&quot;xhr onreadystatechange &quot; + xhr.readyState);</span></a>
+<a name="246"><span class="lineNum">     246 </span>                :<span class="lineCov">          1 :             });</span></a>
+<a name="247"><span class="lineNum">     247 </span>                :<span class="lineCov">          1 :             xhr.onload = test.step_func(function(e)</span></a>
+<a name="248"><span class="lineNum">     248 </span>                :<span class="lineCov">          1 :             {</span></a>
+<a name="249"><span class="lineNum">     249 </span>                :<span class="lineCov">          1 :                 actual.push(&quot;xhr load &quot; + xhr.readyState);</span></a>
+<a name="250"><span class="lineNum">     250 </span>                :<span class="lineCov">          1 :             });</span></a>
+<a name="251"><span class="lineNum">     251 </span>                :<span class="lineCov">          1 :             xhr.onloadend = test.step_func(function(e)</span></a>
+<a name="252"><span class="lineNum">     252 </span>                :<span class="lineCov">          1 :             {</span></a>
+<a name="253"><span class="lineNum">     253 </span>                :<span class="lineCov">          1 :                 actual.push(&quot;xhr loadend &quot; + xhr.readyState);</span></a>
+<a name="254"><span class="lineNum">     254 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="255"><span class="lineNum">     255 </span>                :<span class="lineCov">          1 :                 assert_true(progressFiredReadyState1, &quot;One progress event should fire on xhr.upload when readyState is 1&quot;);</span></a>
+<a name="256"><span class="lineNum">     256 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="257"><span class="lineNum">     257 </span>                :<span class="lineCov">          1 :                 // Headers will tell us if data was sent when expected</span></a>
+<a name="258"><span class="lineNum">     258 </span>                :<span class="lineCov">          1 :                 for(var header in expectedHeaders) {</span></a>
+<a name="259"><span class="lineNum">     259 </span>                :<span class="lineCov">          1 :                     assert_equals(xhr.getResponseHeader(header), expectedHeaders[header], header);</span></a>
+<a name="260"><span class="lineNum">     260 </span>                :<span class="lineCov">          1 :                 }</span></a>
+<a name="261"><span class="lineNum">     261 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="262"><span class="lineNum">     262 </span>                :<span class="lineCov">          1 :                 assert_array_equals(actual, expectedEvents, &quot;events firing in expected order and states&quot;);</span></a>
+<a name="263"><span class="lineNum">     263 </span>                :<span class="lineCov">          1 :                 if (params.expectedBody)</span></a>
+<a name="264"><span class="lineNum">     264 </span>                :<span class="lineCov">          1 :                   assert_equals(xhr.response, params.expectedBody, 'request body was resent');</span></a>
+<a name="265"><span class="lineNum">     265 </span>                :<span class="lineCov">          1 :                 test.done();</span></a>
+<a name="266"><span class="lineNum">     266 </span>                :<span class="lineCov">          1 :             });</span></a>
+<a name="267"><span class="lineNum">     267 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="268"><span class="lineNum">     268 </span>                :<span class="lineCov">          1 :             xhr.open(&quot;POST&quot;, &quot;./resources/redirect.py?location=content.py&amp;code=&quot; + params.code, true);</span></a>
+<a name="269"><span class="lineNum">     269 </span>                :<span class="lineCov">          1 :             xhr.send(params.body);</span></a>
+<a name="270"><span class="lineNum">     270 </span>                :<span class="lineCov">          1 :         });</span></a>
+<a name="271"><span class="lineNum">     271 </span>                :<span class="lineCov">          1 :     }</span></a>
+<a name="272"><span class="lineNum">     272 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="273"><span class="lineNum">     273 </span>                :<span class="lineCov">          1 :     const stringBody = &quot;Test Message&quot;.repeat(1000);</span></a>
+<a name="274"><span class="lineNum">     274 </span>                :<span class="lineCov">          1 :     const blobBody = new Blob(new Array(1000).fill(&quot;Test Message&quot;));</span></a>
+<a name="275"><span class="lineNum">     275 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="276"><span class="lineNum">     276 </span>                :<span class="lineCov">          1 :     testRedirectPost({name: &quot;301&quot;, code: 301, expectResendPost: false, body: stringBody});</span></a>
+<a name="277"><span class="lineNum">     277 </span>                :<span class="lineCov">          1 :     testRedirectPost({name: &quot;302&quot;, code: 302, expectResendPost: false, body: stringBody});</span></a>
+<a name="278"><span class="lineNum">     278 </span>                :<span class="lineCov">          1 :     testRedirectPost({name: &quot;303&quot;, code: 303, expectResendPost: false, body: stringBody});</span></a>
+<a name="279"><span class="lineNum">     279 </span>                :<span class="lineCov">          1 :     testRedirectPost({name: &quot;307 (string)&quot;, code: 307, expectResendPost: true,  body: stringBody, expectedBody: stringBody });</span></a>
+<a name="280"><span class="lineNum">     280 </span>                :<span class="lineCov">          1 :     testRedirectPost({name: &quot;307 (blob)&quot;, code: 307, expectResendPost: true, body: blobBody, expectedBody: stringBody, expectedContentType: &quot;NO&quot; });</span></a>
+<a name="281"><span class="lineNum">     281 </span>                :<span class="lineCov">          1 :     &lt;/script&gt;</span></a>
+<a name="282"><span class="lineNum">     282 </span>                :<span class="lineCov">          1 : &lt;/body&gt;</span></a>
+<a name="283"><span class="lineNum">     283 </span>                :<span class="lineCov">          1 : &lt;/html&gt;</span></a>
+<a name="284"><span class="lineNum">     284 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="285"><span class="lineNum">     285 </span>                :<span class="lineCov">          1 :  *</span></a>
+<a name="286"><span class="lineNum">     286 </span>                :<span class="lineCov">          1 :  * send-redirect-post-upload.htm</span></a>
+<a name="287"><span class="lineNum">     287 </span>                :<span class="lineCov">          1 :  */</span></a>
 </pre>
       </td>
     </tr>

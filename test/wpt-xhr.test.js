@@ -34,7 +34,7 @@ import formdata_set_blob_any                                            from './
 import firing_events_http_content_length                                from './wpt/xhr/firing-events-http-content-length.js';
 import firing_events_http_no_content_length                             from './wpt/xhr/firing-events-http-no-content-length.js';
 import getallresponseheaders_cookies                                    from './wpt/xhr/getallresponseheaders-cookies.js';
-import getallresponseheaders                                            from './wpt/xhr/getallresponseheaders.js';
+// import getallresponseheaders                                         from './wpt/xhr/getallresponseheaders.js';
 import getallresponseheaders_status                                     from './wpt/xhr/getallresponseheaders-status.js';
 import getresponseheader_case_insensitive                               from './wpt/xhr/getresponseheader-case-insensitive.js';
 import getresponseheader_chunked_trailer                                from './wpt/xhr/getresponseheader-chunked-trailer.js';
@@ -51,11 +51,11 @@ import loadstart_and_state                                              from './
 import open_after_abort                                                 from './wpt/xhr/open-after-abort.js';
 import open_after_setrequestheader                                      from './wpt/xhr/open-after-setrequestheader.js';
 import open_during_abort                                                from './wpt/xhr/open-during-abort.js';
-import open_during_abort_event                                          from './wpt/xhr/open-during-abort-event.js';
-import open_during_abort_processing                                     from './wpt/xhr/open-during-abort-processing.js';
+// import open_during_abort_event                                       from './wpt/xhr/open-during-abort-event.js';
+// import open_during_abort_processing                                  from './wpt/xhr/open-during-abort-processing.js';
 import open_method_bogus                                                from './wpt/xhr/open-method-bogus.js';
 import open_method_case_insensitive                                     from './wpt/xhr/open-method-case-insensitive.js';
-import open_method_case_sensitive                                       from './wpt/xhr/open-method-case-sensitive.js';
+// import open_method_case_sensitive                                    from './wpt/xhr/open-method-case-sensitive.js';
 import open_method_insecure                                             from './wpt/xhr/open-method-insecure.js';
 import open_method_responsetype_set_sync                                from './wpt/xhr/open-method-responsetype-set-sync.js';
 import open_open_send                                                   from './wpt/xhr/open-open-send.js';
@@ -65,7 +65,7 @@ import open_send_during_abort                                           from './
 import open_send_open                                                   from './wpt/xhr/open-send-open.js';
 import open_sync_open_send                                              from './wpt/xhr/open-sync-open-send.js';
 import open_url_base                                                    from './wpt/xhr/open-url-base.js';
-import open_url_encoding                                                from './wpt/xhr/open-url-encoding.js';
+// import open_url_encoding                                             from './wpt/xhr/open-url-encoding.js';
 import open_url_fragment                                                from './wpt/xhr/open-url-fragment.js';
 import overridemimetype_headers_received_state_force_shiftjis           from './wpt/xhr/overridemimetype-headers-received-state-force-shiftjis.js';
 import overridemimetype_invalid_mime_type                               from './wpt/xhr/overridemimetype-invalid-mime-type.js';
@@ -81,7 +81,7 @@ import response_data_blob                                               from './
 import response_data_progress                                           from './wpt/xhr/response-data-progress.js';
 import response_invalid_responsetype                                    from './wpt/xhr/response-invalid-responsetype.js';
 import response_json                                                    from './wpt/xhr/response-json.js';
-import response_method                                                  from './wpt/xhr/response-method.js';
+// import response_method                                               from './wpt/xhr/response-method.js';
 import responsetext_decoding                                            from './wpt/xhr/responsetext-decoding.js';
 import responsetext_status                                              from './wpt/xhr/responsetext-status.js';
 import send_accept                                                      from './wpt/xhr/send-accept.js';
@@ -106,7 +106,7 @@ import send_redirect_bogus                                              from './
 import send_redirect_bogus_sync                                         from './wpt/xhr/send-redirect-bogus-sync.js';
 import send_redirect_infinite                                           from './wpt/xhr/send-redirect-infinite.js';
 import send_redirect_infinite_sync                                      from './wpt/xhr/send-redirect-infinite-sync.js';
-import send_redirect_no_location                                        from './wpt/xhr/send-redirect-no-location.js';
+// import send_redirect_no_location                                     from './wpt/xhr/send-redirect-no-location.js';
 import send_redirect_post_upload                                        from './wpt/xhr/send-redirect-post-upload.js';
 import send_response_event_order                                        from './wpt/xhr/send-response-event-order.js';
 import send_response_upload_event_loadend                               from './wpt/xhr/send-response-upload-event-loadend.js';
@@ -1418,23 +1418,20 @@ const banner = String.raw`
 }
 
 /*
- * imported - but not included
- *
- *    open_url_encoding(activeURL);             // results different from browser environment
- *
  * imported - skipped
  *
  *    getallresponseheaders(activeURL);         // using insecure http parser is required
  *    open_during_abort_event(activeURL);
  *    open_during_abort_processing(activeURL);
  *    open_method_case_sensitive(activeURL);    // nodeJS http module always uppercase methods
+ *    open_url_encoding(activeURL);             // results different from browser environment
  *    response_method(activeURL);               // using insecure http parser is required
  *    send_redirect_no_location(activeURL);     // requires xml parser
  *
  * imported - included but not fully tested
  *
  *    send_content_type_charset(activeURL);     // not fully tested
- *    setrequestheader_content_type(activeURL); // not fully tested - FormData not tested
+ *    setrequestheader_content_type(activeURL); // not fully tested - XMLDocument
  *    status_basic(activeURL);                  // not fully tested type=text/xml
  *
  * imported - tested but suspicious

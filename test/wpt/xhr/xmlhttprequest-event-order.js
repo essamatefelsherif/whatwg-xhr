@@ -101,10 +101,11 @@ export function assert_xhr_event_order_matches(expected){
 		throw '\nExpected more events: ' + expected.join(', ');
 	}
 }
-
+/* node:coverage disable **
 export function show_xhr_events(){
 	return actual_xhr_events;
 }
+   node:coverage enable **/
 
 /*
  * xmlhttprequest-event-order.js

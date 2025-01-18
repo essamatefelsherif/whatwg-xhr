@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-12-07 00:20:21</td>
+            <td class="headerValue">2025-01-18 23:18:38</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -69,10 +69,10 @@
       <td>
 <pre class="sourceHeading">           Branch data     Line data    Source code</pre>
 <pre class="source">
-<a name="1"><span class="lineNum">       1 </span>           [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span>]:<span class="lineCov">          2 : import assert from 'node:assert/strict';</span></a>
-<a name="2"><span class="lineNum">       2 </span>                :<span class="lineCov">          2 : import { XMLHttpRequest } from '../../../lib/whatwg-xhr.js';</span></a>
-<a name="3"><span class="lineNum">       3 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="4"><span class="lineNum">       4 </span>           [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span>]:<span class="lineCov">          2 : export default (activeURL) =&gt; {</span></a>
+<a name="1"><span class="lineNum">       1 </span>           [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span>]:<span class="lineCov">          1 : import assert from 'node:assert/strict';</span></a>
+<a name="2"><span class="lineNum">       2 </span>                :<span class="lineCov">          1 : import { XMLHttpRequest } from '../../../lib/whatwg-xhr.js';</span></a>
+<a name="3"><span class="lineNum">       3 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="4"><span class="lineNum">       4 </span>           [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span>]:<span class="lineCov">          1 : export default (activeURL) =&gt; {</span></a>
 <a name="5"><span class="lineNum">       5 </span>                :<span class="lineCov">          1 : </span></a>
 <a name="6"><span class="lineNum">       6 </span>                :<span class="lineCov">          1 :         noContentTypeTest('POST');      // 'No content type (POST)';</span></a>
 <a name="7"><span class="lineNum">       7 </span>                :<span class="lineCov">          1 :         noContentTypeTest('PUT');       // 'No content type (PUT)';</span></a>
@@ -115,55 +115,55 @@
 <a name="44"><span class="lineNum">      44 </span>                :<span class="lineCov">          3 :                 assert.strictEqual(xhr.getResponseHeader('x-request-content-type'), content_type);</span></a>
 <a name="45"><span class="lineNum">      45 </span>                :<span class="lineCov">          3 :         }</span></a>
 <a name="46"><span class="lineNum">      46 </span>                :<span class="lineCov">          1 : }</span></a>
-<a name="47"><span class="lineNum">      47 </span>                :<span class="lineCov">          2 : ﻿</span></a>
-<a name="48"><span class="lineNum">      48 </span>                :<span class="lineCov">          2 : /*</span></a>
-<a name="49"><span class="lineNum">      49 </span>                :<span class="lineCov">          2 :  * send-entity-body-none.htm</span></a>
-<a name="50"><span class="lineNum">      50 </span>                :<span class="lineCov">          2 :  *</span></a>
-<a name="51"><span class="lineNum">      51 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="52"><span class="lineNum">      52 </span>                :<span class="lineCov">          2 : &lt;!doctype html&gt;</span></a>
-<a name="53"><span class="lineNum">      53 </span>                :<span class="lineCov">          2 : &lt;html&gt;</span></a>
-<a name="54"><span class="lineNum">      54 </span>                :<span class="lineCov">          2 :   &lt;head&gt;</span></a>
-<a name="55"><span class="lineNum">      55 </span>                :<span class="lineCov">          2 :     &lt;title&gt;XMLHttpRequest: send(null) - no entity body&lt;/title&gt;</span></a>
-<a name="56"><span class="lineNum">      56 </span>                :<span class="lineCov">          2 :     &lt;script src=&quot;/resources/testharness.js&quot;&gt;&lt;/script&gt;</span></a>
-<a name="57"><span class="lineNum">      57 </span>                :<span class="lineCov">          2 :     &lt;script src=&quot;/resources/testharnessreport.js&quot;&gt;&lt;/script&gt;</span></a>
-<a name="58"><span class="lineNum">      58 </span>                :<span class="lineCov">          2 :     &lt;link rel=&quot;help&quot; href=&quot;https://xhr.spec.whatwg.org/#the-send()-method&quot; data-tested-assertations=&quot;following::ol[1]/li[4] following::ol[1]/li[7]&quot; /&gt;</span></a>
-<a name="59"><span class="lineNum">      59 </span>                :<span class="lineCov">          2 :   &lt;/head&gt;</span></a>
-<a name="60"><span class="lineNum">      60 </span>                :<span class="lineCov">          2 :   &lt;body&gt;</span></a>
-<a name="61"><span class="lineNum">      61 </span>                :<span class="lineCov">          2 :     &lt;div id=&quot;log&quot;&gt;&lt;/div&gt;</span></a>
-<a name="62"><span class="lineNum">      62 </span>                :<span class="lineCov">          2 :     &lt;script&gt;</span></a>
-<a name="63"><span class="lineNum">      63 </span>                :<span class="lineCov">          2 :       function noContentTypeTest(method) {</span></a>
-<a name="64"><span class="lineNum">      64 </span>                :<span class="lineCov">          2 :         var client = new XMLHttpRequest()</span></a>
-<a name="65"><span class="lineNum">      65 </span>                :<span class="lineCov">          2 :         client.open(method, &quot;resources/content.py&quot;, false)</span></a>
-<a name="66"><span class="lineNum">      66 </span>                :<span class="lineCov">          2 :         client.upload.onloadstart = function(){assert_unreached('this event should not fire for null')}</span></a>
-<a name="67"><span class="lineNum">      67 </span>                :<span class="lineCov">          2 :         client.send(null)</span></a>
-<a name="68"><span class="lineNum">      68 </span>                :<span class="lineCov">          2 :         var expectedLength = method == &quot;HEAD&quot; ? &quot;NO&quot; : &quot;0&quot;;</span></a>
-<a name="69"><span class="lineNum">      69 </span>                :<span class="lineCov">          2 :         assert_equals(client.getResponseHeader(&quot;x-request-content-length&quot;), expectedLength)</span></a>
-<a name="70"><span class="lineNum">      70 </span>                :<span class="lineCov">          2 :         assert_equals(client.getResponseHeader(&quot;x-request-content-type&quot;), &quot;NO&quot;)</span></a>
-<a name="71"><span class="lineNum">      71 </span>                :<span class="lineCov">          2 :       }</span></a>
-<a name="72"><span class="lineNum">      72 </span>                :<span class="lineCov">          2 :       test(function() { noContentTypeTest(&quot;POST&quot;); }, &quot;No content type (POST)&quot;);</span></a>
-<a name="73"><span class="lineNum">      73 </span>                :<span class="lineCov">          2 :       test(function() { noContentTypeTest(&quot;PUT&quot;); }, &quot;No content type (PUT)&quot;);</span></a>
-<a name="74"><span class="lineNum">      74 </span>                :<span class="lineCov">          2 :       test(function() { noContentTypeTest(&quot;HEAD&quot;); }, &quot;No content type (HEAD)&quot;);</span></a>
-<a name="75"><span class="lineNum">      75 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="76"><span class="lineNum">      76 </span>                :<span class="lineCov">          2 :       function explicitContentTypeTest(method) {</span></a>
-<a name="77"><span class="lineNum">      77 </span>                :<span class="lineCov">          2 :         var client = new XMLHttpRequest()</span></a>
-<a name="78"><span class="lineNum">      78 </span>                :<span class="lineCov">          2 :         client.open(method, &quot;resources/content.py&quot;, false)</span></a>
-<a name="79"><span class="lineNum">      79 </span>                :<span class="lineCov">          2 :         var content_type = 'application/x-foo'</span></a>
-<a name="80"><span class="lineNum">      80 </span>                :<span class="lineCov">          2 :         client.setRequestHeader('Content-Type', content_type)</span></a>
-<a name="81"><span class="lineNum">      81 </span>                :<span class="lineCov">          2 :         client.send(null)</span></a>
-<a name="82"><span class="lineNum">      82 </span>                :<span class="lineCov">          2 :         var expectedLength = method == &quot;HEAD&quot; ? &quot;NO&quot; : &quot;0&quot;;</span></a>
-<a name="83"><span class="lineNum">      83 </span>                :<span class="lineCov">          2 :         assert_equals(client.getResponseHeader(&quot;x-request-content-length&quot;), expectedLength)</span></a>
-<a name="84"><span class="lineNum">      84 </span>                :<span class="lineCov">          2 :         assert_equals(client.getResponseHeader(&quot;x-request-content-type&quot;), content_type)</span></a>
-<a name="85"><span class="lineNum">      85 </span>                :<span class="lineCov">          2 :       }</span></a>
-<a name="86"><span class="lineNum">      86 </span>                :<span class="lineCov">          2 :       test(function() { explicitContentTypeTest(&quot;POST&quot;); }, &quot;Explicit content type (POST)&quot;);</span></a>
-<a name="87"><span class="lineNum">      87 </span>                :<span class="lineCov">          2 :       test(function() { explicitContentTypeTest(&quot;PUT&quot;); }, &quot;Explicit content type (PUT)&quot;);</span></a>
-<a name="88"><span class="lineNum">      88 </span>                :<span class="lineCov">          2 :       test(function() { explicitContentTypeTest(&quot;HEAD&quot;); }, &quot;Explicit content type (HEAD)&quot;);</span></a>
-<a name="89"><span class="lineNum">      89 </span>                :<span class="lineCov">          2 :     &lt;/script&gt;</span></a>
-<a name="90"><span class="lineNum">      90 </span>                :<span class="lineCov">          2 :   &lt;/body&gt;</span></a>
-<a name="91"><span class="lineNum">      91 </span>                :<span class="lineCov">          2 : &lt;/html&gt;</span></a>
-<a name="92"><span class="lineNum">      92 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="93"><span class="lineNum">      93 </span>                :<span class="lineCov">          2 :  *</span></a>
-<a name="94"><span class="lineNum">      94 </span>                :<span class="lineCov">          2 :  * send-entity-body-none.htm</span></a>
-<a name="95"><span class="lineNum">      95 </span>                :<span class="lineCov">          2 :  */</span></a>
+<a name="47"><span class="lineNum">      47 </span>                :<span class="lineCov">          1 : ﻿</span></a>
+<a name="48"><span class="lineNum">      48 </span>                :<span class="lineCov">          1 : /*</span></a>
+<a name="49"><span class="lineNum">      49 </span>                :<span class="lineCov">          1 :  * send-entity-body-none.htm</span></a>
+<a name="50"><span class="lineNum">      50 </span>                :<span class="lineCov">          1 :  *</span></a>
+<a name="51"><span class="lineNum">      51 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="52"><span class="lineNum">      52 </span>                :<span class="lineCov">          1 : &lt;!doctype html&gt;</span></a>
+<a name="53"><span class="lineNum">      53 </span>                :<span class="lineCov">          1 : &lt;html&gt;</span></a>
+<a name="54"><span class="lineNum">      54 </span>                :<span class="lineCov">          1 :   &lt;head&gt;</span></a>
+<a name="55"><span class="lineNum">      55 </span>                :<span class="lineCov">          1 :     &lt;title&gt;XMLHttpRequest: send(null) - no entity body&lt;/title&gt;</span></a>
+<a name="56"><span class="lineNum">      56 </span>                :<span class="lineCov">          1 :     &lt;script src=&quot;/resources/testharness.js&quot;&gt;&lt;/script&gt;</span></a>
+<a name="57"><span class="lineNum">      57 </span>                :<span class="lineCov">          1 :     &lt;script src=&quot;/resources/testharnessreport.js&quot;&gt;&lt;/script&gt;</span></a>
+<a name="58"><span class="lineNum">      58 </span>                :<span class="lineCov">          1 :     &lt;link rel=&quot;help&quot; href=&quot;https://xhr.spec.whatwg.org/#the-send()-method&quot; data-tested-assertations=&quot;following::ol[1]/li[4] following::ol[1]/li[7]&quot; /&gt;</span></a>
+<a name="59"><span class="lineNum">      59 </span>                :<span class="lineCov">          1 :   &lt;/head&gt;</span></a>
+<a name="60"><span class="lineNum">      60 </span>                :<span class="lineCov">          1 :   &lt;body&gt;</span></a>
+<a name="61"><span class="lineNum">      61 </span>                :<span class="lineCov">          1 :     &lt;div id=&quot;log&quot;&gt;&lt;/div&gt;</span></a>
+<a name="62"><span class="lineNum">      62 </span>                :<span class="lineCov">          1 :     &lt;script&gt;</span></a>
+<a name="63"><span class="lineNum">      63 </span>                :<span class="lineCov">          1 :       function noContentTypeTest(method) {</span></a>
+<a name="64"><span class="lineNum">      64 </span>                :<span class="lineCov">          1 :         var client = new XMLHttpRequest()</span></a>
+<a name="65"><span class="lineNum">      65 </span>                :<span class="lineCov">          1 :         client.open(method, &quot;resources/content.py&quot;, false)</span></a>
+<a name="66"><span class="lineNum">      66 </span>                :<span class="lineCov">          1 :         client.upload.onloadstart = function(){assert_unreached('this event should not fire for null')}</span></a>
+<a name="67"><span class="lineNum">      67 </span>                :<span class="lineCov">          1 :         client.send(null)</span></a>
+<a name="68"><span class="lineNum">      68 </span>                :<span class="lineCov">          1 :         var expectedLength = method == &quot;HEAD&quot; ? &quot;NO&quot; : &quot;0&quot;;</span></a>
+<a name="69"><span class="lineNum">      69 </span>                :<span class="lineCov">          1 :         assert_equals(client.getResponseHeader(&quot;x-request-content-length&quot;), expectedLength)</span></a>
+<a name="70"><span class="lineNum">      70 </span>                :<span class="lineCov">          1 :         assert_equals(client.getResponseHeader(&quot;x-request-content-type&quot;), &quot;NO&quot;)</span></a>
+<a name="71"><span class="lineNum">      71 </span>                :<span class="lineCov">          1 :       }</span></a>
+<a name="72"><span class="lineNum">      72 </span>                :<span class="lineCov">          1 :       test(function() { noContentTypeTest(&quot;POST&quot;); }, &quot;No content type (POST)&quot;);</span></a>
+<a name="73"><span class="lineNum">      73 </span>                :<span class="lineCov">          1 :       test(function() { noContentTypeTest(&quot;PUT&quot;); }, &quot;No content type (PUT)&quot;);</span></a>
+<a name="74"><span class="lineNum">      74 </span>                :<span class="lineCov">          1 :       test(function() { noContentTypeTest(&quot;HEAD&quot;); }, &quot;No content type (HEAD)&quot;);</span></a>
+<a name="75"><span class="lineNum">      75 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="76"><span class="lineNum">      76 </span>                :<span class="lineCov">          1 :       function explicitContentTypeTest(method) {</span></a>
+<a name="77"><span class="lineNum">      77 </span>                :<span class="lineCov">          1 :         var client = new XMLHttpRequest()</span></a>
+<a name="78"><span class="lineNum">      78 </span>                :<span class="lineCov">          1 :         client.open(method, &quot;resources/content.py&quot;, false)</span></a>
+<a name="79"><span class="lineNum">      79 </span>                :<span class="lineCov">          1 :         var content_type = 'application/x-foo'</span></a>
+<a name="80"><span class="lineNum">      80 </span>                :<span class="lineCov">          1 :         client.setRequestHeader('Content-Type', content_type)</span></a>
+<a name="81"><span class="lineNum">      81 </span>                :<span class="lineCov">          1 :         client.send(null)</span></a>
+<a name="82"><span class="lineNum">      82 </span>                :<span class="lineCov">          1 :         var expectedLength = method == &quot;HEAD&quot; ? &quot;NO&quot; : &quot;0&quot;;</span></a>
+<a name="83"><span class="lineNum">      83 </span>                :<span class="lineCov">          1 :         assert_equals(client.getResponseHeader(&quot;x-request-content-length&quot;), expectedLength)</span></a>
+<a name="84"><span class="lineNum">      84 </span>                :<span class="lineCov">          1 :         assert_equals(client.getResponseHeader(&quot;x-request-content-type&quot;), content_type)</span></a>
+<a name="85"><span class="lineNum">      85 </span>                :<span class="lineCov">          1 :       }</span></a>
+<a name="86"><span class="lineNum">      86 </span>                :<span class="lineCov">          1 :       test(function() { explicitContentTypeTest(&quot;POST&quot;); }, &quot;Explicit content type (POST)&quot;);</span></a>
+<a name="87"><span class="lineNum">      87 </span>                :<span class="lineCov">          1 :       test(function() { explicitContentTypeTest(&quot;PUT&quot;); }, &quot;Explicit content type (PUT)&quot;);</span></a>
+<a name="88"><span class="lineNum">      88 </span>                :<span class="lineCov">          1 :       test(function() { explicitContentTypeTest(&quot;HEAD&quot;); }, &quot;Explicit content type (HEAD)&quot;);</span></a>
+<a name="89"><span class="lineNum">      89 </span>                :<span class="lineCov">          1 :     &lt;/script&gt;</span></a>
+<a name="90"><span class="lineNum">      90 </span>                :<span class="lineCov">          1 :   &lt;/body&gt;</span></a>
+<a name="91"><span class="lineNum">      91 </span>                :<span class="lineCov">          1 : &lt;/html&gt;</span></a>
+<a name="92"><span class="lineNum">      92 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="93"><span class="lineNum">      93 </span>                :<span class="lineCov">          1 :  *</span></a>
+<a name="94"><span class="lineNum">      94 </span>                :<span class="lineCov">          1 :  * send-entity-body-none.htm</span></a>
+<a name="95"><span class="lineNum">      95 </span>                :<span class="lineCov">          1 :  */</span></a>
 </pre>
       </td>
     </tr>

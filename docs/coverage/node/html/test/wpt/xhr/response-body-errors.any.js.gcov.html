@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-12-07 00:20:21</td>
+            <td class="headerValue">2025-01-18 23:18:38</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">7</td>
@@ -69,10 +69,10 @@
       <td>
 <pre class="sourceHeading">           Branch data     Line data    Source code</pre>
 <pre class="source">
-<a name="1"><span class="lineNum">       1 </span>           [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span>]:<span class="lineCov">          2 : import assert from 'node:assert/strict';</span></a>
-<a name="2"><span class="lineNum">       2 </span>                :<span class="lineCov">          2 : import { XMLHttpRequest } from '../../../lib/whatwg-xhr.js';</span></a>
-<a name="3"><span class="lineNum">       3 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="4"><span class="lineNum">       4 </span>           [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span>]:<span class="lineCov">          2 : export default (activeURL) =&gt; {</span></a>
+<a name="1"><span class="lineNum">       1 </span>           [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span>]:<span class="lineCov">          1 : import assert from 'node:assert/strict';</span></a>
+<a name="2"><span class="lineNum">       2 </span>                :<span class="lineCov">          1 : import { XMLHttpRequest } from '../../../lib/whatwg-xhr.js';</span></a>
+<a name="3"><span class="lineNum">       3 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="4"><span class="lineNum">       4 </span>           [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span>]:<span class="lineCov">          1 : export default (activeURL) =&gt; {</span></a>
 <a name="5"><span class="lineNum">       5 </span>                :<span class="lineCov">          1 : </span></a>
 <a name="6"><span class="lineNum">       6 </span>                :<span class="lineCov">          1 :         const url = `${activeURL.replace('/xhr/resources', '')}/fetch/api/resources/bad-chunk-encoding.py?ms=1&amp;count=2`;</span></a>
 <a name="7"><span class="lineNum">       7 </span>                :<span class="lineCov">          1 : </span></a>
@@ -117,38 +117,38 @@
 <a name="46"><span class="lineNum">      46 </span>                :<span class="lineCov">          1 :                 xhr.send();</span></a>
 <a name="47"><span class="lineNum">      47 </span>                :<span class="lineCov">          1 :         })();</span></a>
 <a name="48"><span class="lineNum">      48 </span>                :<span class="lineCov">          1 : }</span></a>
-<a name="49"><span class="lineNum">      49 </span>                :<span class="lineCov">          2 : ﻿</span></a>
-<a name="50"><span class="lineNum">      50 </span>                :<span class="lineCov">          2 : /*</span></a>
-<a name="51"><span class="lineNum">      51 </span>                :<span class="lineCov">          2 :  * response-body-errors.any.js</span></a>
-<a name="52"><span class="lineNum">      52 </span>                :<span class="lineCov">          2 :  *</span></a>
-<a name="53"><span class="lineNum">      53 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="54"><span class="lineNum">      54 </span>                :<span class="lineCov">          2 : // This will transmit two chunks TEST_CHUNK and then garbage, which should result in an error.</span></a>
-<a name="55"><span class="lineNum">      55 </span>                :<span class="lineCov">          2 : const url = &quot;/fetch/api/resources/bad-chunk-encoding.py?ms=1&amp;count=2&quot;;</span></a>
-<a name="56"><span class="lineNum">      56 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="57"><span class="lineNum">      57 </span>                :<span class="lineCov">          2 : test(() =&gt; {</span></a>
-<a name="58"><span class="lineNum">      58 </span>                :<span class="lineCov">          2 :   client = new XMLHttpRequest();</span></a>
-<a name="59"><span class="lineNum">      59 </span>                :<span class="lineCov">          2 :   client.open(&quot;GET&quot;, url, false);</span></a>
-<a name="60"><span class="lineNum">      60 </span>                :<span class="lineCov">          2 :   assert_throws_dom(&quot;NetworkError&quot;, () =&gt; client.send());</span></a>
-<a name="61"><span class="lineNum">      61 </span>                :<span class="lineCov">          2 : }, &quot;Synchronous XMLHttpRequest should throw on bad chunk&quot;);</span></a>
-<a name="62"><span class="lineNum">      62 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="63"><span class="lineNum">      63 </span>                :<span class="lineCov">          2 : async_test(t =&gt; {</span></a>
-<a name="64"><span class="lineNum">      64 </span>                :<span class="lineCov">          2 :   client = new XMLHttpRequest();</span></a>
-<a name="65"><span class="lineNum">      65 </span>                :<span class="lineCov">          2 :   client.open(&quot;GET&quot;, url, true);</span></a>
-<a name="66"><span class="lineNum">      66 </span>                :<span class="lineCov">          2 :   client.onreadystatechange = t.step_func(() =&gt; {</span></a>
-<a name="67"><span class="lineNum">      67 </span>                :<span class="lineCov">          2 :     if (client.readyState === 3) {</span></a>
-<a name="68"><span class="lineNum">      68 </span>                :<span class="lineCov">          2 :       assert_true(client.responseText.indexOf(&quot;TEST_CHUNK&quot;) !== -1);</span></a>
-<a name="69"><span class="lineNum">      69 </span>                :<span class="lineCov">          2 :     }</span></a>
-<a name="70"><span class="lineNum">      70 </span>                :<span class="lineCov">          2 :   });</span></a>
-<a name="71"><span class="lineNum">      71 </span>                :<span class="lineCov">          2 :   client.onerror = t.step_func_done(() =&gt; {</span></a>
-<a name="72"><span class="lineNum">      72 </span>                :<span class="lineCov">          2 :     assert_equals(client.responseText, &quot;&quot;);</span></a>
-<a name="73"><span class="lineNum">      73 </span>                :<span class="lineCov">          2 :   });</span></a>
-<a name="74"><span class="lineNum">      74 </span>                :<span class="lineCov">          2 :   client.onload = t.unreached_func();</span></a>
-<a name="75"><span class="lineNum">      75 </span>                :<span class="lineCov">          2 :   client.send();</span></a>
-<a name="76"><span class="lineNum">      76 </span>                :<span class="lineCov">          2 : }, &quot;Asynchronous XMLHttpRequest should clear response on bad chunk&quot;);</span></a>
-<a name="77"><span class="lineNum">      77 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="78"><span class="lineNum">      78 </span>                :<span class="lineCov">          2 :  *</span></a>
-<a name="79"><span class="lineNum">      79 </span>                :<span class="lineCov">          2 :  * response-body-errors.any.js</span></a>
-<a name="80"><span class="lineNum">      80 </span>                :<span class="lineCov">          2 :  */</span></a>
+<a name="49"><span class="lineNum">      49 </span>                :<span class="lineCov">          1 : ﻿</span></a>
+<a name="50"><span class="lineNum">      50 </span>                :<span class="lineCov">          1 : /*</span></a>
+<a name="51"><span class="lineNum">      51 </span>                :<span class="lineCov">          1 :  * response-body-errors.any.js</span></a>
+<a name="52"><span class="lineNum">      52 </span>                :<span class="lineCov">          1 :  *</span></a>
+<a name="53"><span class="lineNum">      53 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="54"><span class="lineNum">      54 </span>                :<span class="lineCov">          1 : // This will transmit two chunks TEST_CHUNK and then garbage, which should result in an error.</span></a>
+<a name="55"><span class="lineNum">      55 </span>                :<span class="lineCov">          1 : const url = &quot;/fetch/api/resources/bad-chunk-encoding.py?ms=1&amp;count=2&quot;;</span></a>
+<a name="56"><span class="lineNum">      56 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="57"><span class="lineNum">      57 </span>                :<span class="lineCov">          1 : test(() =&gt; {</span></a>
+<a name="58"><span class="lineNum">      58 </span>                :<span class="lineCov">          1 :   client = new XMLHttpRequest();</span></a>
+<a name="59"><span class="lineNum">      59 </span>                :<span class="lineCov">          1 :   client.open(&quot;GET&quot;, url, false);</span></a>
+<a name="60"><span class="lineNum">      60 </span>                :<span class="lineCov">          1 :   assert_throws_dom(&quot;NetworkError&quot;, () =&gt; client.send());</span></a>
+<a name="61"><span class="lineNum">      61 </span>                :<span class="lineCov">          1 : }, &quot;Synchronous XMLHttpRequest should throw on bad chunk&quot;);</span></a>
+<a name="62"><span class="lineNum">      62 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="63"><span class="lineNum">      63 </span>                :<span class="lineCov">          1 : async_test(t =&gt; {</span></a>
+<a name="64"><span class="lineNum">      64 </span>                :<span class="lineCov">          1 :   client = new XMLHttpRequest();</span></a>
+<a name="65"><span class="lineNum">      65 </span>                :<span class="lineCov">          1 :   client.open(&quot;GET&quot;, url, true);</span></a>
+<a name="66"><span class="lineNum">      66 </span>                :<span class="lineCov">          1 :   client.onreadystatechange = t.step_func(() =&gt; {</span></a>
+<a name="67"><span class="lineNum">      67 </span>                :<span class="lineCov">          1 :     if (client.readyState === 3) {</span></a>
+<a name="68"><span class="lineNum">      68 </span>                :<span class="lineCov">          1 :       assert_true(client.responseText.indexOf(&quot;TEST_CHUNK&quot;) !== -1);</span></a>
+<a name="69"><span class="lineNum">      69 </span>                :<span class="lineCov">          1 :     }</span></a>
+<a name="70"><span class="lineNum">      70 </span>                :<span class="lineCov">          1 :   });</span></a>
+<a name="71"><span class="lineNum">      71 </span>                :<span class="lineCov">          1 :   client.onerror = t.step_func_done(() =&gt; {</span></a>
+<a name="72"><span class="lineNum">      72 </span>                :<span class="lineCov">          1 :     assert_equals(client.responseText, &quot;&quot;);</span></a>
+<a name="73"><span class="lineNum">      73 </span>                :<span class="lineCov">          1 :   });</span></a>
+<a name="74"><span class="lineNum">      74 </span>                :<span class="lineCov">          1 :   client.onload = t.unreached_func();</span></a>
+<a name="75"><span class="lineNum">      75 </span>                :<span class="lineCov">          1 :   client.send();</span></a>
+<a name="76"><span class="lineNum">      76 </span>                :<span class="lineCov">          1 : }, &quot;Asynchronous XMLHttpRequest should clear response on bad chunk&quot;);</span></a>
+<a name="77"><span class="lineNum">      77 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="78"><span class="lineNum">      78 </span>                :<span class="lineCov">          1 :  *</span></a>
+<a name="79"><span class="lineNum">      79 </span>                :<span class="lineCov">          1 :  * response-body-errors.any.js</span></a>
+<a name="80"><span class="lineNum">      80 </span>                :<span class="lineCov">          1 :  */</span></a>
 </pre>
       </td>
     </tr>

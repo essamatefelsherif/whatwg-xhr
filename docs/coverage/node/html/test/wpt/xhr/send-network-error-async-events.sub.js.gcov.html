@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-12-07 00:20:21</td>
+            <td class="headerValue">2025-01-18 23:18:38</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">8</td>
@@ -69,10 +69,10 @@
       <td>
 <pre class="sourceHeading">           Branch data     Line data    Source code</pre>
 <pre class="source">
-<a name="1"><span class="lineNum">       1 </span>           [<span class="branchCov" title="Branch 0 was taken 2 times"> + </span>]:<span class="lineCov">          2 : import assert from 'node:assert/strict';</span></a>
-<a name="2"><span class="lineNum">       2 </span>                :<span class="lineCov">          2 : import { XMLHttpRequest } from '../../../lib/whatwg-xhr.js';</span></a>
-<a name="3"><span class="lineNum">       3 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="4"><span class="lineNum">       4 </span>           [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span>]:<span class="lineCov">          2 : export default (activeURL) =&gt; {</span></a>
+<a name="1"><span class="lineNum">       1 </span>           [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span>]:<span class="lineCov">          1 : import assert from 'node:assert/strict';</span></a>
+<a name="2"><span class="lineNum">       2 </span>                :<span class="lineCov">          1 : import { XMLHttpRequest } from '../../../lib/whatwg-xhr.js';</span></a>
+<a name="3"><span class="lineNum">       3 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="4"><span class="lineNum">       4 </span>           [<span class="branchCov" title="Branch 0 was taken 1 time"> + </span>]:<span class="lineCov">          1 : export default (activeURL) =&gt; {</span></a>
 <a name="5"><span class="lineNum">       5 </span>                :<span class="lineCov">          1 : </span></a>
 <a name="6"><span class="lineNum">       6 </span>                :<span class="lineCov">          1 :         let xhr = new XMLHttpRequest();</span></a>
 <a name="7"><span class="lineNum">       7 </span>                :<span class="lineCov">          1 : </span></a>
@@ -113,62 +113,62 @@
 <a name="42"><span class="lineNum">      42 </span>                :<span class="lineCov">          1 :         xhr.open('POST', `http://nonexistent`);</span></a>
 <a name="43"><span class="lineNum">      43 </span>                :<span class="lineCov">          1 :         xhr.send('Test Message');</span></a>
 <a name="44"><span class="lineNum">      44 </span>                :<span class="lineCov">          1 : }</span></a>
-<a name="45"><span class="lineNum">      45 </span>                :<span class="lineCov">          2 : ﻿</span></a>
-<a name="46"><span class="lineNum">      46 </span>                :<span class="lineCov">          2 : /*</span></a>
-<a name="47"><span class="lineNum">      47 </span>                :<span class="lineCov">          2 :  * send-network-error-async-events.sub.htm</span></a>
-<a name="48"><span class="lineNum">      48 </span>                :<span class="lineCov">          2 :  *</span></a>
-<a name="49"><span class="lineNum">      49 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="50"><span class="lineNum">      50 </span>                :<span class="lineCov">          2 : &lt;!DOCTYPE html&gt;</span></a>
-<a name="51"><span class="lineNum">      51 </span>                :<span class="lineCov">          2 : &lt;html&gt;</span></a>
-<a name="52"><span class="lineNum">      52 </span>                :<span class="lineCov">          2 : &lt;head&gt;</span></a>
-<a name="53"><span class="lineNum">      53 </span>                :<span class="lineCov">          2 :     &lt;link rel=&quot;help&quot; href=&quot;https://xhr.spec.whatwg.org/#handler-xhr-onerror&quot; data-tested-assertations=&quot;../..&quot; /&gt;</span></a>
-<a name="54"><span class="lineNum">      54 </span>                :<span class="lineCov">          2 :     &lt;link rel=&quot;help&quot; href=&quot;https://xhr.spec.whatwg.org/#the-send()-method&quot; data-tested-assertations=&quot;following::ol[1]/li[9]/ol/li[2] following::ol[1]/li[9]/ol/li[3]&quot; /&gt;</span></a>
-<a name="55"><span class="lineNum">      55 </span>                :<span class="lineCov">          2 :     &lt;link rel=&quot;help&quot; href=&quot;https://xhr.spec.whatwg.org/#infrastructure-for-the-send()-method&quot; data-tested-assertations=&quot;following::dt[4] following::dd[4]/p&quot; /&gt;</span></a>
-<a name="56"><span class="lineNum">      56 </span>                :<span class="lineCov">          2 :     &lt;link rel=&quot;help&quot; href=&quot;https://xhr.spec.whatwg.org/#network-error&quot; data-tested-assertations=&quot;..&quot; /&gt;</span></a>
-<a name="57"><span class="lineNum">      57 </span>                :<span class="lineCov">          2 :     &lt;link rel=&quot;help&quot; href=&quot;https://xhr.spec.whatwg.org/#request-error&quot; data-tested-assertations=&quot;following::ol[1]/li[4] following::ol[1]/li[6] following::ol[1]/li[7] following::ol[1]/li[7]/ol/li[3] following::ol[1]/li[7]/ol/li[4] following::ol[1]/li[9] following::ol[1]/li[10]&quot; /&gt;</span></a>
-<a name="58"><span class="lineNum">      58 </span>                :<span class="lineCov">          2 :     &lt;script src=&quot;/resources/testharness.js&quot;&gt;&lt;/script&gt;</span></a>
-<a name="59"><span class="lineNum">      59 </span>                :<span class="lineCov">          2 :     &lt;script src=&quot;/resources/testharnessreport.js&quot;&gt;&lt;/script&gt;</span></a>
-<a name="60"><span class="lineNum">      60 </span>                :<span class="lineCov">          2 :     &lt;title&gt;XMLHttpRequest: The send() method: Fire a progress event named error when Network error happens (synchronous flag is unset)&lt;/title&gt;</span></a>
-<a name="61"><span class="lineNum">      61 </span>                :<span class="lineCov">          2 : &lt;/head&gt;</span></a>
-<a name="62"><span class="lineNum">      62 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="63"><span class="lineNum">      63 </span>                :<span class="lineCov">          2 : &lt;body&gt;</span></a>
-<a name="64"><span class="lineNum">      64 </span>                :<span class="lineCov">          2 :     &lt;div id=&quot;log&quot;&gt;&lt;/div&gt;</span></a>
-<a name="65"><span class="lineNum">      65 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="66"><span class="lineNum">      66 </span>                :<span class="lineCov">          2 :     &lt;script type=&quot;text/javascript&quot;&gt;</span></a>
-<a name="67"><span class="lineNum">      67 </span>                :<span class="lineCov">          2 :         var test = async_test();</span></a>
-<a name="68"><span class="lineNum">      68 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="69"><span class="lineNum">      69 </span>                :<span class="lineCov">          2 :         test.step(function(){</span></a>
-<a name="70"><span class="lineNum">      70 </span>                :<span class="lineCov">          2 :             var xhr = new XMLHttpRequest();</span></a>
-<a name="71"><span class="lineNum">      71 </span>                :<span class="lineCov">          2 :             var expect =  [&quot;loadstart&quot;, &quot;upload.loadstart&quot;, 4, &quot;upload.error&quot;, &quot;upload.loadend&quot;, &quot;error&quot;, &quot;loadend&quot;];</span></a>
-<a name="72"><span class="lineNum">      72 </span>                :<span class="lineCov">          2 :             var actual = [];</span></a>
-<a name="73"><span class="lineNum">      73 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="74"><span class="lineNum">      74 </span>                :<span class="lineCov">          2 :             xhr.onreadystatechange = test.step_func(() =&gt; {</span></a>
-<a name="75"><span class="lineNum">      75 </span>                :<span class="lineCov">          2 :                 if (xhr.readyState == 4) {</span></a>
-<a name="76"><span class="lineNum">      76 </span>                :<span class="lineCov">          2 :                     actual.push(xhr.readyState);</span></a>
-<a name="77"><span class="lineNum">      77 </span>                :<span class="lineCov">          2 :                 }</span></a>
-<a name="78"><span class="lineNum">      78 </span>                :<span class="lineCov">          2 :             });</span></a>
-<a name="79"><span class="lineNum">      79 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="80"><span class="lineNum">      80 </span>                :<span class="lineCov">          2 :             xhr.onloadstart        = test.step_func(e =&gt; { actual.push(e.type); })</span></a>
-<a name="81"><span class="lineNum">      81 </span>                :<span class="lineCov">          2 :             xhr.onloadend          = test.step_func_done(e =&gt; {</span></a>
-<a name="82"><span class="lineNum">      82 </span>                :<span class="lineCov">          2 :                 actual.push(e.type);</span></a>
-<a name="83"><span class="lineNum">      83 </span>                :<span class="lineCov">          2 :                 assert_array_equals(actual, expect);</span></a>
-<a name="84"><span class="lineNum">      84 </span>                :<span class="lineCov">          2 :             })</span></a>
-<a name="85"><span class="lineNum">      85 </span>                :<span class="lineCov">          2 :             xhr.onerror            = test.step_func(e =&gt; { actual.push(e.type); })</span></a>
-<a name="86"><span class="lineNum">      86 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="87"><span class="lineNum">      87 </span>                :<span class="lineCov">          2 :             xhr.upload.onloadstart = test.step_func(e =&gt; { actual.push(&quot;upload.&quot; + e.type); })</span></a>
-<a name="88"><span class="lineNum">      88 </span>                :<span class="lineCov">          2 :             xhr.upload.onloadend   = test.step_func(e =&gt; { actual.push(&quot;upload.&quot; + e.type); })</span></a>
-<a name="89"><span class="lineNum">      89 </span>                :<span class="lineCov">          2 :             xhr.upload.onerror     = test.step_func(e =&gt; { actual.push(&quot;upload.&quot; + e.type); })</span></a>
-<a name="90"><span class="lineNum">      90 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="91"><span class="lineNum">      91 </span>                :<span class="lineCov">          2 :             xhr.open(&quot;POST&quot;, &quot;http://nonexistent.{{host}}:{{ports[http][0]}}&quot;, true);</span></a>
-<a name="92"><span class="lineNum">      92 </span>                :<span class="lineCov">          2 :             xhr.send(&quot;Test Message&quot;);</span></a>
-<a name="93"><span class="lineNum">      93 </span>                :<span class="lineCov">          2 :         });</span></a>
-<a name="94"><span class="lineNum">      94 </span>                :<span class="lineCov">          2 :     &lt;/script&gt;</span></a>
-<a name="95"><span class="lineNum">      95 </span>                :<span class="lineCov">          2 : &lt;/body&gt;</span></a>
-<a name="96"><span class="lineNum">      96 </span>                :<span class="lineCov">          2 : &lt;/html&gt;</span></a>
-<a name="97"><span class="lineNum">      97 </span>                :<span class="lineCov">          2 : </span></a>
-<a name="98"><span class="lineNum">      98 </span>                :<span class="lineCov">          2 :  *</span></a>
-<a name="99"><span class="lineNum">      99 </span>                :<span class="lineCov">          2 :  * send-network-error-async-events.sub.htm</span></a>
-<a name="100"><span class="lineNum">     100 </span>                :<span class="lineCov">          2 :  */</span></a>
+<a name="45"><span class="lineNum">      45 </span>                :<span class="lineCov">          1 : ﻿</span></a>
+<a name="46"><span class="lineNum">      46 </span>                :<span class="lineCov">          1 : /*</span></a>
+<a name="47"><span class="lineNum">      47 </span>                :<span class="lineCov">          1 :  * send-network-error-async-events.sub.htm</span></a>
+<a name="48"><span class="lineNum">      48 </span>                :<span class="lineCov">          1 :  *</span></a>
+<a name="49"><span class="lineNum">      49 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="50"><span class="lineNum">      50 </span>                :<span class="lineCov">          1 : &lt;!DOCTYPE html&gt;</span></a>
+<a name="51"><span class="lineNum">      51 </span>                :<span class="lineCov">          1 : &lt;html&gt;</span></a>
+<a name="52"><span class="lineNum">      52 </span>                :<span class="lineCov">          1 : &lt;head&gt;</span></a>
+<a name="53"><span class="lineNum">      53 </span>                :<span class="lineCov">          1 :     &lt;link rel=&quot;help&quot; href=&quot;https://xhr.spec.whatwg.org/#handler-xhr-onerror&quot; data-tested-assertations=&quot;../..&quot; /&gt;</span></a>
+<a name="54"><span class="lineNum">      54 </span>                :<span class="lineCov">          1 :     &lt;link rel=&quot;help&quot; href=&quot;https://xhr.spec.whatwg.org/#the-send()-method&quot; data-tested-assertations=&quot;following::ol[1]/li[9]/ol/li[2] following::ol[1]/li[9]/ol/li[3]&quot; /&gt;</span></a>
+<a name="55"><span class="lineNum">      55 </span>                :<span class="lineCov">          1 :     &lt;link rel=&quot;help&quot; href=&quot;https://xhr.spec.whatwg.org/#infrastructure-for-the-send()-method&quot; data-tested-assertations=&quot;following::dt[4] following::dd[4]/p&quot; /&gt;</span></a>
+<a name="56"><span class="lineNum">      56 </span>                :<span class="lineCov">          1 :     &lt;link rel=&quot;help&quot; href=&quot;https://xhr.spec.whatwg.org/#network-error&quot; data-tested-assertations=&quot;..&quot; /&gt;</span></a>
+<a name="57"><span class="lineNum">      57 </span>                :<span class="lineCov">          1 :     &lt;link rel=&quot;help&quot; href=&quot;https://xhr.spec.whatwg.org/#request-error&quot; data-tested-assertations=&quot;following::ol[1]/li[4] following::ol[1]/li[6] following::ol[1]/li[7] following::ol[1]/li[7]/ol/li[3] following::ol[1]/li[7]/ol/li[4] following::ol[1]/li[9] following::ol[1]/li[10]&quot; /&gt;</span></a>
+<a name="58"><span class="lineNum">      58 </span>                :<span class="lineCov">          1 :     &lt;script src=&quot;/resources/testharness.js&quot;&gt;&lt;/script&gt;</span></a>
+<a name="59"><span class="lineNum">      59 </span>                :<span class="lineCov">          1 :     &lt;script src=&quot;/resources/testharnessreport.js&quot;&gt;&lt;/script&gt;</span></a>
+<a name="60"><span class="lineNum">      60 </span>                :<span class="lineCov">          1 :     &lt;title&gt;XMLHttpRequest: The send() method: Fire a progress event named error when Network error happens (synchronous flag is unset)&lt;/title&gt;</span></a>
+<a name="61"><span class="lineNum">      61 </span>                :<span class="lineCov">          1 : &lt;/head&gt;</span></a>
+<a name="62"><span class="lineNum">      62 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="63"><span class="lineNum">      63 </span>                :<span class="lineCov">          1 : &lt;body&gt;</span></a>
+<a name="64"><span class="lineNum">      64 </span>                :<span class="lineCov">          1 :     &lt;div id=&quot;log&quot;&gt;&lt;/div&gt;</span></a>
+<a name="65"><span class="lineNum">      65 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="66"><span class="lineNum">      66 </span>                :<span class="lineCov">          1 :     &lt;script type=&quot;text/javascript&quot;&gt;</span></a>
+<a name="67"><span class="lineNum">      67 </span>                :<span class="lineCov">          1 :         var test = async_test();</span></a>
+<a name="68"><span class="lineNum">      68 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="69"><span class="lineNum">      69 </span>                :<span class="lineCov">          1 :         test.step(function(){</span></a>
+<a name="70"><span class="lineNum">      70 </span>                :<span class="lineCov">          1 :             var xhr = new XMLHttpRequest();</span></a>
+<a name="71"><span class="lineNum">      71 </span>                :<span class="lineCov">          1 :             var expect =  [&quot;loadstart&quot;, &quot;upload.loadstart&quot;, 4, &quot;upload.error&quot;, &quot;upload.loadend&quot;, &quot;error&quot;, &quot;loadend&quot;];</span></a>
+<a name="72"><span class="lineNum">      72 </span>                :<span class="lineCov">          1 :             var actual = [];</span></a>
+<a name="73"><span class="lineNum">      73 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="74"><span class="lineNum">      74 </span>                :<span class="lineCov">          1 :             xhr.onreadystatechange = test.step_func(() =&gt; {</span></a>
+<a name="75"><span class="lineNum">      75 </span>                :<span class="lineCov">          1 :                 if (xhr.readyState == 4) {</span></a>
+<a name="76"><span class="lineNum">      76 </span>                :<span class="lineCov">          1 :                     actual.push(xhr.readyState);</span></a>
+<a name="77"><span class="lineNum">      77 </span>                :<span class="lineCov">          1 :                 }</span></a>
+<a name="78"><span class="lineNum">      78 </span>                :<span class="lineCov">          1 :             });</span></a>
+<a name="79"><span class="lineNum">      79 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="80"><span class="lineNum">      80 </span>                :<span class="lineCov">          1 :             xhr.onloadstart        = test.step_func(e =&gt; { actual.push(e.type); })</span></a>
+<a name="81"><span class="lineNum">      81 </span>                :<span class="lineCov">          1 :             xhr.onloadend          = test.step_func_done(e =&gt; {</span></a>
+<a name="82"><span class="lineNum">      82 </span>                :<span class="lineCov">          1 :                 actual.push(e.type);</span></a>
+<a name="83"><span class="lineNum">      83 </span>                :<span class="lineCov">          1 :                 assert_array_equals(actual, expect);</span></a>
+<a name="84"><span class="lineNum">      84 </span>                :<span class="lineCov">          1 :             })</span></a>
+<a name="85"><span class="lineNum">      85 </span>                :<span class="lineCov">          1 :             xhr.onerror            = test.step_func(e =&gt; { actual.push(e.type); })</span></a>
+<a name="86"><span class="lineNum">      86 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="87"><span class="lineNum">      87 </span>                :<span class="lineCov">          1 :             xhr.upload.onloadstart = test.step_func(e =&gt; { actual.push(&quot;upload.&quot; + e.type); })</span></a>
+<a name="88"><span class="lineNum">      88 </span>                :<span class="lineCov">          1 :             xhr.upload.onloadend   = test.step_func(e =&gt; { actual.push(&quot;upload.&quot; + e.type); })</span></a>
+<a name="89"><span class="lineNum">      89 </span>                :<span class="lineCov">          1 :             xhr.upload.onerror     = test.step_func(e =&gt; { actual.push(&quot;upload.&quot; + e.type); })</span></a>
+<a name="90"><span class="lineNum">      90 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="91"><span class="lineNum">      91 </span>                :<span class="lineCov">          1 :             xhr.open(&quot;POST&quot;, &quot;http://nonexistent.{{host}}:{{ports[http][0]}}&quot;, true);</span></a>
+<a name="92"><span class="lineNum">      92 </span>                :<span class="lineCov">          1 :             xhr.send(&quot;Test Message&quot;);</span></a>
+<a name="93"><span class="lineNum">      93 </span>                :<span class="lineCov">          1 :         });</span></a>
+<a name="94"><span class="lineNum">      94 </span>                :<span class="lineCov">          1 :     &lt;/script&gt;</span></a>
+<a name="95"><span class="lineNum">      95 </span>                :<span class="lineCov">          1 : &lt;/body&gt;</span></a>
+<a name="96"><span class="lineNum">      96 </span>                :<span class="lineCov">          1 : &lt;/html&gt;</span></a>
+<a name="97"><span class="lineNum">      97 </span>                :<span class="lineCov">          1 : </span></a>
+<a name="98"><span class="lineNum">      98 </span>                :<span class="lineCov">          1 :  *</span></a>
+<a name="99"><span class="lineNum">      99 </span>                :<span class="lineCov">          1 :  * send-network-error-async-events.sub.htm</span></a>
+<a name="100"><span class="lineNum">     100 </span>                :<span class="lineCov">          1 :  */</span></a>
 </pre>
       </td>
     </tr>

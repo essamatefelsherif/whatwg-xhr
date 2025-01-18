@@ -14,7 +14,7 @@
 		"testVerbCov" : "node --experimental-test-coverage test/wpt-xhr.test.js -n -v",
 		"testSilent"  : "node test/wpt-xhr.test.js -d",
 		"testCli"     : "node --experimental-test-coverage test/wpt-xhr.cmd.test.js",
-		"devCovRep"   : "node --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=docs/coverage/node/lcov.info --test",
+		"devCovRep"   : "node --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=docs/coverage/node/lcov.info --test-reporter=spec --test-reporter-destination=stdout --test test/wpt-xhr.test.js test/wpt-xhr.cmd.test.js",
 		"devCovHtml"  : "genhtml -o docs/coverage/node/html --config-file .lcovrc --prefix $PWD docs/coverage/node/lcov.info",
 		"devDoc"      : "jsdoc lib/whatwg-xhr.js lib/helper/*.js test/wpt-xhr*.js -d docs/jsdoc/ -c .jsdoc.conf.json --verbose",
 		"devDocAll"   : "rm -vfr docs/jsdoc/* && npm run devDoc",
