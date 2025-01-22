@@ -110,18 +110,7 @@ export default (activeURL) => {
 		var actual = {}.toString.call(object);
 		var expected = "[object " + class_string + "]";
 
-		assert(same_value(actual, expected), description);
-		function same_value(x, y){
-			if(y !== y) {
-				//NaN case
-				return x !== x;
-			}
-			if (x === 0 && y === 0) {
-				//Distinguish +0 and -0
-				return 1/x === 1/y;
-			}
-			return x === y;
-		}
+		assert.strictEqual(actual, expected, description);
 	}
 
 	function readBlobAsPromise(blob){
