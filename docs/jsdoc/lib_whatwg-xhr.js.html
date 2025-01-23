@@ -34,6 +34,8 @@
  * export class ProgressEvent  extends Event
  * export class FormData
  *
+ * function makeEntry
+ * function readBlobSync
  * function handleError
  * function requestErrorSteps
  * function setResponseToNetworkError
@@ -59,7 +61,7 @@ import http                from 'node:http';
 import https               from 'node:https';
 import process             from 'node:process';
 import threads             from 'node:worker_threads';
-import { spawn }           from 'node:child_process';
+import { spawn, spawnSync} from 'node:child_process';
 import { dirname }         from 'node:path';
 import { fileURLToPath }   from 'node:url';
 import { Readable }        from 'node:stream';
@@ -113,9 +115,22 @@ import {
 	xmlEncodingSniffer
 } from './helper/xml-encoding-sniffer.js';
 
+import {
+	File as FilePolyfill
+} from './helper/file-polyfill.js';
+
 /* Emulate commonJS __filename &amp; __dirname global constants */
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = dirname(__filename);
+
+/**
+ * Global object added in node modules v20.0.0.
+ *
+ * @const {object} File
+ * @desc  The File interface provides information about files and allows JavaScript in a web page to access their content.
+ * @see   module:file-polyfill.File
+ */
+const File = FilePolyfill;
 
 /**
  * @const {boolean} disableHeaderCheck
@@ -132,17 +147,6 @@ const defaultHeaders = () => ({
 	'User-Agent' : 'whatwg-xhr',
 	'Accept': '*/*',
 	'Accept-Language': 'en-US,en;q=0.5'
-});
-/****/
-
-/**
- * @func   defaultHeadersCase
- * @return {object} Lower case default headers.
- */
-const defaultHeadersCase = () => ({
-	'user-agent' : 'User-Agent',
-	'accept': 'Accept',
-	'accept-language': 'Accept-Language'
 });
 /****/
 
@@ -193,6 +197,7 @@ class XMLHttpRequestEventTarget extends EventTarget{
 		eventHandlers['ontimeout'  ] = null;    // xhr.spec. attribute EventHandler
 		eventHandlers['onloadend'  ] = null;    // xhr.spec. attribute EventHandler
 
+		// Map any XMLHttpRequestEventTarget object created to an associated data object.
 		xmlHttpRequestEventTarget.set(this, eventHandlers);
 	}
 
@@ -355,8 +360,9 @@ class XMLHttpRequestUpload extends XMLHttpRequestEventTarget{
  *   "text"
  * };
  *
- * @const {object} XMLHttpRequestResponseType
- * @desc  Enumerated set of response types.
+ * @const    {object} XMLHttpRequestResponseType
+ * @readonly
+ * @desc     Enumerated set of response types.
  */
 const XMLHttpRequestResponseType = {
 	'': null,
@@ -437,23 +443,23 @@ export class XMLHttpRequest extends XMLHttpRequestEventTarget{
 		// states - An XMLHttpRequest object has an associated:
 		requestData['readyState'] = this.UNSENT;               // xhr.spec. readonly attribute unsigned short state: initially unsent.
 
-		// requesAn XMLHttpRequest object has an associated:
+		// request - An XMLHttpRequest object has an associated:
 		requestData['timeout'] = 0;                            // xhr.spec. attribute unsigned long timeout: An unsigned integer, initially 0.
 		requestData['withCredentials'] = false;                // xhr.spec. attribute boolean cross-origin credentials: A boolean, initially false.
 
 		allowXMLHttpRequestUploadConstructor = true;           //
-		requestData['upload'] = new XMLHttpRequestUpload();    // xhr.spec. readonly attribute XMLHttpRequestUpload upload object: an XMLHttpRequestUpload object.
-		allowXMLHttpRequestUploadConstructor = false;          //
+		requestData['upload'] = new XMLHttpRequestUpload();    // xhr.spec. readonly attribute XMLHttpRequestUpload upload object:
+		allowXMLHttpRequestUploadConstructor = false;          //           an XMLHttpRequestUpload object.
 
 		// response - An XMLHttpRequest object has an associated:
-		requestData['status'    ] = 0;                 // xhr.spec. readonly attribute unsigned short status;
- 		requestData['statusText'] = '';                // xhr.spec. readonly attribute ByteString statusText;
+		requestData['status'    ] = 0;      // xhr.spec. readonly attribute unsigned short status;
+ 		requestData['statusText'] = '';     // xhr.spec. readonly attribute ByteString statusText;
 
-		requestData['response'    ] = '';              // xhr.spec. readonly attribute any response: a response, initially a network error.
-		requestData['responseText'] = '';              // xhr.spec. readonly attribute ByteString responseText.
-		requestData['responseType'] = '';              // xhr.spec. response type: one of "", "arraybuffer", "blob", "document", "json", and "text"; initially "".
-		requestData['responseURL' ] = '';              // xhr.spec. readonly attribute USVString responseURL;
-		requestData['responseXML' ] = null;            // xhr.spec. [Exposed=Window] readonly attribute Document? responseXML;
+		requestData['response'    ] = '';   // xhr.spec. readonly attribute any response: a response, initially a network error.
+		requestData['responseText'] = '';   // xhr.spec. readonly attribute ByteString responseText.
+		requestData['responseType'] = '';   // xhr.spec. response type: one of "","arraybuffer","blob","document","json" and "text"; initially "".
+		requestData['responseURL' ] = '';   // xhr.spec. readonly attribute USVString responseURL;
+		requestData['responseXML' ] = null; // xhr.spec. [Exposed=Window] readonly attribute Document? responseXML;
 
 		// associated data - An XMLHttpRequest object has an associated:
 		requestData['sendFlag'] = false;               // xhr.spec. send() flag: a flag, initially unset.
@@ -481,6 +487,7 @@ export class XMLHttpRequest extends XMLHttpRequestEventTarget{
 		requestData['_responseNetworkError'] = false;
 		requestData['_responseBody'        ] = null;  // fetch.spec.2.2.6. A response has an associated body (null or a body). Unless stated otherwise it is null.
 
+		// Map any XMLHttpRequest object created to an associated data object.
 		xmlHttpRequest.set(this, requestData);
 	}
 
@@ -606,11 +613,13 @@ export class XMLHttpRequest extends XMLHttpRequestEventTarget{
 			try{
 				requestData['responseObject'] = new Uint8Array(requestData['receivedBytes']).buffer;
 			}
+			/* node:coverage disable */
 			catch(e){
 				// xhr.spec.5. If this throws an exception, then set this’s response object to failure and return null.
 				requestData['responseObject'] = 'failure';
 				return null;
 			}
+			/* node:coverage enable */
 		}
 		else
 		// xhr.spec.6. Otherwise, if this’s response type is "blob",
@@ -628,17 +637,19 @@ export class XMLHttpRequest extends XMLHttpRequestEventTarget{
 			}
 		}
 		else
+		/* node:coverage disable */
 		// xhr.spec.7. Otherwise, if this’s response type is "document", set a document response for this.
 		if(requestData['responseType'] === 'document'){
 			// @todo...
 		}
+		/* node:coverage enable */
 		// xhr.spec.8. Otherwise:
 		else{
 			// xhr.spec.8.1. Assert: this’s response type is "json".
 			if(requestData['responseType'] === 'json'){
 
 				// xhr.spec.8.2. If this’s response’s body is null, then return null.
-				// author. if(requestData['_responseBody'] === null)
+				// @author. if(requestData['_responseBody'] === null)
 				if(requestData['receivedBytes'].length === 0)
 					return null;
 
@@ -737,11 +748,13 @@ export class XMLHttpRequest extends XMLHttpRequestEventTarget{
 								'InvalidAccessError'
 					);
 			}
+			/* node:coverage disable */
 			else{
 				// xhr.spec.1. If the current global object is not a Window object and the given value is "document", then return.
 				if(String(type).toLowerCase() === 'document')
 					return;
 			}
+			/* node:coverage enable */
 
 			// xhr.spec.2. If this’s state is loading or done, then throw an "InvalidStateError" DOMException.
 			if(requestData['readyState'] === this.LOADING || requestData['readyState'] === this.DONE)
@@ -780,11 +793,13 @@ export class XMLHttpRequest extends XMLHttpRequestEventTarget{
 
 		const requestData = xmlHttpRequest.get(this);
 
+		/* node:coverage disable */
 		// xhr.spec.1. If this’s response type is not the empty string or "document", then throw an "InvalidStateError" DOMException.
 		if(this.responseType !== '' &amp;&amp; this.responseType !== 'document'){
 			throw new DOMException(
 				`XMLHttpRequest.responseXML getter: responseXML is only available if responseType is '' or 'document'.`, 'InvalidStateError');	// firefox 102
 		}
+		/* node:coverage enable */
 
 		// xhr.spec.2. If this’s state is not done, then return null.
 		if(xmlHttpRequest.get(this)['readyState'] !== this.DONE)
@@ -902,7 +917,6 @@ export class XMLHttpRequest extends XMLHttpRequestEventTarget{
 		xmlHttpRequest.get(this)['withCredentials'] = Boolean(cred);
 	}
 } // @endof class XMLHttpRequest extends XMLHttpRequestEventTarget
-
 
 /**
  * @const    {number} UNSENT
@@ -1045,7 +1059,7 @@ XMLHttpRequest.prototype.open = function open(method, url, is_async = true, user
 	}
 
 	// xhr.spec.7. If the async argument is omitted, set async to true, and set username and password to null.
-	// @author: already handled by default arguments: open(method, url, is_async = true, username = null, password = null)
+	// @author. already handled by default arguments: open(method, url, is_async = true, username = null, password = null)
 
 	// xhr.spec.8. If parsedURL’s host is non-null, then:
 	if(parsedURL.host){
@@ -1205,7 +1219,7 @@ XMLHttpRequest.prototype.abort = function abort(){
  */
 XMLHttpRequest.prototype.setRequestHeader = function setRequestHeader(name, value){
 
-	// @author: validate the number of arguments
+	// @author. validate the number of arguments
 	if(arguments.length &lt; 2)
 		throw new TypeError(`XMLHttpRequest.setRequestHeader: At least 2 arguments required, but only ${arguments.length} passed`);	// firefox 102
 
@@ -1443,7 +1457,7 @@ XMLHttpRequest.prototype.send = function send(body = null){
 
 		// xhr.spec.4.2. If body is a Document, then set this’s request body to body, serialized, converted, and UTF-8 encoded.
 		if(globalThis.Document &amp;&amp; body instanceof globalThis.Document){
-			// @todo: xhr.spec.4.2. set this’s request body to body, serialized, converted, and UTF-8 encoded.
+			// @todo. xhr.spec.4.2. set this’s request body to body, serialized, converted, and UTF-8 encoded.
 		}
 		// xhr.spec.4.3. Otherwise:
 		else{
@@ -1487,7 +1501,7 @@ XMLHttpRequest.prototype.send = function send(body = null){
 						let newContentTypeSerialized = contentTypeFormat(contentTypeRecord);
 
 						// xhr.spec.4.5.1.2.3. Set (`Content-Type`, newContentTypeSerialized) in this’s author request headers.
-						// @author: first delete the existing Content-Type header
+						// @author. first delete the existing Content-Type header
 						delete requestData['requestHeaders'][requestData['requestHeadersCase']['content-type']];
 						delete requestData['requestHeadersCase']['content-type'];
 
@@ -1526,6 +1540,8 @@ XMLHttpRequest.prototype.send = function send(body = null){
 		requestData['uploadListenerFlag'] = true;
 	}
 	else
+	// @author. an implementation dependent method to inspect if any event listeners had been registered by calling addEventListener.
+	// @todo.   suggest an implementation independent method
 	if(Object.getOwnPropertySymbols(requestData['upload']).filter(e => requestData['upload'][e].size).length){
 		requestData['uploadListenerFlag'] = true;
 	}
@@ -1563,7 +1579,7 @@ XMLHttpRequest.prototype.send = function send(body = null){
 	// xhr.spec.6. use-URL-credentials flag:  Set if this’s request URL includes credentials.
 	// xhr.spec.6. initiator type: "xmlhttprequest".
 
-	// author. use http.request(url[, options][, callback])
+	// @author. use http.request(url[, options][, callback])
 	const clientRequestOptions = {
 		agent:           false,
 		auth:            req_auth,
@@ -1576,12 +1592,11 @@ XMLHttpRequest.prototype.send = function send(body = null){
 		setHost:         true,
 		timeout:         requestData['timeout'],
 		withCredentials: requestData['withCredentials'],
-
 		// insecureHTTPParser: true,
 		url:             requestData['url'],
 	};
 
-	// author. choose the proper protocol
+	// @author. choose the proper protocol
 	let doClientRequest;
 
 	if(req_protocol === 'https:')
@@ -1881,10 +1896,22 @@ XMLHttpRequest.prototype.send = function send(body = null){
 			clientRequest.setHeader('Content-Length', requestData['requestBody'].length);
 
 			(async () => {
-				let buffer;
+				let buffer = Buffer.alloc(0);
 
 				if(requestData['requestBody'].source instanceof Blob){
 					buffer = Buffer.from (await requestData['requestBody'].source.arrayBuffer());
+				}
+				else
+				if(requestData['requestBody'].source instanceof FormData){
+					await new Promise((resolve, reject) => {
+						requestData['requestBody'].stream.on('data', (chunk) => {
+							buffer = Buffer.concat([buffer, Buffer.from(chunk)]);
+						});
+
+						requestData['requestBody'].stream.on('end', () => {
+							resolve();
+						});
+					});
 				}
 				else{
 					buffer = await Promise.resolve(requestData['requestBody'].source);
@@ -2009,33 +2036,26 @@ const execString = `
 
 		if(bodyFlag &amp;&amp; requestData['requestBody'].source instanceof Blob){
 
-			const contentBlob = '.whatwg-xhr-contentBlob-' + process.pid;
-			const syncBlob    = '.whatwg-xhr-syncBlob-'    + process.pid;
+			requestData['requestBody'].source = readBlobSync(requestData['requestBody'].source);
+			syncProc.stdin.write(requestData['requestBody'].source);
+		}
+		else
+		if(bodyFlag &amp;&amp; requestData['requestBody'].source instanceof FormData){
 
-			fs.writeFileSync(syncBlob, '', 'utf8');
+			let buffer = Buffer.alloc(0);
+			if(requestData['requestBody'].blobs){
+				for(let part of requestData['requestBody'].blobs){
+					if(part instanceof Blob){
+						buffer = Buffer.concat([buffer, readBlobSync(part)]);
+					}
+					else
+					if(part instanceof Uint8Array){
+						buffer = Buffer.concat([buffer, part]);
+					}
+				}
+			}
 
-			let threadCode = `\
-	const fs      = require('node:fs');
-	const threads = require('node:worker_threads');
-
-	threads.parentPort.once('message', (data) => {
-		data.arrayBuffer()
-			.then(arrayBuffer => Buffer.from(arrayBuffer))
-			.then(buf => {
-				fs.writeFileSync('${contentBlob}', buf);
-				fs.unlinkSync('${syncBlob}');
-			});
-	});
-`;
-
-			let worker = new threads.Worker(threadCode, {eval: true});
-
-			worker.postMessage(requestData['requestBody'].source);
-
-			while(fs.existsSync(syncBlob));
-			requestData['requestBody'].source = fs.readFileSync(contentBlob);
-			fs.unlinkSync(contentBlob);
-
+			requestData['requestBody'].source = buffer;
 			syncProc.stdin.write(requestData['requestBody'].source);
 		}
 		else
@@ -2043,14 +2063,16 @@ const execString = `
 			syncProc.stdin.write(requestData['requestBody'].source);
 		}
 
-	syncProc.stderr.on('data', (chunk) => {
-		let msg = chunk.toString();
+		/* node:coverage disable */
+		syncProc.stderr.on('data', (chunk) => {
+			let msg = chunk.toString();
 
-		setResponseToNetworkError.call(xhr);
-		handleError.call(xhr, new Error(msg));
+			setResponseToNetworkError.call(xhr);
+			handleError.call(xhr, new Error(msg));
 
-		process.exit(1);
-	});
+			process.exit(1);
+		});
+		/* node:coverage enable */
 
 		while(fs.existsSync(syncFile));
 		syncProc.stdin.end();
@@ -2138,7 +2160,7 @@ const execString = `
  */
 XMLHttpRequest.prototype.getResponseHeader = function getResponseHeader(name){
 
-	// @author: validate the number of arguments
+	// @author. validate the number of arguments
 	if(arguments.length &lt; 1)
 		throw new TypeError(`XMLHttpRequest.getResponseHeader: At least 1 argument required, but only ${arguments.length} passed`);	// firefox 102
 
@@ -2238,7 +2260,7 @@ XMLHttpRequest.prototype.getAllResponseHeaders = function getAllResponseHeaders(
  */
 XMLHttpRequest.prototype.overrideMimeType = function overrideMimeType(mime){
 
-	// @author: validate the number of arguments
+	// @author. validate the number of arguments
 	if(arguments.length &lt; 1)
 		throw new TypeError(`XMLHttpRequest.overrideMimeType: At least 1 argument required, but only 0 passed`);	// firefox 102
 
@@ -2330,6 +2352,7 @@ export class ProgressEvent extends Event{
 		else
 			super(type);
 
+		// Map any ProgressEvent object created to an associated data object.
 		progressEvent.set(this, progressEventData);
 	}
 
@@ -2407,18 +2430,30 @@ export class FormData{
 	 */
 	constructor(form, submitter){
 
-		if(arguments.length === 0 || !globalThis.HTMLFormElement){
+		if(globalThis.HTMLFormElement){
+			/* node:coverage disable *
+
+			if(form === null || typeof form !== 'object')
+				throw new TypeError('FormData constructor: Argument 1 is not an object.');	// firefox 102
+
+			if(!(form instanceof globalThis.HTMLFormElement))
+				throw new TypeError(' FormData constructor: Argument 1 does not implement interface HTMLFormElement.');	// firefox 102
+
 			const entryList = [];
+			formData.set(this, entryList);
+
+			** node:coverage enable */
+		}
+		else
+		if(arguments.length === 0 || form === undefined){
+			const entryList = [];
+
+			// Map any FormData object created to an associated data object.
 			formData.set(this, entryList);
 		}
 		else
-		if(globalThis.HTMLFormElement){
-
-			if(form === null || typeof form !== 'object')
-				throw new TypeError('FormData constructor: Argument 1 is not an object.');
-
-			if(!(form instanceof globalThis.HTMLFormElement))
-				throw new TypeError(' FormData constructor: Argument 1 does not implement interface HTMLFormElement.');
+		if(form !== undefined){
+			throw new TypeError('FormData constructor: Argument 1 could not be converted to: undefined.');	// node.js
 		}
 	}
 
@@ -2431,15 +2466,42 @@ export class FormData{
 	 * @param    {string}      filename - (Optional) The filename reported to the server (a string), when a Blob or File is passed as the second parameter.
 	 * @desc     Appends a new value onto an existing key inside a FormData object, or adds the key if it does not already exist.
 	 */
-	append(name, value){
-		// validate the arguments
-		if(arguments.length &lt; 2)
-			throw new TypeError(`FormData.append: ${arguments.length} is not a valid argument count for any overload.`);
+	append(name, value, filename = undefined){
+
+		if(globalThis.HTMLFormElement){
+			/* node:coverage disable *
+
+			if(arguments.length &lt; 2)
+				throw new TypeError(`FormData.append: ${arguments.length} is not a valid argument count for any overload.`);	// firefox 102
+			else
+			if(arguments.length === 3){
+				if(typeof value !== 'object')
+					throw new TypeError(`FormData.append: Argument 2 is not an object.`);	// firefox 102
+				else
+				if(!(value instanceof Blob))
+					throw new TypeError(`FormData.append: Argument 2 does not implement interface Blob.`);	// firefox 102
+			}
+
+			** node:coverage enable */
+		}
+		else
+		if(arguments.length === 0)
+			throw new TypeError(`FormData.append: 2 arguments required, but 0 found.`);	// node.js
+		else
+		if(arguments.length === 1)
+			throw new TypeError(`FormData.append: 2 arguments required, but only 1 found.`);	// node.js
+		else
+		if(arguments.length === 3 &amp;&amp; !(value instanceof Blob))
+			throw new TypeError(`Failed to execute 'append' on 'FormData': parameter 2 is not of type 'Blob'`);	// node.js
+
+		name = String(name);
+
+		value = value instanceof Blob ? value : String(value);
+		filename = arguments.length === 3 ? String(filename) : undefined;
 
 		const entryList = formData.get(this);
-		const entry = {};
 
-		entry[name] = String(value);
+		const entry = makeEntry(name, value, filename);
 		entryList.push(entry);
 	}
 
@@ -2534,21 +2596,88 @@ export class FormData{
 	 * @param    {string}      filename - (Optional) The filename reported to the server (a string), when a Blob or File is passed as the second parameter.
 	 * @desc     Sets a new value for an existing key inside a FormData object, or adds the key/value if it does not already exist.
 	 */
-	set(name, value){
-		// validate the arguments
-		if(arguments.length &lt; 2)
-			throw new TypeError(`FormData.append: ${arguments.length} is not a valid argument count for any overload.`);
+	set(name, value, filename){
+
+		if(arguments.length === 0)
+			throw new TypeError(`FormData.set: 2 arguments required, but 0 found.`); // node.js
+
+		if(arguments.length === 1)
+			throw new TypeError(`FormData.set: 2 arguments required, but only 1 found.`); // node.js
+
+		if(arguments.length === 3 &amp;&amp; !(value instanceof Blob))
+			throw new TypeError(`Failed to execute 'set' on 'FormData': parameter 2 is not of type 'Blob'`); // node.js
+
+		name = String(name);
+
+		value = value instanceof Blob ? value : String(value);
+		filename = arguments.length === 3 ? String(filename) : undefined;
 
 		const entryList = formData.get(this);
 		for(let i = 0; i &lt; entryList.length; i++)
 			if(entryList[i][name] !== undefined)
 				entryList.splice(i, 1);
 
-		const entry = {};
-
-		entry[name] = String(value);
+		const entry = makeEntry(name, value, filename);
 		entryList.push(entry);
 	}
+
+	entries(){
+		const entryList = formData.get(this);
+
+		let i = 0;
+		let iterator = {
+			next(){
+				return i &lt; entryList.length ?
+					{ value: Object.entries(entryList[i++])[0], done: false} :
+					{ value: undefined, done: true};
+			},
+		};
+		Object.defineProperty(iterator, Symbol.toStringTag, { value: 'FormData Iterator', writable: false, enumerable: false, configurable: true});
+
+		const esIteratorPrototype = Object.getPrototypeOf(Object.getPrototypeOf([][Symbol.iterator]()));
+		Object.setPrototypeOf(iterator, esIteratorPrototype);
+
+		return Object.create(iterator);
+	}
+
+	keys(){
+		const entryList = formData.get(this);
+
+		let i = 0;
+		let iterator = {
+			next(){
+				return i &lt; entryList.length ?
+					{ value: Object.keys(entryList[i++])[0], done: false} :
+					{ value: undefined, done: true};
+			},
+		};
+		Object.defineProperty(iterator, Symbol.toStringTag, { value: 'FormData Iterator', writable: false, enumerable: false, configurable: true});
+
+		const esIteratorPrototype = Object.getPrototypeOf(Object.getPrototypeOf([][Symbol.iterator]()));
+		Object.setPrototypeOf(iterator, esIteratorPrototype);
+
+		return Object.create(iterator);
+	}
+
+	values(){
+		const entryList = formData.get(this);
+
+		let i = 0;
+		let iterator = {
+			next(){
+				return i &lt; entryList.length ?
+					{ value: Object.values(entryList[i++])[0], done: false} :
+					{ value: undefined, done: true};
+			},
+		};
+		Object.defineProperty(iterator, Symbol.toStringTag, { value: 'FormData Iterator', writable: false, enumerable: false, configurable: true});
+
+		const esIteratorPrototype = Object.getPrototypeOf(Object.getPrototypeOf([][Symbol.iterator]()));
+		Object.setPrototypeOf(iterator, esIteratorPrototype);
+
+		return Object.create(iterator);
+	}
+
 } // @endof class FormData
 
 Object.defineProperty(FormData.prototype, Symbol.toStringTag, { value: 'FormData', writable: false, enumerable: false, configurable: true});
@@ -2558,20 +2687,111 @@ Object.defineProperty(FormData.prototype, Symbol.iterator, {
 
 		let i = 0;
 
-		return{
+		let iterator = {
 			next(){
 				return i &lt; entryList.length ?
 					{ value: Object.entries(entryList[i++])[0], done: false} :
 					{ value: undefined, done: true};
 			},
+		};
+		Object.defineProperty(iterator, Symbol.toStringTag, { value: 'FormData Iterator', writable: false, enumerable: false, configurable: true});
 
-			[Symbol.iterator](){
-				return this;
-			}
-		}
+		return Object.create(iterator);
 	},
 	writable: false, enumerable: false, configurable: true
 });
+
+/**
+ * HTML Living Standard — Last Updated 7 January 2025
+ * url: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#create-an-entry
+ *
+ * To create an entry given a string name, a string or Blob object value, and optionally a scalar value string filename:
+ *   1. Set name to the result of converting name into a scalar value string.
+ *   2. If value is a string, then set value to the result of converting value into a scalar value string.
+ *   3. Otherwise:
+ *      1. If value is not a File object, then set value to a new File object, representing the same bytes, whose name attribute value is "blob".
+ *      2. If filename is given, then set value to a new File object, representing the same bytes, whose name attribute is filename.
+ *   4. Return an entry whose name is name and whose value is value.
+ *   Note:  These operations will create a new File object if either filename is given or the passed Blob is not a File object.
+ *          In those cases, the identity of the passed Blob object is not kept.
+ *
+ * function makeEntry
+ * @param   {string} name
+ * @param   {string|Blob} value
+ * @param   {?string} filename
+ * @return  {object} Return an entry whose name is name and whose value is value.
+ * @desc    To create an entry given a string name, a string or Blob object value, and optionally a scalar value string filename.
+ * @see     https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#create-an-entry
+ */
+function makeEntry(name, value, filename) {
+
+	// html.spec.1. Set name to the result of converting name into a scalar value string.
+	name = Buffer.from(name).toString('utf8');
+
+	// html.spec.2. If value is a string, then set value to the result of converting value into a scalar value string.
+	if(typeof value === 'string'){
+		value = Buffer.from(value).toString('utf8')
+	}
+	// html.spec.3. Otherwise:
+	else {
+		// html.spec.3.1. If value is not a File object, then set value to a new File object,
+		//                representing the same bytes, whose name attribute value is "blob".
+		if(!(value instanceof File)){
+			value = new File([value], 'blob', { type: value.type });
+		}
+
+		// html.spec.3.2. If filename is given, then set value to a new File object,
+		//                representing the same bytes, whose name attribute is filename.
+		if(filename !== undefined){
+			const options = {
+				type: value.type,
+				lastModified: value.lastModified
+			};
+
+			value = new File([value], filename, options);
+		}
+	}
+
+	// html.spec.4. Return an entry whose name is name and whose value is value.
+	return { [name]: value };
+}
+
+/**
+ * function readBlobSync
+ * @param   {Blob|File} blob
+ * @return  {Buffer} Return a buffer object with the contents of the Blob or File given.
+ * @desc    Reads the contents of the Blob or File object synchronously, thus blocking the Node.js event loop and further JavaScript execution until return.
+ */
+function readBlobSync(blob){
+
+	const contentBlob = '.whatwg-xhr-contentBlob-' + process.pid;
+	const syncBlob    = '.whatwg-xhr-syncBlob-'    + process.pid;
+
+	fs.writeFileSync(syncBlob, '', 'utf8');
+
+	let threadCode = `\
+		const fs      = require('node:fs');
+		const threads = require('node:worker_threads');
+
+		threads.parentPort.once('message', (data) => {
+			data.arrayBuffer()
+				.then(arrayBuffer => Buffer.from(arrayBuffer))
+				.then(buf => {
+					fs.writeFileSync('${contentBlob}', buf);
+					fs.unlinkSync('${syncBlob}');
+				});
+		});`;
+
+	let worker = new threads.Worker(threadCode, {eval: true});
+
+	worker.postMessage(blob);
+
+	while(fs.existsSync(syncBlob));
+	let buffer = fs.readFileSync(contentBlob);
+	fs.unlinkSync(contentBlob);
+
+	return buffer;
+}
 
 /**
  * XMLHttpRequest Living Standard — Last Updated 20 February 2023
@@ -2833,10 +3053,10 @@ function getFinalMimeType(){
 } // @endof function getFinalMimeType
 
 /**
- * @func   getFinalEncoding
- * @this   module:whatwg-xhr.XMLHttpRequest
- * @return {string|null} Final encoding.
- * @desc   Get a final encoding for an XMLHttpRequest object xhr, as given by {@link https://xhr.spec.whatwg.org/#response-body XHR specs}.
+ * @func     getFinalEncoding
+ * @this     module:whatwg-xhr.XMLHttpRequest
+ * @return   {string|null} Final encoding.
+ * @desc     Get a final encoding for an XMLHttpRequest object xhr, as given by {@link https://xhr.spec.whatwg.org/#response-body XHR specs}.
  * @requires module:helper-content-type.parse
  */
 function getFinalEncoding(){
@@ -2913,6 +3133,7 @@ function setDocumentResponse(){
 
 		// xhr.spec.5. If finalMIME is an HTML MIME type, then:
 		if(obj.type === 'text/html'){
+			/* node:coverage disable */
 
 			// xhr.spec.5.1. Let &lt;charset> be the result of get a final encoding for xhr.
 			let charset = getFinalEncoding.call(this);
@@ -2932,6 +3153,8 @@ function setDocumentResponse(){
 			// xhr.spec.5.5. Flag document as an HTML document.
 
 			// @todo...
+
+			/* node:coverage enable */
 		}
 		else{
 			// xhr.spec.6. Otherwise, let document be a document that represents the result of running the XML parser
@@ -2972,7 +3195,7 @@ function getTextResponse(){
 	const requestData = xmlHttpRequest.get(this);
 
 	// xhr.spec.1. If xhr’s response’s body is null, then return the empty string.
-	// author. if(requestData['_responseBody'] === null)
+	// @author. if(requestData['_responseBody'] === null)
 	if(requestData['receivedBytes'].length === 0){
 		return '';
 	}
@@ -2988,7 +3211,7 @@ function getTextResponse(){
 		try{
 			let obj = contentTypeParse(finalMimeType);
 			if(obj.type === 'text/xml' || obj.type === 'application/xml' || obj.type.endsWith('+xml')){
-				// @todo: use the rules set forth in the XML specifications to determine the encoding. Let charset be the determined encoding.
+				// @todo. use the rules set forth in the XML specifications to determine the encoding. Let charset be the determined encoding.
 				charset = xmlEncodingSniffer(requestData['receivedBytes']);
 			}
 		}catch(e){}
@@ -3122,7 +3345,7 @@ function requestDataURL(options){
 			<p>A Node.js implementation of the <a href="https://xhr.spec.whatwg.org/" target="_blank">WHATWG XMLHttpRequest Living Standard</a> for non-browser environments.</p>
 	</div>
 	<nav>
-		<h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-helper-content-type.html">helper-content-type</a></li><li><a href="module-helper-xml-encoding-sniffer.html">helper-xml-encoding-sniffer</a></li><li><a href="module-whatwg-fetch.html">whatwg-fetch</a></li><li><a href="module-whatwg-misc.html">whatwg-misc</a></li><li><a href="module-whatwg-xhr.html">whatwg-xhr</a></li><li><a href="module-wpt-xhr.html">wpt-xhr</a></li><li><a href="module-wpt-xhr-cmd.html">wpt-xhr-cmd</a></li><li><a href="module-wpt-xhr-cmd-test.html">wpt-xhr-cmd-test</a></li></ul><h3>Externals</h3><ul><li><a href="external-DOMException.html">DOMException</a></li></ul><h3>Classes</h3><ul><li><a href="module-whatwg-xhr.FormData.html">FormData</a></li><li><a href="module-whatwg-xhr.ProgressEvent.html">ProgressEvent</a></li><li><a href="module-whatwg-xhr.XMLHttpRequest.html">XMLHttpRequest</a></li><li><a href="module-whatwg-xhr-ClientRequestData.html">ClientRequestData</a></li><li><a href="module-whatwg-xhr-XMLHttpRequestEventTarget.html">XMLHttpRequestEventTarget</a></li><li><a href="module-whatwg-xhr-XMLHttpRequestUpload.html">XMLHttpRequestUpload</a></li></ul><h3>Interfaces</h3><ul><li><a href="module-whatwg-xhr-Event.html">Event</a></li><li><a href="module-whatwg-xhr-EventTarget.html">EventTarget</a></li></ul>
+		<h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-file-polyfill.html">file-polyfill</a></li><li><a href="module-helper-content-type.html">helper-content-type</a></li><li><a href="module-helper-xml-encoding-sniffer.html">helper-xml-encoding-sniffer</a></li><li><a href="module-whatwg-fetch.html">whatwg-fetch</a></li><li><a href="module-whatwg-misc.html">whatwg-misc</a></li><li><a href="module-whatwg-xhr.html">whatwg-xhr</a></li><li><a href="module-wpt-xhr.html">wpt-xhr</a></li><li><a href="module-wpt-xhr-cmd.html">wpt-xhr-cmd</a></li><li><a href="module-wpt-xhr-cmd-test.html">wpt-xhr-cmd-test</a></li></ul><h3>Externals</h3><ul><li><a href="external-Blob.html">Blob</a></li><li><a href="external-DOMException.html">DOMException</a></li></ul><h3>Classes</h3><ul><li><a href="module-file-polyfill.File.html">File</a></li><li><a href="module-whatwg-xhr.FormData.html">FormData</a></li><li><a href="module-whatwg-xhr.ProgressEvent.html">ProgressEvent</a></li><li><a href="module-whatwg-xhr.XMLHttpRequest.html">XMLHttpRequest</a></li><li><a href="module-whatwg-xhr-ClientRequestData.html">ClientRequestData</a></li><li><a href="module-whatwg-xhr-XMLHttpRequestEventTarget.html">XMLHttpRequestEventTarget</a></li><li><a href="module-whatwg-xhr-XMLHttpRequestUpload.html">XMLHttpRequestUpload</a></li></ul><h3>Interfaces</h3><ul><li><a href="module-whatwg-xhr-Event.html">Event</a></li><li><a href="module-whatwg-xhr-EventTarget.html">EventTarget</a></li></ul>
 	</nav>
 	<br class="clear">
 	<footer>

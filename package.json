@@ -21,7 +21,8 @@
 		"devCoveralls": "coveralls < docs/coverage/node/lcov.info"
 	},
 	"bin": {
-		"wpt-xhr": "bin/wpt-xhr"
+		"wpt-xhr": "bin/wpt-xhr",
+		"wpt-xhr.bat": "bin/wpt-xhr.bat"
 	},
 	"engines": {
 		"node": ">=15.4.0",

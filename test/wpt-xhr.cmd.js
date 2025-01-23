@@ -10,10 +10,10 @@ import process from 'node:process';
 
 /** @const {object} cmdOptions - Command line options */
 const cmdOptions = {
-	host    : 'wpt.local',       // -h --host <host>
-	port    : '8000',            // -p --port <port>
+	host    : 'wpt.live',        // -h --host <host>
+	port    : '',                // -p --port <port>
 	path    : '/xhr/resources/', //    --path <path>
-	url     : 'http://wpt.local:8000/xhr/resources/',
+	url     : 'http://wpt.live/xhr/resources/',
 
 	node   : true,               // -n --node {boolean} / -d --def {boolean}
 	verbose: false,              // -v --verbose {boolean}

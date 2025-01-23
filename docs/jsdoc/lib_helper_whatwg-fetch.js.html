@@ -34,10 +34,11 @@
  */
 
 /* Import nodeJS core modules */
-import { Blob }                               from 'node:buffer';
-import { Readable as ReadableStream, Duplex } from 'node:stream';
-import { TextEncoder }                        from 'node:util';
-import { URLSearchParams }                    from 'node:url';
+import assert               from 'node:assert';
+import { Blob }             from 'node:buffer';
+import { Readable, Duplex } from 'node:stream';
+import { TextEncoder }      from 'node:util';
+import { URLSearchParams }  from 'node:url';
 
 /* Import from whatwg-xhr main module */
 import { FormData }           from '../whatwg-xhr.js';
@@ -185,6 +186,8 @@ export const corsSafelistedHttpRequestMethod = new Set(['get', 'head', 'post']);
  */
 export const forbiddenHttpRequestMethod = new Set(['connect', 'trace', 'track']);
 
+/* node:coverage disable ***/
+
 /**
  * Fetch Living Standard — Last Updated 7 June 2023
  * url: https://fetch.spec.whatwg.org/#bodyinit-unions
@@ -221,9 +224,11 @@ function isXMLHttpRequestBodyInit(body){
  */
 function isBodyInit(body){
 
-	return body instanceof ReadableStream ||
+	return body instanceof Readable ||
 	       isXMLHttpRequestBodyInit(body);
 }
+
+/* node:coverage enable ***/
 
 /**
  * Fetch Living Standard — Last Updated 7 June 2023
@@ -300,10 +305,12 @@ export function safelyExtractBodyWithType(body, keepAlive = false){
 	// fetch.spec.1. Let stream be null.
 	let stream = null;
 
+	/* node:coverage disable ***/
 	// fetch.spec.2. If object is a ReadableStream object, then set stream to object.
-	if(body instanceof ReadableStream){
+	if(body instanceof Readable){
 		stream = body;
 	}
+	/* node:coverage enable ***/
 	else
 	// fetch.spec.3. Otherwise, if object is a Blob object, set stream to the result
 	//               of running object’s get stream.
@@ -313,12 +320,14 @@ export function safelyExtractBodyWithType(body, keepAlive = false){
 	else{
 	// fetch.spec.4. Otherwise, set stream to a new ReadableStream object, and set up
 	//               stream with byte reading support.
-		stream = new ReadableStream({type: 'bytes'});
+		stream = new Readable({
+			read(){},
+			objectMode: false,
+		});
 	}
-
 	// fetch.spec.5. Assert: stream is a ReadableStream object.
 	{
-		// @todo...
+		assert(stream.readable);
 	}
 
 	// fetch.spec.6. Let action be null.
@@ -326,6 +335,9 @@ export function safelyExtractBodyWithType(body, keepAlive = false){
 	// fetch.spec.8. Let length be null.
 	// fetch.spec.9. Let type be null.
 	let action = null, source = null, length = null, type = null;
+
+	// @author....
+	let blobs = null;
 
 	// fetch.spec.10. Switch on object: Blob, byte sequence, BufferSource, FormData,
 	//                URLSearchParams, scalar value string, ReadableStream
@@ -381,7 +393,7 @@ export function safelyExtractBodyWithType(body, keepAlive = false){
 	// fetch.spec.10. Switch on object: FormData
 	if(isFormDataLike(body)){
 
-		const boundary = `----formdata-undici-${Math.random()}`.replace('.', '').slice(0, 32);
+		const boundary = `----formdata-whatwg-xhr-${Math.random()}`.replace('.', '').slice(0, 32);
 		const prefix = `--${boundary}\r\nContent-Disposition: form-data`;
 
 		/*! formdata-polyfill. MIT License. Jimmy Wärting &lt;https://jimmy.warting.se/opensource> */
@@ -402,8 +414,7 @@ export function safelyExtractBodyWithType(body, keepAlive = false){
 		for(const [name, value] of body){
 			if(typeof value === 'string'){
 				const chunk = enc.encode(
-					prefix +
-					`; name="${escape(normalizeLinefeeds(name))}"` +
+					`${prefix}; name="${escape(normalizeLinefeeds(name))}"` +
 					`\r\n\r\n${normalizeLinefeeds(value)}\r\n`
 				);
 
@@ -425,19 +436,20 @@ export function safelyExtractBodyWithType(body, keepAlive = false){
 		blobParts.push(chunk);
 		length += chunk.byteLength;
 
+		blobs = blobParts;
+
 		// fetch.spec.10. FormData: Set source to object.
 		source = body;
 
 		// fetch.spec.10. FormData: Set action to this step:
 		//                run the multipart/form-data encoding algorithm,
 		//                with object’s entry list and UTF-8.
-
 		action = async function *(){
 			for(const part of blobParts){
-				if(part.stream){
-					yield * part.stream();
+				if(part instanceof Blob){
+					yield await part.bytes();
 				}
-				else {
+				else{
 					yield part;
 				}
 			}
@@ -465,7 +477,7 @@ export function safelyExtractBodyWithType(body, keepAlive = false){
 	}
 	else
 	// fetch.spec.10. Switch on object: ReadableStream
-	if(body instanceof ReadableStream){
+	if(body instanceof Readable){
 		// fetch.spec.10. If keepalive is true, then throw a TypeError.
 		// fetch.spec.10. If object is disturbed or locked, then throw a TypeError.
 		// @todo...
@@ -492,7 +504,7 @@ export function safelyExtractBodyWithType(body, keepAlive = false){
 
 	// fetch.spec.12. If action is non-null, then run these steps in parallel:
 	if(action){
-		// @todo...
+		stream = Readable.from(action(), {objectMode: false});
 	}
 
 	// fetch.spec.13. Let body be a body whose stream is stream, source is source,
@@ -501,6 +513,7 @@ export function safelyExtractBodyWithType(body, keepAlive = false){
 		stream: stream,
 		source: source,
 		length: length,
+		blobs: blobs,
 	};
 
 	return {body, type};
@@ -537,7 +550,7 @@ function isFormDataLike(object){
 			<p>A Node.js implementation of the <a href="https://xhr.spec.whatwg.org/" target="_blank">WHATWG XMLHttpRequest Living Standard</a> for non-browser environments.</p>
 	</div>
 	<nav>
-		<h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-helper-content-type.html">helper-content-type</a></li><li><a href="module-helper-xml-encoding-sniffer.html">helper-xml-encoding-sniffer</a></li><li><a href="module-whatwg-fetch.html">whatwg-fetch</a></li><li><a href="module-whatwg-misc.html">whatwg-misc</a></li><li><a href="module-whatwg-xhr.html">whatwg-xhr</a></li><li><a href="module-wpt-xhr.html">wpt-xhr</a></li><li><a href="module-wpt-xhr-cmd.html">wpt-xhr-cmd</a></li><li><a href="module-wpt-xhr-cmd-test.html">wpt-xhr-cmd-test</a></li></ul><h3>Externals</h3><ul><li><a href="external-DOMException.html">DOMException</a></li></ul><h3>Classes</h3><ul><li><a href="module-whatwg-xhr.FormData.html">FormData</a></li><li><a href="module-whatwg-xhr.ProgressEvent.html">ProgressEvent</a></li><li><a href="module-whatwg-xhr.XMLHttpRequest.html">XMLHttpRequest</a></li><li><a href="module-whatwg-xhr-ClientRequestData.html">ClientRequestData</a></li><li><a href="module-whatwg-xhr-XMLHttpRequestEventTarget.html">XMLHttpRequestEventTarget</a></li><li><a href="module-whatwg-xhr-XMLHttpRequestUpload.html">XMLHttpRequestUpload</a></li></ul><h3>Interfaces</h3><ul><li><a href="module-whatwg-xhr-Event.html">Event</a></li><li><a href="module-whatwg-xhr-EventTarget.html">EventTarget</a></li></ul>
+		<h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-file-polyfill.html">file-polyfill</a></li><li><a href="module-helper-content-type.html">helper-content-type</a></li><li><a href="module-helper-xml-encoding-sniffer.html">helper-xml-encoding-sniffer</a></li><li><a href="module-whatwg-fetch.html">whatwg-fetch</a></li><li><a href="module-whatwg-misc.html">whatwg-misc</a></li><li><a href="module-whatwg-xhr.html">whatwg-xhr</a></li><li><a href="module-wpt-xhr.html">wpt-xhr</a></li><li><a href="module-wpt-xhr-cmd.html">wpt-xhr-cmd</a></li><li><a href="module-wpt-xhr-cmd-test.html">wpt-xhr-cmd-test</a></li></ul><h3>Externals</h3><ul><li><a href="external-Blob.html">Blob</a></li><li><a href="external-DOMException.html">DOMException</a></li></ul><h3>Classes</h3><ul><li><a href="module-file-polyfill.File.html">File</a></li><li><a href="module-whatwg-xhr.FormData.html">FormData</a></li><li><a href="module-whatwg-xhr.ProgressEvent.html">ProgressEvent</a></li><li><a href="module-whatwg-xhr.XMLHttpRequest.html">XMLHttpRequest</a></li><li><a href="module-whatwg-xhr-ClientRequestData.html">ClientRequestData</a></li><li><a href="module-whatwg-xhr-XMLHttpRequestEventTarget.html">XMLHttpRequestEventTarget</a></li><li><a href="module-whatwg-xhr-XMLHttpRequestUpload.html">XMLHttpRequestUpload</a></li></ul><h3>Interfaces</h3><ul><li><a href="module-whatwg-xhr-Event.html">Event</a></li><li><a href="module-whatwg-xhr-EventTarget.html">EventTarget</a></li></ul>
 	</nav>
 	<br class="clear">
 	<footer>

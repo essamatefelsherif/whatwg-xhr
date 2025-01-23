@@ -72,7 +72,7 @@ Full documentation <https://essamatefelsherif.github.io/whatwg-xhr/>
 * Supports FormData, Blobs and Files.
 * Supports synchronous and asynchronous operations.
 * Independent of any existing implementation of [fetch](https://fetch.spec.whatwg.org/ "WHATWG Fetch Living Standard").
-* No current support for "file" URL scheme or [web streams](https://streams.spec.whatwg.org/ "WHATWG Streams Living Standard").
+* No current support for "file" URL scheme, CORS or [web streams](https://streams.spec.whatwg.org/ "WHATWG Streams Living Standard").
 
 ## Documentation
 

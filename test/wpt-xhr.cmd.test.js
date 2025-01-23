@@ -392,7 +392,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 
 	cmdData.cmd_act = `${CMD}`;
 
-	cmdData.cmd_out = '{"host":"wpt.local","port":"8000","path":"/xhr/resources/","url":"http://wpt.local:8000/xhr/resources/","node":true,"verbose":false}';
+	cmdData.cmd_out = '{"host":"wpt.live","port":"","path":"/xhr/resources/","url":"http://wpt.live/xhr/resources/","node":true,"verbose":false}';
 	cmdData.cmd_err = '';
 
 	cmdData.cmd_opt = {encoding: 'UTF-8', env: {WPT_XHR_TEST: "node"}};
@@ -482,7 +482,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 
 	cmdData.cmd_act = `${CMD} --verbose --def`;
 
-	cmdData.cmd_out = '{"host":"wpt.local","port":"8000","path":"/xhr/resources/","url":"http://wpt.local:8000/xhr/resources/","node":false,"verbose":true}';
+	cmdData.cmd_out = '{"host":"wpt.live","port":"","path":"/xhr/resources/","url":"http://wpt.live/xhr/resources/","node":false,"verbose":true}';
 	cmdData.cmd_err = '';
 
 	cmdData.cmd_opt = {encoding: 'UTF-8', env: {WPT_XHR_TEST: "node"}};
@@ -497,7 +497,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 
 	cmdData.cmd_act = `${CMD} -v -d`;
 
-	cmdData.cmd_out = '{"host":"wpt.local","port":"8000","path":"/xhr/resources/","url":"http://wpt.local:8000/xhr/resources/","node":false,"verbose":true}';
+	cmdData.cmd_out = '{"host":"wpt.live","port":"","path":"/xhr/resources/","url":"http://wpt.live/xhr/resources/","node":false,"verbose":true}';
 	cmdData.cmd_err = '';
 
 	cmdData.cmd_opt = {encoding: 'UTF-8', env: {WPT_XHR_TEST: "node"}};
@@ -512,7 +512,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 
 	cmdData.cmd_act = `${CMD} -d -n`;
 
-	cmdData.cmd_out = '{"host":"wpt.local","port":"8000","path":"/xhr/resources/","url":"http://wpt.local:8000/xhr/resources/","node":true,"verbose":false}';
+	cmdData.cmd_out = '{"host":"wpt.live","port":"","path":"/xhr/resources/","url":"http://wpt.live/xhr/resources/","node":true,"verbose":false}';
 	cmdData.cmd_err = '';
 
 	cmdData.cmd_opt = {encoding: 'UTF-8', env: {WPT_XHR_TEST: "node"}};
@@ -527,7 +527,7 @@ Try '${CMD_BIN} --help' for more information.\n`;
 
 	cmdData.cmd_act = `${CMD} --def --node`;
 
-	cmdData.cmd_out = '{"host":"wpt.local","port":"8000","path":"/xhr/resources/","url":"http://wpt.local:8000/xhr/resources/","node":true,"verbose":false}';
+	cmdData.cmd_out = '{"host":"wpt.live","port":"","path":"/xhr/resources/","url":"http://wpt.live/xhr/resources/","node":true,"verbose":false}';
 	cmdData.cmd_err = '';
 
 	cmdData.cmd_opt = {encoding: 'UTF-8', env: {WPT_XHR_TEST: "node"}};
