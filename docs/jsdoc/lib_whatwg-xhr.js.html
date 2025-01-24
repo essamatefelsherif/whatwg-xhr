@@ -1965,6 +1965,7 @@ XMLHttpRequest.prototype.send = function send(body = null){
 
 		const contentFile = '.whatwg-xhr-content-' + process.pid;
 		const syncFile    = '.whatwg-xhr-sync-'    + process.pid;
+		const filename    = __filename.replace(/\\/g, '\\\\');
 
 		fs.writeFileSync(syncFile, '', 'utf8');
 
@@ -1984,7 +1985,7 @@ XMLHttpRequest.prototype.send = function send(body = null){
 const execString = `
 	(async () => {
 		let fs                 = await import('node:fs');
-		let { XMLHttpRequest } = await import('${__filename}');
+		let { XMLHttpRequest } = await import('file:${filename}');
 
 		let xhr = new XMLHttpRequest;
 

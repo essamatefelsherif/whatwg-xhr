@@ -13,13 +13,13 @@
 	"templates": {
 		"default":{
 			"includeDate": false,
-			"layoutFile": "./.jsdoc.layout.tmpl",
+			"layoutFile" : "./.jsdoc.layout.tmpl",
 			"staticFiles": {
 				"include": ["./docs/img"],
 				"includePattern" : "logo-xhr*"
 			}
 		},
-		"cleverLinks": false,
+		"cleverLinks"   : false,
 		"monospaceLinks": false
 	}
 }

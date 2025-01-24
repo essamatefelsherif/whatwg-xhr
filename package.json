@@ -9,7 +9,7 @@
 		"import" : "./lib/whatwg-xhr.js"
 	},
 	"scripts": {
-		"test"        : "npm run testVerb",
+		"test"        : "node test/wpt-xhr.test.js -n -v",
 		"testVerb"    : "node test/wpt-xhr.test.js -n -v",
 		"testVerbCov" : "node --experimental-test-coverage test/wpt-xhr.test.js -n -v",
 		"testSilent"  : "node test/wpt-xhr.test.js -d",
